@@ -1,7 +1,7 @@
 # dotfiles
 
 ## set up
-init
+1. init
 ```
 git init --bare $HOME/.cfg
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -9,7 +9,7 @@ dotfiles config --local status.showUntrackedFiles no
 echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.zshrc
 ```
 
-add dotfile
+2. add dotfile
 ```
 dotfiles status
 dotfiles add ~/.vim/vimrc
@@ -18,7 +18,7 @@ dotfiles add ~/.bashrc
 dotfiles commit -m 'Add bashrc'
 ```
 
-create remote repository and push
+3. create remote repository and push
 ```
 git remote add origin <git-repo-url>
 git push origin master
