@@ -1,0 +1,33 @@
+[user]
+    name = fakeyanss
+    email = yanshisangc@gmail.com
+[core]
+    editor = vim
+[alias]
+    # Shortening aliases
+    co = checkout
+    cob = checkout -b
+    f = fetch -p
+    c = commit
+    p = push
+    ba = branch -a
+    bd = branch -d
+    bD = branch -D
+    dc = diff --cached
+
+    # Feature improving aliases
+    st = status -sb
+    a = add -p
+
+    # Complex aliases
+    plog = log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'
+    tlog = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    rank = "!git shortlog -sn --no-merges"
+    bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
+    ranks = "!git log --format='%aN' | sort -u | while read name; do echo \"\\033[32m$name\\033[0m\t\"; git log --author=\"$name\" --pretty=tformat: --numstat | awk \"{ add += \\$1; subs += \\$2; loc += \\$1 - \\$2 } END { printf \\\"added lines: %s, removed lines: %s, total lines: %s\\n\\\", add, subs, loc }\" -; done"
+[http]
+	sslVerify = false
+	proxy = http://127.0.0.1:1181
+[https]
+	proxy = http://127.0.0.1:1181
