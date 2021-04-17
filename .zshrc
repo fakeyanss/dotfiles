@@ -130,4 +130,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-alias config='/usr/bin/git --git-dir=/Users/fakeyanss/.cfg/ --work-tree=/Users/fakeyanss'
+# dotfiles
+alias dotfiles='/usr/bin/git --git-dir=/Users/fakeyanss/.dotfiles/ --work-tree=/Users/fakeyanss'
