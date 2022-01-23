@@ -1,0 +1,24 @@
+{
+  "picgoPlugins": {
+    "picgo-plugin-github-plus": true,
+    "picgo-plugin-rename-file": true
+  },
+  "picgo-plugin-rename-file": {
+    "format": "{y}-{m}-{d}_{origin}-{rand:6}"
+  },
+  "picBed": {
+    "uploader": "githubPlus",
+    "current": "githubPlus",
+    "githubPlus": {
+      "branch": "master",
+      "customUrl": "https://cdn.jsdelivr.net/gh/fakeyanss/imgplace@master",
+      "origin": "github",
+      "repo": "fakeyanss/imgplace",
+      "path": "2022/",
+      "token": "$GITHUB_TOKEN_PICGO"
+    }
+  },
+  "picgo-plugin-github-plus": {
+    "lastSync": "2021-04-23 10:48:58"
+  }
+}

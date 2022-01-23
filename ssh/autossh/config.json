@@ -1,0 +1,35 @@
+{
+	"show_detail": true,
+	"servers": [
+		{
+			"name": "android mi11 ultra",
+			"ip": "192.168.1.7",
+			"port": 8022,
+			"user": "u0_a365",
+			"password": "",
+			"method": "key",
+			"key": "/Users/fakeyanss/.ssh/id_rsa",
+			"options": {
+				"ServerAliveInterval": 30
+			},
+			"alias": "",
+			"log": {
+				"enable": false,
+				"filename": "",
+				"mode": ""
+			}
+		}
+	],
+	"groups": [
+		{
+			"group_name": "your group name",
+			"prefix": "a",
+			"servers": [],
+			"collapse": false,
+			"proxy": null
+		}
+	],
+	"options": {
+		"ServerAliveInterval": 30
+	}
+}
