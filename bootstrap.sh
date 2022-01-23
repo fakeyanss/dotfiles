@@ -77,9 +77,42 @@ function setup_git() {
 	log_finish "$task"
 }
 
+function setup_ruby() {
+	task="setup ruby"
+	log_task "$task"
+
+	log_action "install ruby"
+	brew_no_update_install ruby
+	log_ok
+
+	log_finish "$task"
+}
+
 function setup_zsh {
 	task="setup zsh"
 	log_task "$task"
+
+	log_action "install zsh"
+	brew_no_update_install zsh
+	log_ok
+
+	log_action "set zsh to user login shell"
+	CURRENTSHELL=$(dscl . -read /Users/$USER UserShell | awk '{print $2}')
+	if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
+		log_running "setting newer homebrew zsh (/usr/local/bin/zsh) as your shell (password required)"
+		# sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
+		# chsh -s /usr/local/bin/zsh
+		sudo dscl . -change /Users/$USER UserShell $SHELL /usr/local/bin/zsh >/dev/null 2>&1
+	fi
+	log_ok
+
+	log_action "install oh-my-zsh"
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	git clone https://github.com/zsh-users/zsh-autosuggestions \
+		${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+		${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	log_ok
 
 	log_action "replace .zshrc"
 	log_running "remove old .zshrc"
@@ -148,9 +181,11 @@ function main() {
 	# symbol_dotfiles
 	# todo
 
-	# base
+	# base, keep order
 	setup_git
+	setup_ruby
 	setup_zsh
+
 	setup_node
 
 	# extra
