@@ -1,6 +1,5 @@
-[user]
-    name = $GITHUB_USER
-    email = $GITHUB_EMAIL
+[include]
+    path= ~/.config/.gitconfig
 [core]
     editor = vim
 [alias]

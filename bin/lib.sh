@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+function backup() {
+    timestamp=$1
+    file=$2
+    backup_dir=$HOMEDIR/.backup/$timestamp
+    mkdir -p $backup_dir
+    ls $file >/dev/null 2>&1
+	if [[ $? == 0 ]]; then
+        mv $file $backup_dir
+    fi
+}
+
 function symlink() {
     removebrokenlinks
     getfiles

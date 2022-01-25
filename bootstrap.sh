@@ -50,6 +50,62 @@ function setup_brew() {
 	task="setup brew"
 	log_task "$task"
 
+	log_action "install homebrew"
+	brew -v >/dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		log_running "go..."
+		export HOMEBREW_BREW_GIT_REMOTE="https://ghproxy.com/https://github.com/Homebrew/brew.git"
+		export HOMEBREW_CORE_GIT_REMOTE="https://ghproxy.com/https://github.com/Homebrew/homebrew-core.git"
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+	else
+		log_running "brew existed, skip"
+	fi
+	log_ok
+
+	log_action "set brew tap upstream"
+	BREW_TAPS="$(brew tap)"
+	for tap in ${BREW_TAPS[@]}; do
+		upstream=$(git -C "$(brew --repo $tap)" remote -v | grep -e 'origin.*fetch' | awk '{print $2}')
+		echo $upstream | grep -q 'ghproxy.com' >/dev/null 2>&1
+		if [[ $? != 0 ]]; then
+			upstream=${upstream/https:\/\/github.com/https:\/\/ghproxy.com\/https:\/\/github.com}
+		fi
+		log_running "replace brew upstream, $tap to $upstream"
+		git -C "$(brew --repo $tap)" remote set-url origin "$upstream"
+		git -C "$(brew --repo $tap)" config homebrew.forceautoupdate true
+	done
+	taps=(
+		homebrew/core
+		homebrew/cask
+		homebrew/cask-fonts
+		homebrew/cask-drivers
+		homebrew/cask-versions
+		homebrew/services
+		homebrew/command-not-found
+	)
+	for tap in ${taps[@]}; do
+		# set remote upstream proxy to https://ghproxy.com, and autoupdate
+		tap_name=${tap/homebrew\//}
+		upstream=https://ghproxy.com/https://github.com/Homebrew/homebrew-${tap_name}.git
+		log_running "replace brew upstream, $tap to $upstream"
+		if echo "$BREW_TAPS" | grep -qE "^$tap\$"; then
+			git -C "$(brew --repo $tap)" remote set-url origin "$upstream"
+			git -C "$(brew --repo $tap)" config homebrew.forceautoupdate true
+		else
+			brew tap --force-auto-update $tap "$upstream"
+		fi
+	done
+	grep -q 'HOMEBREW_BOTTLE_DOMAIN' ~/.zshrc >/dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		cat >>~/.zshrc <<EOF
+# homebrew
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles"
+EOF
+	fi
+	log_running "update brew upstream, this my be slow..."
+	brew update-reset
+	log_ok
+
 	log_finish "$task"
 }
 
@@ -65,13 +121,21 @@ function setup_git() {
 	task="setup git"
 	log_task "$task"
 
-	log_action "int git using brew"
+	log_action "upgrade git using brew"
 	brew_no_update_install git
 	log_ok
 
+	log_action "symbol link .git files"
+	backup $timestamp $HOMEDIR/.gitconfig
+	ln -sv $WORKDIR/git/.gitconfig $HOMEDIR/.gitconfig
+	
+	backup $timestamp $HOMEDIR/.gitignore
+	ln -sv $WORKDIR/git/.gitignore $HOMEDIR/.gitignore
+	log_ok
+
 	log_action "replace git config keywords"
-	sed -i "" "s/\\$\GITHUB_USER/${GITHUB_USER}/g" ~/.gitconfig
-	sed -i "" "s/\\$\GITHUB_EMAIL/${GITHUB_EMAIL}/g" ~/.gitconfig
+	sed -i "" "s/\\$\GITHUB_USER/${GITHUB_USER}/g" ~/.config/.gitconfig
+	sed -i "" "s/\\$\GITHUB_EMAIL/${GITHUB_EMAIL}/g" ~/.config/.gitconfig
 	log_ok
 
 	log_finish "$task"
@@ -114,11 +178,9 @@ function setup_zsh {
 		${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	log_ok
 
-	log_action "replace .zshrc"
-	log_running "remove old .zshrc"
-	rm ~/.zshrc
-	log_running "symbol link .zshrc"
-	ln -s $WORKDIR/zsh/.zshrc ~/.zshrc
+	log_action "symbol link .zshrc"
+	backup $timestamp $HOMEDIR/.zshrc
+	ln -s $WORKDIR/zsh/.zshrc $HOMEDIR/.zshrc
 	log_ok
 
 	log_finish "$task"
@@ -136,7 +198,9 @@ function setup_node() {
 	mkdir -p ~/.nvm
 	export NVM_DIR=~/.nvm
 	source $(brew --prefix nvm)/nvm.sh
-	cat >>~/.zshrc <<EOF
+	grep -q "nvm.sh" ~/.zshrc >/dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		cat >>~/.zshrc <<EOF
 # node, npm
 export NODE_MIRROR=https://npm.taobao.org/dist/
 export NVM_DIR="$HOME/.nvm"
@@ -144,6 +208,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 EOF
+	fi
 	log_ok
 
 	log_action "install node lts version"
@@ -172,27 +237,31 @@ function setup_picgo() {
 }
 
 function main() {
-	log "Hi! I'm going to install tooling and tweak your system settings. Here I go..."
+	log "Pipixia, Here we go..."
 
-	setup_sudo
+	# setup_sudo
 
 	# git pull origin master
 
 	# symbol_dotfiles
-	# todo
 
 	# base, keep order
+	# setup_brew
+
 	setup_git
-	setup_ruby
-	setup_zsh
+	# setup_ruby
+	# setup_zsh
 
-	setup_node
+	# setup_node
 
-	# extra
-	setup_picgo
+	# extra software
+	# setup_picgo
 }
 
-source echo.sh
-source env.sh
+source $WORKDIR/bin/echo.sh
+source $WORKDIR/bin/lib.sh
+source $WORKDIR/config/env.sh
+
+timestamp=$(date +"%s")
 
 main "$@"

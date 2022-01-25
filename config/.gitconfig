@@ -1,0 +1,3 @@
+[user]
+    name = $GITHUB_USER
+    email = $GITHUB_EMAIL
