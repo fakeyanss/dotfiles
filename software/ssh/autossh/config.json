@@ -8,7 +8,7 @@
 			"user": "u0_a365",
 			"password": "",
 			"method": "key",
-			"key": "/Users/fakeyanss/.ssh/id_rsa",
+			"key": "~/.ssh/id_rsa",
 			"options": {
 				"ServerAliveInterval": 30
 			},

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+backup_timestamp=$(date +"%s")
+
 function backup() {
-    timestamp=$1
-    file=$2
-    backup_dir=$HOMEDIR/.backup/$timestamp
+    file=$1
+    backup_dir=$HOMEDIR/.backup/$backup_timestamp
     mkdir -p $backup_dir
     ls $file >/dev/null 2>&1
 	if [[ $? == 0 ]]; then
@@ -22,7 +23,7 @@ function symlink() {
             echo "*** $DOTFILE already exists, backing up in $BACKUP ***"
             cp -r "$DOTFILE" "$BACKUP"
             rm -rf "$DOTFILE"
-            ln -s "$REALFILE" "$DOTFILE"
+            ln -sv "$REALFILE" "$DOTFILE"
             if [[ "$DOTFILE" == "$HOME/.ssh" ]]; then
                 if [[ -f $BACKUP/ssh/known_hosts ]]; then
                     cp "$BACKUP/ssh/known_hosts" "$DOTFILE/"
@@ -32,9 +33,9 @@ function symlink() {
             fi
         elif [[ -e "$DOTFILE" ]]; then
             rm -f "$DOTFILE"
-            ln -s "$REALFILE" "$DOTFILE"
+            ln -sv "$REALFILE" "$DOTFILE"
         else
-            ln -s "$REALFILE" "$DOTFILE"
+            ln -sv "$REALFILE" "$DOTFILE"
         fi
         if [[ -e /selinux/enforce ]]; then
             if [[ "$DOTFILE" == "$HOME/.ssh" && -x /sbin/restorecon ]]; then

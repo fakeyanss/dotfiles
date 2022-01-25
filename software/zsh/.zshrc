@@ -36,9 +36,9 @@ alias pyi=$HOME/.pyenv/.install.sh
 
 # ssh
 alias autossh=$HOME/.ssh/autossh/autossh
-
 # node, npm
 export NODE_MIRROR=https://npm.taobao.org/dist/
-export NVM_DIR="/Users/fakeyanss/.nvm"
+export NVM_DIR="/Users/guichen01/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"                                       # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+

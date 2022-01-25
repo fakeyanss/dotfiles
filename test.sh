@@ -8,4 +8,4 @@
 # done
 # git -C "$(brew --repo clojure/tools)" remote set-url origin https://github.com/clojure/homebrew-tools.git
 
-ln -s /Users/guichen01/.gear/dotfiles/git/.gitconfig /Users/guichen01/.gitconfig
+ln -sv /Users/guichen01/.gear/dotfiles/git/.gitconfig /Users/guichen01/.gitconfig
