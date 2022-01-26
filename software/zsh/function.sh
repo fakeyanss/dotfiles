@@ -33,3 +33,7 @@ set dark mode to not dark mode
 end tell
 end tell"
 }
+
+function del() {
+	mv $1 /tmp
+}
