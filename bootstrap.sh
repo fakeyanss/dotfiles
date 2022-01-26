@@ -22,14 +22,17 @@ function main() {
 	# symbol_dotfiles
 
 	# base, keep order
-	# setup_brew
-
+	setup_brew
+	setup_ssh
 	setup_git
 	setup_ruby
 	setup_zsh
-	setup_java
-	setup_node
 	setup_tmux
+	setup_starship
+
+	setup_java
+	setup_python
+	setup_node
 
 	# extra software
 	setup_picgo

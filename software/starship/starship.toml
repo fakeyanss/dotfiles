@@ -1,0 +1,191 @@
+[aws]
+format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+symbol = "aws "
+
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[x](bold red)"
+vicmd_symbol = "[<](bold green)"
+
+[cmake]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "cmake "
+
+[cmd_duration]
+format = '\[[⏱ $duration ]($style)\]'
+
+#[cobol]
+#format = '\[[$symbol($version)]($style)\]'
+#symbol = "cobol "
+
+[conda]
+format = '\[[$symbol$environment]($style)\]'
+symbol = "conda "
+
+[crystal]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "cr "
+
+[dart]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "dart "
+
+[deno]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "deno "
+
+[directory]
+read_only = " ro"
+
+[docker_context]
+format = '\[[$symbol$context]($style)\]'
+symbol = "docker "
+
+[dotnet]
+format = '\[[$symbol($version)(ð¯ $tfm)]($style)\]'
+symbol = ".NET "
+
+[elixir]
+format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
+symbol = "exs "
+
+[elm]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "elm "
+
+[erlang]
+format = '\[[$symbol($version)]($style)\]'
+
+[gcloud]
+format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
+
+[git_branch]
+format = '\[[$symbol$branch]($style)\]'
+symbol = "git "
+
+[git_commit]
+tag_symbol = " tag "
+
+#[git_metrics]
+#added_style = "bold blue"
+#format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+
+[git_status]
+ahead = ">"
+behind = "<"
+diverged = "<>"
+renamed = "r"
+deleted = "x"
+format = '([\[$all_status$ahead_behind\]]($style))'
+
+[golang]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "go "
+
+[helm]
+format = '\[[$symbol($version)]($style)\]'
+
+[hg_branch]
+format = '\[[$symbol$branch]($style)\]'
+symbol = "hg "
+
+[java]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "java "
+
+[julia]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "jl "
+
+[kotlin]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "kt "
+
+[kubernetes]
+format = '\[[$symbol$context( \($namespace\))]($style)\]'
+
+[lua]
+format = '\[[$symbol($version)]($style)\]'
+
+[memory_usage]
+format = '\[$symbol[$ram( | $swap)]($style)\]'
+symbol = "memory "
+
+[nim]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "nim "
+
+[nix_shell]
+format = '\[[$symbol$state( \($name\))]($style)\]'
+symbol = "nix "
+
+[nodejs]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "nodejs "
+
+[ocaml]
+format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
+symbol = "ml "
+
+[openstack]
+format = '\[[$symbol$cloud(\($project\))]($style)\]'
+
+[package]
+format = '\[[$symbol$version]($style)\]'
+symbol = "pkg "
+
+[perl]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "pl "
+
+[php]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "php "
+
+[purescript]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "purs "
+
+[python]
+format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
+symbol = "py "
+
+[red]
+format = '\[[$symbol($version)]($style)\]'
+
+[ruby]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "rb "
+
+[rust]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "rs "
+
+[scala]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "scala "
+
+[swift]
+format = '\[[$symbol($version)]($style)\]'
+symbol = "swift "
+
+[terraform]
+format = '\[[$symbol$workspace]($style)\]'
+
+[time]
+disabled = false
+format = '\[[$time]($style)\]'
+time_format = "%Y-%m-%d %T"
+utc_time_offset = "+8"
+
+[username]
+format = '\[[$user]($style)\]'
+
+[vagrant]
+format = '\[[$symbol($version)]($style)\]'
+
+[vlang]
+format = '\[[$symbol($version)]($style)\]'
+
+[zig]
+format = '\[[$symbol($version)]($style)\]'

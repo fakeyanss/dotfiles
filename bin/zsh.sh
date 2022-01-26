@@ -16,9 +16,11 @@ function setup_zsh {
     install_omz
     log_ok
 
-    log_action "symbol link .zshrc"
+    log_action "symbol link .zshrc, function.sh"
     backup $HOMEDIR/.zshrc
     ln -sv $WORKDIR/software/zsh/.zshrc $HOMEDIR/.zshrc
+    backup $HOMEDIR/.config/function.sh
+    ln -sv $WORKDIR/software/zsh/function.sh $HOMEDIR/.config/function.sh
     log_ok
 
     log_finish "$task"
@@ -35,9 +37,10 @@ function ch_sh() {
 }
 
 function install_omz() {
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-autosuggestions \
+    export REMOTE="https://ghproxy.com/https://github.com/${REPO}.git"
+    sh -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://ghproxy.com/https://github.com/zsh-users/zsh-autosuggestions \
         ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    git clone https://ghproxy.com/https://github.com/zsh-users/zsh-syntax-highlighting.git \
         ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 }

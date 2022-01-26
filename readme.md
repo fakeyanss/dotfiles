@@ -8,19 +8,19 @@ bash bootstrap.sh
 ```
 
 ## Support
-- [ ] git
-- [ ] zsh
-- [ ] node
-- [ ] picgo
+- [x] ssh
+- [x] git
+- [x] zsh
+- [x] java
+    - [x] jenv
+- [x] python
+    - [x] pyenv
+- [x] tmux
+- [x] node
+- [x] alias & user function
+- [x] starship
+- [x] picgo
 - [ ] hammerspoon
 - [ ] aria2
-- [ ] python
-    - [ ] pyenv
-- [ ] java
-    - [ ] jenv
-- [ ] tmux
 - [ ] wget
-- [ ] ssh
-- [ ] alias
-- [ ] starship
 - [ ] iterm2
