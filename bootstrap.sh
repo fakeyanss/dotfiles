@@ -30,9 +30,8 @@ function main() {
 	log "Good job! All of dotfiles have been installed :)"
 }
 
-HOMEDIR=/Users/$USER
-WORKDIR=$(git rev-parse --show-toplevel)
-source $WORKDIR/conf/conf.sh
-source $WORKDIR/bin/include.sh
+DOTFILES=$(git rev-parse --show-toplevel)
+source $DOTFILES/conf/conf.sh
+source $DOTFILES/bin/include.sh
 
 main "$@"

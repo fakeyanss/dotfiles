@@ -2,15 +2,15 @@
 
 cd $(dirname $0)
 
-mkdir -p $HOMEDIR/autossh/
-cp -f ./autossh $HOMEDIR/autossh/
+mkdir -p $HOME/autossh/
+cp -f ./autossh $HOME/autossh/
 
-CONFIG_FILE=`cd $HOMEDIR/autossh/ && pwd`/config.json
+CONFIG_FILE=`cd $HOME/autossh/ && pwd`/config.json
 if [[ ! -f ${CONFIG_FILE} ]]; then
-    cp ./config.json $HOMEDIR/autossh/
+    cp ./config.json $HOME/autossh/
 fi
 
-HAS_ALIAS=`cat $HOMEDIR/.bash_profile | grep autossh | wc -l`
+HAS_ALIAS=`cat $HOME/.bash_profile | grep autossh | wc -l`
 if [[ ${HAS_ALIAS} -eq 0 ]]; then
     echo "export PATH=$PATH:~/autossh/" >> ~/.bash_profile
 fi

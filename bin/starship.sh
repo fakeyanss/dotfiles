@@ -20,9 +20,9 @@ EOF
     log_ok
 
     log_action "symbol link starship.toml"
-    backup $HOMEDIR/.config/starship.toml
-    mkdir -p $HOMEDIR/.config
-    ln -sv $WORKDIR/software/starship/starship.toml $HOMEDIR/.config/starship.toml
+    backup $HOME/.config/starship.toml
+    mkdir -p $HOME/.config
+    ln -sv $DOTFILES/software/starship/starship.toml $HOME/.config/starship.toml
     log_ok
 
 	log_finish "$task"

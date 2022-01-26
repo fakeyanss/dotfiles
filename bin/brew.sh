@@ -3,19 +3,13 @@
 function setup_brew() {
 	task="setup brew"
 	log_task "$task"
-
-	log_action "install homebrew"
 	install_brew
-	log_ok
-
-	log_action "set brew tap upstream"
 	set_tap_mirror
-	log_ok
-
 	log_finish "$task"
 }
 
 function install_brew() {
+    log_action "install homebrew"
     brew -v >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         log_running "go..."
@@ -25,9 +19,11 @@ function install_brew() {
     else
         log_running "brew existed, skip"
     fi
+    log_ok
 }
 
 function set_tap_mirror() {
+    log_action "set brew tap upstream"
     BREW_TAPS="$(brew tap)"
     for tap in ${BREW_TAPS[@]}; do
         upstream=$(git -C "$(brew --repo $tap)" remote -v | grep -e 'origin.*fetch' | awk '{print $2}')
@@ -60,15 +56,17 @@ function set_tap_mirror() {
             brew tap --force-auto-update $tap "$upstream"
         fi
     done
-    grep -q 'HOMEBREW_BOTTLE_DOMAIN' $HOMEDIR/.zprofile >/dev/null 2>&1
+    grep -q 'HOMEBREW_BOTTLE_DOMAIN' $HOME/.zprofile >/dev/null 2>&1
     if [ $? -ne 0 ]; then
-        cat >>$HOMEDIR/.zprofile <<EOF
+        cat >>$HOME/.zprofile <<EOF
 # homebrew
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles"
+
 EOF
     fi
     log_running "update brew upstream, this my be slow..."
     brew update-reset
+    log_ok
 }
 
 function brew_no_update_install() {

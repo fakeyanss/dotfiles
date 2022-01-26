@@ -3,31 +3,22 @@
 function setup_java() {
     task="setup java"
     log_task "$task"
-
-    log_action "brew tap AdoptOpenJDK"
     tap_jdk
-    log_ok
-
-    log_action "install jdk8, jdk11"
     install_jdk
-    log_ok
-
-    log_action "set jenv, java environment manage"
     set_jenv
-    log_ok
-
-    log_action "install maven"
     install_maven
-    log_ok
-
     log_finish "$task"
 }
 
 function tap_jdk() {
-    brew tap --force-auto-update AdoptOpenJDK/openjdk "https://ghproxy.com/https://github.com/AdoptOpenJDK/homebrew-openjdk.git"
+    log_action "brew tap AdoptOpenJDK"
+    brew tap --force-auto-update AdoptOpenJDK/openjdk \
+        "https://ghproxy.com/https://github.com/AdoptOpenJDK/homebrew-openjdk.git"
+    log_ok
 }
 
 function install_jdk() {
+    log_action "install jdk8, jdk11"
     log_running "install jdk8"
     sed -i "" "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk//Casks/adoptopenjdk8.rb
@@ -36,9 +27,11 @@ function install_jdk() {
     sed -i "" "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk//Casks/adoptopenjdk11.rb
     brew_no_update_install_cask adoptopenjdk/openjdk/adoptopenjdk11
+    log_ok
 }
 
 function set_jenv() {
+    log_action "set jenv, java environment manage"
     log_running "install jenv"
     brew_no_update_install jenv
 
@@ -57,9 +50,12 @@ EOF
     jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
     jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
     jenv global 1.8
+    log_ok
 }
 
 function install_maven() {
+    log_action "install maven"
     brew_no_update_install maven
     mvn --version
+    log_ok
 }

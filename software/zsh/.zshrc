@@ -23,6 +23,9 @@ source $ZSH/oh-my-zsh.sh
 # proxy
 # export ALL_PROXY="socks5://127.0.0.1:10808"
 
+# brew
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
+
 # ssh
 alias autossh=$HOME/.ssh/autossh/autossh
 
@@ -34,11 +37,11 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/H
 
 # python
 eval "$(pyenv init -)"
-alias pyi=$HOME/.pyenv/.install.sh
+eval "$(pyenv virtualenv-init -)"
 
 # node, npm
 export NODE_MIRROR=https://npm.taobao.org/dist/
-export NVM_DIR="/Users/guichen01/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"                                       # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 

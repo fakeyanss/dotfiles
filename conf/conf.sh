@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-source $WORKDIR/conf/env.conf
+source $DOTFILES/conf/env.conf

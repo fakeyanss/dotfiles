@@ -3,29 +3,28 @@
 function setup_node() {
     task="setup node"
     log_task "$task"
-
-    log_action "install nvm using brew"
-    brew_no_update_install nvm
-    log_ok
-
-    log_action "symbol link .npmrc"
-    backup $HOMEDIR/.npmrc
-    ln -sv $WORKDIR/software/node/.npmrc $HOMEDIR/.npmrc
-    log_ok
-
-    log_action "set nvm config"
+    install_nvm
+    symbol_link_npm
     set_nvm
-    log_ok
-
-    log_action "install node lts version"
-    nvm install stable
-    log_ok
-
     log_finish "$task"
 }
 
+function install_nvm() {
+    log_action "install nvm using brew"
+    brew_no_update_install nvm
+    log_ok
+}
+
+function symbol_link_npm() {
+    log_action "symbol link .npmrc"
+    backup $HOME/.npmrc
+    ln -sv $DOTFILES/software/node/.npmrc $HOME/.npmrc
+    log_ok
+}
+
 function set_nvm() {
-    mkdir -p $HOMEDIR/.nvm
+    log_action "set nvm config"
+    mkdir -p $HOME/.nvm
     export NVM_DIR=~/.nvm
     source $(brew --prefix nvm)/nvm.sh
     grep -q "nvm.sh" ~/.zshrc >/dev/null 2>&1
@@ -39,4 +38,11 @@ export NVM_DIR="$HOME/.nvm"
 
 EOF
     fi
+    log_ok
+}
+
+function install_node() {
+    log_action "install node lts version"
+    nvm install stable
+    log_ok
 }

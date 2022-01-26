@@ -37,3 +37,7 @@ end tell"
 function del() {
 	mv $1 /tmp
 }
+
+source $DOTFILES/software/python/pyenv.sh
+
+
