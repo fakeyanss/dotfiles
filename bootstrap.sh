@@ -1,17 +1,5 @@
 #!/usr/bin/env bash
 
-function symbol_dotfiles() {
-	rsync -avh --no-perms \
-		git/ \
-		tmux/ \
-		zsh/ \
-		wget/ \
-		node/ \
-		picgo/ \
-		python/ \
-		~
-}
-
 function main() {
 	log "Pipixia, Here we go..."
 
@@ -19,10 +7,12 @@ function main() {
 
 	# git pull origin master
 
-	# symbol_dotfiles
-
 	# base, keep order
-	setup_brew
+	if [[ $1 == '-no-brew' ]]; then
+		log "skip homebrew"
+	else
+		setup_brew
+	fi
 	setup_ssh
 	setup_git
 	setup_ruby
@@ -36,6 +26,8 @@ function main() {
 
 	# extra software
 	setup_picgo
+
+	log "Good job! All of dotfiles have been installed :)"
 }
 
 HOMEDIR=/Users/$USER

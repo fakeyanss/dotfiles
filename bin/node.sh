@@ -25,7 +25,7 @@ function setup_node() {
 }
 
 function set_nvm() {
-    mkdir -p ~/.nvm
+    mkdir -p $HOMEDIR/.nvm
     export NVM_DIR=~/.nvm
     source $(brew --prefix nvm)/nvm.sh
     grep -q "nvm.sh" ~/.zshrc >/dev/null 2>&1

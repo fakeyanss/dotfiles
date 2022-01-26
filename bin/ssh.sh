@@ -4,7 +4,7 @@ function setup_ssh() {
     task="setup ssh"
     log_task "$task"
 
-    mkdir -p '~/.ssh'
+    mkdir -p '$HOMEDIR/.ssh'
 
     log_action "install autossh"
     install_autossh
@@ -18,11 +18,12 @@ function install_autossh() {
     mac_amd="https://ghproxy.com/https://github.com/islenbo/autossh/releases/download/v1.1.0/autossh-macOS-amd64_v1.1.0.zip"
     ls ~/.ssh/autossh >/dev/null 2>&1
     if [ $? -ne 0 ]; then
-        wget -O ~/.ssh/autossh/autossh.zip mac_amd
-        unzip ~/.ssh/autossh/autossh.zip
-        rm ~/.ssh/autossh/autossh.zip
-        mv ~/.ssh/autossh/autossh* ~/.ssh/autossh/autossh
-        ~/.ssh/autossh/autossh/install
+        # wget -O ~/.ssh/autossh/autossh.zip mac_amd
+        # unzip ~/.ssh/autossh/autossh.zip
+        # rm ~/.ssh/autossh/autossh.zip
+        # mv ~/.ssh/autossh/autossh* ~/.ssh/autossh/autossh
+        # cp $WORKDIR/software/ssh/autossh/config.json $HOMEDIR/autossh/
+        cp $WORKDIR/software/ssh/autossh $HOMEDIR/.ssh
     else
         log_running "autossh existed, skip"
     fi

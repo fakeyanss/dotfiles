@@ -10,7 +10,7 @@ source $WORKDIR/bin/picgo.sh
 source $WORKDIR/bin/python.sh
 source $WORKDIR/bin/ruby.sh
 source $WORKDIR/bin/ssh.sh
-source $WORKDIR/bin/statship.sh
+source $WORKDIR/bin/starship.sh
 source $WORKDIR/bin/sudo.sh
 source $WORKDIR/bin/tmux.sh
 source $WORKDIR/bin/zsh.sh

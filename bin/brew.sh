@@ -21,7 +21,7 @@ function install_brew() {
         log_running "go..."
         export HOMEBREW_BREW_GIT_REMOTE="https://ghproxy.com/https://github.com/Homebrew/brew.git"
         export HOMEBREW_CORE_GIT_REMOTE="https://ghproxy.com/https://github.com/Homebrew/homebrew-core.git"
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        /bin/bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     else
         log_running "brew existed, skip"
     fi
@@ -60,9 +60,9 @@ function set_tap_mirror() {
             brew tap --force-auto-update $tap "$upstream"
         fi
     done
-    grep -q 'HOMEBREW_BOTTLE_DOMAIN' ~/.zshrc >/dev/null 2>&1
+    grep -q 'HOMEBREW_BOTTLE_DOMAIN' $HOMEDIR/.zprofile >/dev/null 2>&1
     if [ $? -ne 0 ]; then
-        cat >>~/.zshrc <<EOF
+        cat >>$HOMEDIR/.zprofile <<EOF
 # homebrew
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles"
 EOF

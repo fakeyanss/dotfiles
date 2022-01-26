@@ -21,6 +21,7 @@ EOF
 
     log_action "symbol link starship.toml"
     backup $HOMEDIR/.config/starship.toml
+    mkdir -p $HOMEDIR/.config
     ln -sv $WORKDIR/software/starship/starship.toml $HOMEDIR/.config/starship.toml
     log_ok
 

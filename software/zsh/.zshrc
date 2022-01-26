@@ -48,5 +48,4 @@ eval "$(starship init zsh)"
 # custom function
 source $HOME/.config/function.sh
 # private conf, like ssh, mysql connection... 
-source $HOME/.config/private.conf# homebrew
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles"
+source $HOME/.config/private.conf

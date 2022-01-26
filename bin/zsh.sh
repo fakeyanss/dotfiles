@@ -19,8 +19,11 @@ function setup_zsh {
     log_action "symbol link .zshrc, function.sh"
     backup $HOMEDIR/.zshrc
     ln -sv $WORKDIR/software/zsh/.zshrc $HOMEDIR/.zshrc
+    mkdir -p $HOMEDIR/.config
     backup $HOMEDIR/.config/function.sh
     ln -sv $WORKDIR/software/zsh/function.sh $HOMEDIR/.config/function.sh
+    backup $HOMEDIR/.zprofile
+    ln -sv $WORKDIR/software/zsh/.zprofile $HOMEDIR/.zprofile
     log_ok
 
     log_finish "$task"
@@ -37,8 +40,18 @@ function ch_sh() {
 }
 
 function install_omz() {
-    export REMOTE="https://ghproxy.com/https://github.com/${REPO}.git"
-    sh -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    ZSH=${ZSH:-~/.oh-my-zsh}
+    REPO=${REPO:-ohmyzsh/ohmyzsh}
+    REMOTE=${REMOTE:-https://ghproxy.com/https://github.com/${REPO}.git}
+    BRANCH=${BRANCH:-master}
+    git clone -c core.eol=lf -c core.autocrlf=false \
+    -c fsck.zeroPaddedFilemode=ignore \
+    -c fetch.fsck.zeroPaddedFilemode=ignore \
+    -c receive.fsck.zeroPaddedFilemode=ignore \
+    -c oh-my-zsh.remote=origin \
+    -c oh-my-zsh.branch="$BRANCH" \
+    --depth=1 --branch "$BRANCH" "$REMOTE" "$ZSH"
+    #sh -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://ghproxy.com/https://github.com/zsh-users/zsh-autosuggestions \
         ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     git clone https://ghproxy.com/https://github.com/zsh-users/zsh-syntax-highlighting.git \
