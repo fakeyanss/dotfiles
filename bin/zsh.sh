@@ -10,6 +10,7 @@ function setup_zsh() {
     backup $HOME/.zshrc
     ln -sv $DOTFILES/software/zsh/.zshrc $HOME/.zshrc
     mkdir -p $HOME/.config
+    touch $HOME/.config/private.conf
     backup $HOME/.config/function.sh
     ln -sv $DOTFILES/software/zsh/function.sh $HOME/.config/function.sh
     grep -q "DOTFILES" $HOME/.zprofile >/dev/null 2>&1

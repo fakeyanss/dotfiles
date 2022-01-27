@@ -25,7 +25,7 @@ function symbol_link_git() {
 
 	backup $HOME/.config/.gitconfig
 	mkdir -p $HOME/.config
-	ln -sv $DOTFILES/conf/.gitconfig $HOME/.config/.gitconfig
+    cp $DOTFILES/conf/gitconfig $HOME/.config/gitconfig
 	log_ok
 }
 
