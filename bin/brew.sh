@@ -60,7 +60,7 @@ function set_tap_mirror() {
     if [ $? -ne 0 ]; then
         cat >>$HOME/.zprofile <<EOF
 # homebrew
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles"
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
 
 EOF
     fi

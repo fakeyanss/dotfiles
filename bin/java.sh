@@ -22,7 +22,7 @@ function install_jdk() {
     log_running "install jdk8"
     sed -i "" "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk//Casks/adoptopenjdk8.rb
-    brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
+    brew_no_update_install_cask adoptopenjdk/openjdk/adoptopenjdk8
     log_running "install jdk11"
     sed -i "" "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk//Casks/adoptopenjdk11.rb
@@ -41,7 +41,7 @@ function set_jenv() {
         cat >>~/.zshrc <<EOF
 # java env
 export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"    
+eval "$(jenv init -)"
 
 EOF
     fi
