@@ -20,11 +20,11 @@ function tap_jdk() {
 function install_jdk() {
     log_action "install jdk8, jdk11"
     log_running "install jdk8"
-    sed -i "" "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
+    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk//Casks/adoptopenjdk8.rb
     brew_no_update_install_cask adoptopenjdk/openjdk/adoptopenjdk8
     log_running "install jdk11"
-    sed -i "" "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
+    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk//Casks/adoptopenjdk11.rb
     brew_no_update_install_cask adoptopenjdk/openjdk/adoptopenjdk11
     log_ok

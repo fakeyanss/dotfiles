@@ -12,7 +12,17 @@ function setup_picgo() {
 	fi
 
 	log_action "set picgo config"
-	sed -i "" "s/\\$\GITHUB_TOKEN_PICGO/${PICGO_GITHUB_TOKEN}/g" ~/.picgo/config.json
+	backup $HOME/.picgo/config.json
+	# cp $DOTFILES/software/picgo/config.json $HOME/.picgo/config.json
+	# gsed -e "s/\$PICGO_GITHUB_TOKEN/${PICGO_GITHUB_TOKEN}/g" $HOME/.picgo/config.json
+	# gsed -e "s/\$PICGO_GITHUB_REPO/${PICGO_GITHUB_REPO}/g" $HOME/.picgo/config.json
+	# gsed -e "s/\$PICGO_GITHUB_PATH/${PICGO_GITHUB_PATH}/g" $HOME/.picgo/config.json
+	# fuck sed on mac
+	config=$(cat $DOTFILES/software/picgo/config.json)
+	config=${config//\$PICGO_GITHUB_TOKEN/${PICGO_GITHUB_TOKEN}}
+	config=${config//\$PICGO_GITHUB_REPO/${PICGO_GITHUB_REPO}}
+	config=${config//\$PICGO_GITHUB_PATH/${PICGO_GITHUB_PATH}}
+	echo -e $config > $HOME/.picgo/config.json
 	log_ok
 
 	log_finish "$task"

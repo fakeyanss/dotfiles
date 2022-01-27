@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+readonly picgo_github_token=xxxx
+readonly picgo_github_repo=fakeyanss/imgplace
+readonly picgo_github_path=2022/
+
+function autossh() {
+    ~/.ssh/autossh/autossh
+}
+
+function proxy() {
+    export http_proxy="http://127.0.0.1:8000"
+    export https_proxy="http://127.0.0.1:8000"
+}
+
+function unproxy() {
+    unset http_proxy
+    unset https_proxy
+}

@@ -11,11 +11,11 @@
     "current": "githubPlus",
     "githubPlus": {
       "branch": "master",
-      "customUrl": "https://cdn.jsdelivr.net/gh/fakeyanss/imgplace@master",
+      "customUrl": "https://cdn.jsdelivr.net/gh/$PICGO_GITHUB_REPO@master",
       "origin": "github",
-      "repo": "fakeyanss/imgplace",
-      "path": "2022/",
-      "token": "$GITHUB_TOKEN_PICGO"
+      "repo": "$PICGO_GITHUB_REPO",
+      "path": "$PICGO_GITHUB_PATH",
+      "token": "$PICGO_GITHUB_TOKEN"
     }
   },
   "picgo-plugin-github-plus": {

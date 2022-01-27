@@ -13,6 +13,7 @@ function main() {
 	else
 		setup_brew
 	fi
+	setup_sed
 	setup_ssh
 	setup_git
 	setup_ruby

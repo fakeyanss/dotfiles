@@ -31,7 +31,7 @@ function symbol_link_git() {
 
 function config_git() {
 	log_action "replace git config keywords"
-	sed -i "" "s/\\$\GITHUB_USER/${GITHUB_USER}/g" $HOME/.config/.gitconfig
-	sed -i "" "s/\\$\GITHUB_EMAIL/${GITHUB_EMAIL}/g" $HOME/.config/.gitconfig
+	sed -i "s/\\$\GITHUB_USER/${GITHUB_USER}/g" $HOME/.config/.gitconfig
+	sed -i "s/\\$\GITHUB_EMAIL/${GITHUB_EMAIL}/g" $HOME/.config/.gitconfig
 	log_ok
 }
