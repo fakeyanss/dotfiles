@@ -94,3 +94,6 @@ This project changes a number of settings and configures software on MacOS. Here
   - npm mirror
   
   - pip mirror
+
+
+TODO: log as spacevim, colourful font
