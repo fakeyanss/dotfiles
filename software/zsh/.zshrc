@@ -33,7 +33,7 @@ alias autossh=$HOME/.ssh/autossh/autossh
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 # maven env
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 
 # python
 eval "$(pyenv init -)"

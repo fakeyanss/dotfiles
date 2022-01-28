@@ -4,8 +4,11 @@ function setup_java() {
     task="setup java"
     log_task "$task"
     tap_jdk
-    install_jdk
-    set_jenv
+
+    main_version=${1:-jdk8}
+    sub_version=${2:-jdk11}
+    install_jdk $main_version $sub_version
+    set_jenv $main_version $sub_version
     install_maven
     log_finish "$task"
 }
@@ -18,15 +21,17 @@ function tap_jdk() {
 }
 
 function install_jdk() {
-    log_action "install jdk8, jdk11"
-    log_running "install jdk8"
+    log_action "install jdk"
+    main_version=$1
+    sub_version=$2
+    log_running "install $main_version"
     gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
-        /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk//Casks/adoptopenjdk8.rb
-    brew_no_update_install_cask adoptopenjdk/openjdk/adoptopenjdk8
-    log_running "install jdk11"
+        /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk/Casks/adoptopen${main_version}.rb
+    brew_no_update_install_cask adoptopenjdk/openjdk/adoptopen${main_version}
+    log_running "install $sub_version"
     gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
-        /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk//Casks/adoptopenjdk11.rb
-    brew_no_update_install_cask adoptopenjdk/openjdk/adoptopenjdk11
+        /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk/Casks/adoptopen${sub_version}.rb
+    brew_no_update_install_cask adoptopenjdk/openjdk/adoptopen${sub_version}
     log_ok
 }
 
@@ -34,6 +39,8 @@ function set_jenv() {
     log_action "set jenv, java environment manage"
     log_running "install jenv"
     brew_no_update_install jenv
+
+    eval "$(jenv init -)"
 
     log_running "set jenv path"
     grep -q "jenv" ~/.zshrc >/dev/null 2>&1
@@ -46,10 +53,15 @@ eval "$(jenv init -)"
 EOF
     fi
 
-    log_running "jevn add jdk, set global to 1.8"
-    jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
-    jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
-    jenv global 1.8
+    main_version=$1
+    log_running "jenv add jdk, set global to $main_version"
+    main_version=${main_version/jdk/}
+    sub_version=${2/jdk/}
+    jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-${sub_version}.jdk/Contents/Home
+    jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-${main_version}.jdk/Contents/Home
+    jenv global 1.${main_version}
+    # enable export JAVA_HOME
+    jenv enable-plugin export
     log_ok
 }
 

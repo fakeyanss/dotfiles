@@ -21,12 +21,11 @@ function main() {
 	# setup_tmux
 	# setup_starship
 
-	# setup_java
-	# setup_python
-	# setup_node
-	# setup_golang
-
 	# extra software
+	setup_java $JAVA_MAIN_VERSION $JAVA_SUB_VERSION
+	# setup_python $PYTHON_MAIN_VERSION $PYTHON_SUB_VERSION
+	# setup_node
+	# setup_golang $GOLANG_VERSION
 	# setup_picgo
 
 	log "Good job! All of dotfiles have been installed :)"

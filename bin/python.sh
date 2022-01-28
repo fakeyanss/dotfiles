@@ -4,7 +4,7 @@ function setup_python() {
     task="setup python"
     log_task "$task"
     install_pyenv
-    install_py
+    install_py $1 $2
     symbol_link_py
     log_finish "$task"
 }
@@ -28,12 +28,14 @@ EOF
 function install_py() {
     log_action "install and set python version"
     source $DOTFILES/software/python/pyenv.sh
-    log_running "install py 2.7.18"
-    pyenv_install 2.7.18
-    log_running "install py 3.10.1"
-    pyenv_install 3.10.1
-    log_running "set global default to py 3.10.1"
-    pyenv global 3.10.1
+    main_version=${1:-3.10.1}
+    sub_verson=${2:-2.7.18}
+    log_running "install py $sub_verson"
+    pyenv_install $sub_verson
+    log_running "install py $main_version"
+    pyenv_install $main_version
+    log_running "set global default to py $main_version"
+    pyenv global $main_version
     log_ok
 }
 

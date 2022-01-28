@@ -4,7 +4,7 @@ function setup_golang() {
     task="setup golang"
     log_task "$task"
     install_goenv
-    install_golang
+    install_golang $1
     log_finish "$task"
 }
 
@@ -22,8 +22,9 @@ EOF
 }
 
 function install_golang() {
-    log_action "install golang 1.17.6"
-    goenv install 1.17.6
-    goenv global 1.17.6
+    version=${1:-1.17.6}
+    log_action "install golang $version"
+    goenv install -s $version
+    goenv global $version
     log_ok
 }
