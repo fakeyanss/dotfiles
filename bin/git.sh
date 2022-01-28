@@ -23,7 +23,7 @@ function symbol_link_git() {
 	backup $HOME/.gitignore
 	ln -sv $DOTFILES/software/git/.gitignore $HOME/.gitignore
 
-	backup $HOME/.config/.gitconfig
+	backup $HOME/.config/gitconfig
 	mkdir -p $HOME/.config
     cp $DOTFILES/conf/gitconfig $HOME/.config/gitconfig
 	log_ok

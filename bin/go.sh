@@ -9,7 +9,7 @@ function setup_golang() {
 }
 
 function install_goenv() {
-    log_action "install golang"
+    log_action "install goenv"
     brew_no_update_install "--HEAD goenv"
     grep -q 'goenv' $HOME/.zshrc >/dev/null 2>&1
     if [ $? -ne 0 ]; then

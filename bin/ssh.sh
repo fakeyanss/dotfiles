@@ -3,7 +3,7 @@
 function setup_ssh() {
     task="setup ssh"
     log_task "$task"
-    mkdir -p '$HOME/.ssh'
+    mkdir -p $HOME/.ssh
     install_autossh
     log_finish "$task"
 }
