@@ -13,20 +13,21 @@ function main() {
 	else
 		setup_brew
 	fi
-	setup_sed
-	setup_ssh
-	setup_git
-	setup_ruby
-	setup_zsh
-	setup_tmux
-	setup_starship
+	# setup_sed
+	# setup_ssh
+	# setup_git
+	# setup_ruby
+	# setup_zsh
+	# setup_tmux
+	# setup_starship
 
-	setup_java
-	setup_python
-	setup_node
+	# setup_java
+	# setup_python
+	# setup_node
+	# setup_golang
 
 	# extra software
-	setup_picgo
+	# setup_picgo
 
 	log "Good job! All of dotfiles have been installed :)"
 }
