@@ -28,6 +28,9 @@ function main() {
 	setup_golang $GOLANG_VERSION
 	setup_picgo
 
+	setup_iterm2
+
+	setup_mac
 	log "Good job! All of dotfiles have been installed :)"
 }
 

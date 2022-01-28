@@ -4,8 +4,10 @@ source $DOTFILES/bin/brew.sh
 source $DOTFILES/bin/echo.sh
 source $DOTFILES/bin/git.sh
 source $DOTFILES/bin/go.sh
+source $DOTFILES/bin/iterm2.sh
 source $DOTFILES/bin/java.sh
 source $DOTFILES/bin/lib.sh
+source $DOTFILES/bin/mac_system.sh
 source $DOTFILES/bin/node.sh
 source $DOTFILES/bin/picgo.sh
 source $DOTFILES/bin/python.sh
