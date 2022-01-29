@@ -32,6 +32,7 @@ function main() {
 	setup_hammerspoon
 
 	setup_mac
+	setup_extra
 	log "Good job! All of dotfiles have been installed :)"
 }
 

@@ -10,7 +10,7 @@ local spoons = {
 	-- UnsplashZ = {},
     Window = {},
     Clipboard = {},
-    -- EjectMenu = {},
+    EjectMenu = {},
     TimeFlow = {}
 }
 
@@ -19,6 +19,14 @@ for spoonName, spoonConfig in pairs(spoons) do
 	hs.loadSpoon(spoonName)
 	spoon[spoonName]:start(spoonConfig)
 end
+
+-- load vim mode
+local VimMode = hs.loadSpoon('VimMode')
+local vim = VimMode:new()
+vim:disableForApp('Code')
+vim:enterWithSequence('jk')
+vim:useFallbackMode('Google Chrome')
+vim:shouldDimScreenInNormalMode(false)
 
 -- ModalMgr Spoon must be loaded explicitly, because HSaria2 relies upon it.
 hs.loadSpoon("ModalMgr")
