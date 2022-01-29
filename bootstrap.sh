@@ -29,6 +29,7 @@ function main() {
 	setup_picgo
 
 	setup_iterm2
+	setup_hammerspoon
 
 	setup_mac
 	log "Good job! All of dotfiles have been installed :)"

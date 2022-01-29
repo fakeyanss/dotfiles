@@ -6,7 +6,7 @@ obj.name = "Caffeine"
 local caffeine
 
 function toggleCaffeine()
-  setCaffeineMenuItem(hs.caffeinate.toggle("systemIdle"))
+  setCaffeineMenuItem(hs.caffeinate.toggle("displayIdle"))
 end
 
 function setCaffeineMenuItem(isIdle)
