@@ -16,6 +16,7 @@ function install_hm() {
 
 function symbol_link_hm() {
     log_action "symbol link .hammerspoon"
+    backup $HOME/.hammerspoon
     ln -sv $DOTFILES/software/hammerspoon $HOME/.hammerspoon
     log_ok
 }
