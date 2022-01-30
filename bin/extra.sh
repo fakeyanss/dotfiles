@@ -37,21 +37,21 @@ function setup_extra() {
     gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/dozer.rb
     brew_no_update_install_cask dozer
+    open -a dozer
     # outliner notebook
     gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/logseq.rb
     brew_no_update_install_cask logseq
-<<<<<<< HEAD
 
     # karabiner, 比 hammerspoon 的 keystroke 更好用
     brew_no_update_install_cask karabiner-elements
     backup $HOME/.config/karabiner/karabiner.json
     ln -s $DOTFILES/software/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json
+    open -a karabiner
 
-=======
->>>>>>> 74faf86 (v0.2.2)
     brew_no_update_install_cask docker
     brew_no_update_install_cask logitech-options
     brew_no_update_install_cask wechat
     brew_no_update_install_cask wireshark
+    brew_no_update_install_cask neteasemusic
 }
