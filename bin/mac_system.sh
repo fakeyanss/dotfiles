@@ -681,20 +681,19 @@ function setup_mac() {
 
     # Install the Solarized Dark theme for iTerm
     # open "${HOME}/init/Solarized Dark.itermcolors"
-    open "$DOTFILES/software/iterm2/Nord.itermcolors"
 
     # Don’t display the annoying prompt when quitting iTerm
-    defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+    # defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
     ###############################################################################
     # Time Machine                                                                #
     ###############################################################################
 
     # Prevent Time Machine from prompting to use new hard drives as backup volume
-    defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+    # defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
     # Disable local Time Machine backups
-    hash tmutil &>/dev/null && sudo tmutil disablelocal
+    # hash tmutil &>/dev/null && sudo tmutil disablelocal
 
     ###############################################################################
     # Activity Monitor                                                            #
@@ -830,7 +829,7 @@ function setup_mac() {
     ###############################################################################
 
     # Start SizeUp at login
-    defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
+    # defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
 
     # Don’t show the preferences window on next start
     # defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false

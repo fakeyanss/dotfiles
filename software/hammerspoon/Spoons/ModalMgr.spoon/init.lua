@@ -186,4 +186,7 @@ function obj:deactivateAll()
     obj:deactivate(obj.active_list)
 end
 
+function obj:start()
+end
+
 return obj

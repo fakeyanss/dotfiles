@@ -21,6 +21,11 @@ function setup_extra() {
     # outliner notebook
     brew_no_update_install_cask logseq
 
+    # karabiner, 比 hammerspoon 的 keystroke 更好用
+    brew_no_update_install_cask karabiner-elements
+    backup $HOME/.config/karabiner/karabiner.json
+    ln -s $DOTFILES/software/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json
+
     brew_no_update_install_cask docker
     brew_no_update_install_cask logitech-options
     brew_no_update_install_cask wechat
