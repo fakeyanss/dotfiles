@@ -7,13 +7,16 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     z
-    tmux
-    redis-cli
-    mvn
-    node
-    npm
-    pyenv
-    brew
+    evalcache
+    # tmux
+    # redis-cli
+    # mvn
+    # node
+    # npm
+    # pyenv
+    # brew
+    # docker
+    # docker-compose
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -31,13 +34,16 @@ alias autossh=$HOME/.ssh/autossh/autossh
 
 # java env
 export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+# eval "$(jenv init -)"
+_evalcache jenv init -
 # maven env
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 
 # python
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+_evalcache pyenv init -
+_evalcache pyenv virtualenv-init -
 
 # node, npm
 export NODE_MIRROR=https://npm.taobao.org/dist/
@@ -46,10 +52,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 # go
-eval "$(goenv init -)"
+# eval "$(goenv init -)"
+_evalcache goenv init -
 
 # statship
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
+_evalcache starship init zsh
 
 # custom function
 source $HOME/.config/function.sh
