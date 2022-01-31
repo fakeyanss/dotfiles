@@ -46,10 +46,11 @@ Here is the supported software list.
 | git                                             | prerequirement, and upgrade by homebrew in a moment                                                |         |
 | homebrew                                        | the beginning of all things                                                                        |         |
 | zsh & oh my zsh                                 | using evalcache, speeding up the zsh loading                                                       |         |
-| nvim                                            |                                                                                                    | WIP     |
-| java                                            |                                                                                                    |         |
-| python                                          |                                                                                                    |         |
-| node                                            |                                                                                                    |         |
+| vim & nvim                                      |                                                                                                    | WIP     |
+| java                                            | using AdoptOpenJdk and jenv                                                                        |         |
+| go                                              | using goenv                                                                                        |         |
+| python                                          | using pyenv                                                                                        |         |
+| node                                            | using nvm                                                                                          |         |
 | hammonspoon                                     | caffinate, window manager, clipboard history, wallpaper from unsplash, network speed in menubar... |         |
 | picgo                                           | picture bed integration and uploader                                                               |         |
 | customized function & alias                     | sudo passwordless, switch darkmode and lightmode, pbcopy & pbpaste                                 |         |
