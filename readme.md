@@ -1,14 +1,5 @@
 # more-than-dotfiles
 
-```
-git clone https://ghproxy.com/https://github.com/fakeYanss/dotfiles.git --depth=1 ~/.dotfiles
-cd ~/.dotfiles;
-# run this using terminal (not iTerm, lest iTerm settings get discarded on exit)
-bash bootstrap.sh
-```
-
----
-
 ## What does this repository do?
 
 Automation setup by a simple script.
@@ -37,13 +28,16 @@ Before you actually execute the script, please make sure what is dotfiles and wh
 
 > That way all your settings and preferences can be reusable and consistent on other machines.
 
-
-
 ## Installation
 
+```bash
+git clone https://ghproxy.com/https://github.com/fakeYanss/dotfiles.git --depth=1 ~/.dotfiles
+cd ~/.dotfiles;
+# run this using terminal (not iTerm, lest iTerm settings get discarded on exit)
+bash bootstrap.sh
+```
 
-
-## ## Supported software
+## Supported software
 
 Here is the supported software list.
 
@@ -56,14 +50,9 @@ Here is the supported software list.
 | java                                            |                                                                                                    |         |
 | python                                          |                                                                                                    |         |
 | node                                            |                                                                                                    |         |
-|                                                 |                                                                                                    |         |
 | hammonspoon                                     | caffinate, window manager, clipboard history, wallpaper from unsplash, network speed in menubar... |         |
 | picgo                                           | picture bed integration and uploader                                                               |         |
 | customized function & alias                     | sudo passwordless, switch darkmode and lightmode, pbcopy & pbpaste                                 |         |
 | localizational for network environment in China | homebrew proxy and mirror, github proxy, npm mirror, pip mirror                                    |         |
-
-
-
-
 
 TODO: log as spacevim, colourful font
