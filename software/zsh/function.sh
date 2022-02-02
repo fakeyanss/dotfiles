@@ -43,3 +43,8 @@ function del() {
 source $DOTFILES/software/python/pyenv.sh
 
 alias sed=gsed
+
+function fileserv() {
+    port=${1:-8000}
+    python -m http.server $port
+}
