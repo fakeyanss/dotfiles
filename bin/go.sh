@@ -16,6 +16,7 @@ function install_goenv() {
         cat >>$HOME/.zshrc <<EOF
 # go
 eval "$(goenv init -)"
+export GOPATH=$HOME/.config/go
 EOF
     fi
     log_ok

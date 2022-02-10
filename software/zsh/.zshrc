@@ -54,6 +54,7 @@ export NVM_DIR="$HOME/.nvm"
 # go
 # eval "$(goenv init -)"
 _evalcache goenv init -
+export GOPATH=$HOME/.config/go
 
 # statship
 # eval "$(starship init zsh)"

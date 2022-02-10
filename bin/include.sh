@@ -14,6 +14,7 @@ source $DOTFILES/bin/node.sh
 source $DOTFILES/bin/picgo.sh
 source $DOTFILES/bin/python.sh
 source $DOTFILES/bin/ruby.sh
+source $DOTFILES/bin/rust.sh
 source $DOTFILES/bin/sed.sh
 source $DOTFILES/bin/ssh.sh
 source $DOTFILES/bin/starship.sh

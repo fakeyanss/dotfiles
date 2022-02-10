@@ -26,10 +26,11 @@ function main() {
 	setup_python $PYTHON_MAIN_VERSION $PYTHON_SUB_VERSION
 	setup_node
 	setup_golang $GOLANG_VERSION
-	setup_picgo
+	setup_rust
 
-	setup_iterm2
+	setup_picgo
 	setup_hammerspoon
+	setup_iterm2
 
 	setup_mac
 	setup_extra
