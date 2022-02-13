@@ -20,8 +20,6 @@ function pbpaste() {
 	fi
 }
 
-
-
 function mci() {
 	mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
 }

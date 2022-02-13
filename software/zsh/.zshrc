@@ -38,6 +38,8 @@ export PATH="$HOME/.jenv/bin:$PATH"
 _evalcache jenv init -
 # maven env
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+# using gradle@6
+PATH="/usr/local/opt/gradle@6/bin:$PATH"
 
 # python
 # eval "$(pyenv init -)"
