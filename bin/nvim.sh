@@ -30,18 +30,23 @@ function setup_nvim_lsp() {
     npm install -g yarn
     # using nvim-lsp-installer
     # nvim install -g \
-        # bash-language-server \
-        # vscode-langservers-extracted \
-        # cssmodules-language-server \
-        # dockerfile-language-server-nodejs \
-        # sql-formatter node-sql-parser \
-        # typescript typescript-language-server \
-        # @ansible/ansible-language-server \
-        # vls \
+    # bash-language-server \
+    # vscode-langservers-extracted \
+    # cssmodules-language-server \
+    # dockerfile-language-server-nodejs \
+    # sql-formatter node-sql-parser \
+    # typescript typescript-language-server \
+    # @ansible/ansible-language-server \
+    # vls \
     # go install golang.org/x/tools/gopls@latest
     # go get github.com/lighttiger2505/sqls
     # pip install -U jedi-language-server
     gsed -i "s/return (\"https:\/\/github.com/return (\"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         $HOME/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer/lua/nvim-lsp-installer/installers/context.lua
+
+    mkdir -p $HOME/.config/lsp/jdtls
+    mkdir -p $HOME/.config/lsp/workspace
+    tar -xzf $DOTFILES/software/nvim/extra/jdt-language-server-1.8.0-202201261434.tar.gz \
+        -C $HOME/.config/lsp/jdtls
     log_ok
 }
