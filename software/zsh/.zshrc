@@ -56,6 +56,9 @@ _evalcache goenv init -
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn
 
+# editor
+alias purevim=/usr/bin/vim
+alias vim=/usr/local/bin/nvim
 
 # statship
 # eval "$(starship init zsh)"
