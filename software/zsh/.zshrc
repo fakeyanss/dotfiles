@@ -34,7 +34,6 @@ alias autossh=$HOME/.ssh/autossh/autossh
 
 # java env
 export PATH="$HOME/.jenv/bin:$PATH"
-# eval "$(jenv init -)"
 _evalcache jenv init -
 # maven env
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
@@ -42,8 +41,6 @@ _evalcache jenv init -
 PATH="/usr/local/opt/gradle@6/bin:$PATH"
 
 # python
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
 _evalcache pyenv init -
 _evalcache pyenv virtualenv-init -
 
@@ -56,6 +53,9 @@ export NVM_DIR="$HOME/.nvm"
 # go
 # eval "$(goenv init -)"
 _evalcache goenv init -
+export GO111MODULE=on
+export GOPROXY=https://goproxy.cn
+
 
 # statship
 # eval "$(starship init zsh)"

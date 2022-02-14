@@ -62,9 +62,17 @@ local packer = require('packer').startup(function()
         config = require('plugins/telescope-conf')
     }
 
+    use {
+        'iamcco/markdown-preview.nvim',
+        run = 'cd app && yarn install'
+    }
+    use 'hotoo/pangu.vim'
+
     --------------------------- LSP ---------------------------
     -- lspconfig
     use {'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer'}
+    -- debugging
+    use 'mfussenegger/nvim-dap'
     -- lsp java
     use 'mfussenegger/nvim-jdtls'
     -- Maybe coc.nvim is cheaper, but coc-java is too difficult to setup.
@@ -72,12 +80,17 @@ local packer = require('packer').startup(function()
     --     'neoclide/coc.nvim',
     --     branch = 'release'
     -- }
+    -- lsp rust
+    use {
+        'simrat39/rust-tools.nvim',
+        requires = {'nvim-lua/plenary.nvim'}
+    }
     -- nvim-cmp
     use {
         'hrsh7th/nvim-cmp',
         requires = {'rafamadriz/friendly-snippets', 'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ', 'hrsh7th/cmp-vsnip',
-        'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline',
-        'octaltree/cmp-look'},
+                    'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline',
+                    'octaltree/cmp-look'}
         -- config = require('plugins/cmp-conf')
     }
 

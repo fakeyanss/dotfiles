@@ -10,6 +10,7 @@ source $DOTFILES/bin/iterm2.sh
 source $DOTFILES/bin/java.sh
 source $DOTFILES/bin/lib.sh
 source $DOTFILES/bin/mac_system.sh
+source $DOTFILES/bin/nvim.sh
 source $DOTFILES/bin/node.sh
 source $DOTFILES/bin/picgo.sh
 source $DOTFILES/bin/python.sh
