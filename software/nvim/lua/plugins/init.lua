@@ -83,6 +83,9 @@ local packer = require('packer').startup(function()
     config = require('plugins/telescope-conf')
   }
 
+  -- git blame
+  use 'f-person/git-blame.nvim'
+
   -- markdown
   use {
     "plasticboy/vim-markdown",
