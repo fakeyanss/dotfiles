@@ -57,6 +57,9 @@ map("n", "<A-l>", "<C-w>l", opt)
 
 ------------------------------------------------------------------
 -- 插件快捷键
+-- oscyank
+map('v', '<leader>y', ":OSCYank<CR>", opt)
+
 -- nvimTree
 map('n', '<A-m>', ':NvimTreeToggle<CR>', opt)
 
