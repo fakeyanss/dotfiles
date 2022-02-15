@@ -87,10 +87,7 @@ local packer = require('packer').startup(function()
   use 'f-person/git-blame.nvim'
 
   -- markdown
-  use {
-    "plasticboy/vim-markdown",
-    ft = { "markdown" }
-  }
+  use 'dhruvasagar/vim-table-mode'
   use {
     'iamcco/markdown-preview.nvim',
     run = 'cd app && yarn install'
