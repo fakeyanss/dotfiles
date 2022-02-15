@@ -5,6 +5,11 @@ if fn.empty(fn.glob(install_path)) > 0 then
     vim.cmd 'packadd packer.nvim'
 end
 
+install_path = fn.stdpath('data') .. '/site/pack/packer/start/nvim-lsp-installer'
+if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', 'https://ghproxy.com/https://github.com/williamboman/nvim-lsp-installer', install_path})
+end
+
 local packer = require('packer').startup(function()
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
@@ -38,9 +43,7 @@ local packer = require('packer').startup(function()
     -- Comment
     use {
         'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup(require('keymap').comment)
-        end
+        --config = require('plugins/Comment-conf')
     }
 
     -- nvim-autopairs
@@ -50,7 +53,7 @@ local packer = require('packer').startup(function()
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        config = require('plugins/treesitter-conf')
+        --config = require('plugins/treesitter-conf')
     }
 
     -- telescope
@@ -68,7 +71,7 @@ local packer = require('packer').startup(function()
     }
     use 'hotoo/pangu.vim'
 
-    --------------------------- LSP ---------------------------
+    -- --------------------------- LSP ---------------------------
     -- lspconfig
     use {'neovim/nvim-lspconfig', 'williamboman/nvim-lsp-installer'}
     -- debugging
@@ -91,12 +94,10 @@ local packer = require('packer').startup(function()
         requires = {'rafamadriz/friendly-snippets', 'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ', 'hrsh7th/cmp-vsnip',
                     'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline',
                     'octaltree/cmp-look'}
-        -- config = require('plugins/cmp-conf')
     }
 
     -- lspkind
     use 'onsails/lspkind-nvim'
-    -- use 'github/copilot.vim'
 
 end)
 

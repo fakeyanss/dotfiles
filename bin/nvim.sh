@@ -41,6 +41,9 @@ function setup_nvim_lsp() {
     # go install golang.org/x/tools/gopls@latest
     # go get github.com/lighttiger2505/sqls
     # pip install -U jedi-language-server
+
+    git clone https://ghproxy.com/https://github.com/williamboman/nvim-lsp-installer \
+        $HOME/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer
     gsed -i "s/return (\"https:\/\/github.com/return (\"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         $HOME/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer/lua/nvim-lsp-installer/installers/context.lua
 

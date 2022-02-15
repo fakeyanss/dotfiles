@@ -5,17 +5,10 @@ for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) 
 end
 
 return function()
-    require('nvim-treesitter.configs').setup {
-        autotag = {
-            enable = true,
-            filetypes = {
-              'html', 'javascript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'xml'
-            },
-          },
-          ensure_installed = 'maintained', -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-        
-        -- Install languages synchronously (only applied to `ensure_installed`)
-        sync_install = false,
+    require'nvim-treesitter.configs'.setup {
+        -- 安装 language parser
+        -- :TSInstallInfo 命令查看支持的语言
+        ensure_installed = {"html", "css", "vim", "lua", "javascript", "typescript", "tsx"},
         -- 启用代码高亮功能
         highlight = {
             enable = true,
@@ -36,6 +29,7 @@ return function()
             enable = true
         }
     }
+
     -- 开启 Folding
     vim.wo.foldmethod = 'expr'
     vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
