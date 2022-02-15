@@ -49,7 +49,13 @@ function setup_nvim_lsp() {
 
     mkdir -p $HOME/.config/lsp/jdtls
     mkdir -p $HOME/.config/lsp/workspace
-    tar -xzf $DOTFILES/software/nvim/extra/jdt-language-server-1.8.0-202201261434.tar.gz \
+
+    ls $HOME/.config/lsp/jdtls >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+      tar -xzf $DOTFILES/software/nvim/extra/jdt-language-server-1.8.0-202201261434.tar.gz \
         -C $HOME/.config/lsp/jdtls
+    else
+      log_running "jdtls existed, skip"
+    fi
     log_ok
-}
+  }
