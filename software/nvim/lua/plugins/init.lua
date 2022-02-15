@@ -43,7 +43,9 @@ local packer = require('packer').startup(function()
     -- Comment
     use {
         'numToStr/Comment.nvim',
-        --config = require('plugins/Comment-conf')
+        config = function()
+            require('Comment').setup(require('keymap').comment)
+        end
     }
 
     -- nvim-autopairs
@@ -53,7 +55,7 @@ local packer = require('packer').startup(function()
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        --config = require('plugins/treesitter-conf')
+        config = require('plugins/treesitter-conf')
     }
 
     -- telescope

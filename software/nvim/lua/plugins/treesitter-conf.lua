@@ -6,15 +6,27 @@ end
 
 return function()
     require'nvim-treesitter.configs'.setup {
-        -- 安装 language parser
-        -- :TSInstallInfo 命令查看支持的语言
-        ensure_installed = {"html", "css", "vim", "lua", "javascript", "typescript", "tsx"},
-        -- 启用代码高亮功能
+        -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+        ensure_installed = "maintained",
+      
+        -- Install languages synchronously (only applied to `ensure_installed`)
+        sync_install = false,
+      
         highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false
+          -- `false` will disable the whole extension
+          enable = true,
+      
+          -- list of language that will be disabled
+          disable = {},
+      
+          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+          -- Using this option may slow down your editor, and you may see some duplicate highlights.
+          -- Instead of true it can also be a list of languages
+          additional_vim_regex_highlighting = false,
         },
-        -- 启用增量选择
+
+        -- Incremental selection based on the named nodes from the grammar.
         incremental_selection = {
             enable = true,
             keymaps = {
@@ -24,16 +36,9 @@ return function()
                 scope_incremental = '<TAB>'
             }
         },
-        -- 启用基于Treesitter的代码格式化(=) . NOTE: This is an experimental feature.
+        -- Indentation based on treesitter for the = operator. NOTE: This is an experimental feature.
         indent = {
             enable = true
         }
-    }
-
-    -- 开启 Folding
-    vim.wo.foldmethod = 'expr'
-    vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-    -- 默认不要折叠
-    -- https://stackoverflow.com/questions/8316139/how-to-set-the-default-to-unfolded-when-you-open-a-file
-    vim.wo.foldlevel = 99
+      }
 end
