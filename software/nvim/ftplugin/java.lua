@@ -15,6 +15,7 @@ local config = {
     '-Declipse.product=org.eclipse.jdt.ls.core.product', '-Dlog.protocol=true', '-Dlog.level=ALL', '-Xms1g',
     '--add-modules=ALL-SYSTEM', '--add-opens', 'java.base/java.util=ALL-UNNAMED', '--add-opens',
     'java.base/java.lang=ALL-UNNAMED', -- 💀
+    '-javaagent:' .. lsp_dir .. '/lombok/lombok.jar',
     '-jar', lsp_dir .. '/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
     -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
     -- Must point to the                                                     Change this to

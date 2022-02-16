@@ -66,7 +66,10 @@ map('n', '<A-m>', ':NvimTreeToggle<CR>', opt)
 -- bufferline 左右Tab切换
 map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
 map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
-map("n", "<C-w>", ":bd<CR>", opt)
+map("n", "<C-w>", ":BufferLinePickClose<CR>", opt)
+
+-- visia
+map("n", "<A-,>", ":Vista!!<CR>", opt)
 
 -- nvim-treesitter 代码格式化
 map("n", "<leader>i", "gg=G", opt)

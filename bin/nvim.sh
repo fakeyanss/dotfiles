@@ -48,12 +48,14 @@ function setup_nvim_lsp() {
         $HOME/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer/lua/nvim-lsp-installer/installers/context.lua
 
     mkdir -p $HOME/.config/lsp/jdtls
+    mkdir -p $HOME/.config/lsp/jdtls/lombok
     mkdir -p $HOME/.config/lsp/workspace
 
     ls $HOME/.config/lsp/jdtls >/dev/null 2>&1
     if [ $? -ne 0 ]; then
       tar -xzf $DOTFILES/software/nvim/extra/jdt-language-server-1.8.0-202201261434.tar.gz \
         -C $HOME/.config/lsp/jdtls
+      cp $DOTFILES/software/nvim/extra/lombok.jar $HOME/.config/lsp/jdtls/lombok/
     else
       log_running "jdtls existed, skip"
     fi

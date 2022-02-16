@@ -28,6 +28,10 @@ local packer = require('packer').startup(function()
 
   use 'ojroques/vim-oscyank'
 
+  -- showing tags
+  use 'liuchengxu/vista.vim'
+  use 'simrat39/symbols-outline.nvim'
+
   -- statusline
   use {
     'nvim-lualine/lualine.nvim',
@@ -91,6 +95,7 @@ local packer = require('packer').startup(function()
 
   -- markdown
   use 'dhruvasagar/vim-table-mode'
+  use 'mzlogin/vim-markdown-toc'
   use {
     'iamcco/markdown-preview.nvim',
     run = 'cd app && yarn install'
