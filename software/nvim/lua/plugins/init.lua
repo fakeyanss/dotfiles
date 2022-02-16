@@ -67,6 +67,9 @@ local packer = require('packer').startup(function()
   -- nvim-autopairs
   use 'windwp/nvim-autopairs'
 
+  -- Plugin to manipulate character pairs quickly
+  use({"machakann/vim-sandwich", event = "VimEnter"})
+
   -- treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
