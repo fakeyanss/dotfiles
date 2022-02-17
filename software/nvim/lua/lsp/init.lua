@@ -12,6 +12,7 @@ local servers = {
     dockerls = {},
     gopls = {},
     html = {},
+    -- jdtls = {},
     jsonls = {},
     lemminx = {},
     tsserver = {},

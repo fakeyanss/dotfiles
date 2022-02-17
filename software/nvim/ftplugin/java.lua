@@ -1,4 +1,5 @@
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
+-- more configuration: https://github.com/mfussenegger/nvim-jdtls
 local java_bin = '/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home/bin/java'
 local home_dir = vim.fn.finddir('~')
 local lsp_dir = home_dir .. '/.config/lsp/jdtls'

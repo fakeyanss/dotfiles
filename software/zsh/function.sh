@@ -1,5 +1,58 @@
 #!/usr/bin/env bash
 
+source $HOME/.config/private.conf
+PROXY_ENV=(http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY)
+NO_PROXY_ENV=(no_proxy NO_PROXY)
+proxy_value=${proxy_url:-http://127.0.0.1:8118}
+no_proxy_value=localhost,127.0.0.1,localaddress,.localdomain.com,10.96.0.0/12,192.168.99.0/24,192.168.39.0/24,192.168.49.2/24
+
+function __proxyIsSet(){
+    for envar in $PROXY_ENV
+    do
+        eval temp=$(echo \$$envar)
+        if [ $temp ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+function __proxyAssign(){
+    for envar in $PROXY_ENV
+    do
+        export $envar=$1
+    done
+    for envar in $NO_PROXY_ENV
+    do
+        export $envar=$2
+    done
+    echo "set all proxy env successfull"
+    echo "proxy value is:"
+    echo ${proxy_value}
+    echo "no proxy value is:"
+    echo ${no_proxy_value}
+}
+
+function __proxyClear(){
+    for envar in $PROXY_ENV
+    do
+        unset $envar
+    done
+    echo "cleaned all proxy env"
+}
+
+function proxyToggle(){
+    if __proxyIsSet; then
+        __proxyClear
+    else
+        # user=YourUserName
+        # read -p "Password: " -s pass &&  echo -e " "
+        # proxy_value="http://$user:$pass@ProxyServerAddress:Port"
+        __proxyAssign $proxy_value $no_proxy_value
+    fi
+}
+
+
 # Linux specific aliases, work on both MacOS and Linux.
 function pbcopy() {
 	stdin=$(</dev/stdin)

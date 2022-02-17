@@ -10,7 +10,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', 'https://ghproxy.com/https://github.com/williamboman/nvim-lsp-installer', install_path})
 end
 
-local packer = require('packer').startup(function()
+local packer = require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
