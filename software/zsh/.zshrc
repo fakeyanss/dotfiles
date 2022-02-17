@@ -53,7 +53,8 @@ export NVM_DIR="$HOME/.nvm"
 # go
 # eval "$(goenv init -)"
 _evalcache goenv init -
-export GO111MODULE=on
+export GO111MODULE=auto
+export GOENV_GOPATH_PREFIX=$HOME/.config/golang
 export GOPROXY=https://goproxy.cn
 
 # editor
@@ -66,5 +67,5 @@ _evalcache starship init zsh
 
 # custom function
 source $HOME/.config/function.sh
-# private conf, like ssh, mysql connection... 
+# private conf, like ssh, mysql connection, see $DOTFILES/conf/private.conf.sample
 source $HOME/.config/private.conf
