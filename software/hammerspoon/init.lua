@@ -23,12 +23,12 @@ for spoonName, spoonConfig in pairs(spoons) do
 end
 
 -- load vim mode
-local VimMode = hs.loadSpoon('VimMode')
-local vim = VimMode:new()
-vim:disableForApp('Code')
-vim:enterWithSequence('jk')
-vim:useFallbackMode('Google Chrome')
-vim:shouldDimScreenInNormalMode(false)
+-- local VimMode = hs.loadSpoon('VimMode')
+-- local vim = VimMode:new()
+-- vim:disableForApp('Code')
+-- vim:enterWithSequence('jk')
+-- vim:useFallbackMode('Google Chrome')
+-- vim:shouldDimScreenInNormalMode(false)
 
 ----------------------------------------------------------------------------------------------------
 -- resizeM modal environment
