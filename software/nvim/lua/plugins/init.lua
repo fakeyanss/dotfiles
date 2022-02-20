@@ -1,13 +1,7 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', 'https://ghproxy.com/https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd 'packadd packer.nvim'
-end
-
-install_path = fn.stdpath('data') .. '/site/pack/packer/start/nvim-lsp-installer'
-if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', 'https://ghproxy.com/https://github.com/williamboman/nvim-lsp-installer', install_path})
+    print('Install packer.nvim first! See $DOTFILES/bin/nvim.sh')
 end
 
 local packer = require('packer').startup(function(use)
@@ -24,6 +18,12 @@ local packer = require('packer').startup(function(use)
     use {
         'davepinto/virtual-column.nvim',
         config = require('plugins/virtual-column-conf')
+    }
+
+    -- statusline
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons'}
     }
 
     -- yank between remote server
@@ -50,8 +50,10 @@ local packer = require('packer').startup(function(use)
     })
 
     -- treesitter
-    use {'nvim-treesitter/nvim-treesitter' -- run = ':TSUpdate',
-    -- config = require('plugins/treesitter-conf')
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = require('plugins/treesitter-conf')
     }
 
     -- telescope
@@ -81,11 +83,6 @@ local packer = require('packer').startup(function(use)
     use 'mfussenegger/nvim-dap'
     -- lsp java
     use 'mfussenegger/nvim-jdtls'
-    -- Maybe coc.nvim is cheaper, but coc-java is too difficult to setup.
-    -- use {
-    --     'neoclide/coc.nvim',
-    --     branch = 'release'
-    -- }
     -- lsp rust
     use {
         'simrat39/rust-tools.nvim',
@@ -96,7 +93,8 @@ local packer = require('packer').startup(function(use)
         'hrsh7th/nvim-cmp',
         requires = {'rafamadriz/friendly-snippets', 'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ', 'hrsh7th/cmp-vsnip',
                     'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline',
-                    'octaltree/cmp-look'}
+                    'octaltree/cmp-look'},
+        config = require('plugins.cmp')
     }
 
     -- lspkind
@@ -109,12 +107,6 @@ local packer = require('packer').startup(function(use)
         config = require('plugins/bufferline-conf')
     }
 
-    -- statusline
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = {'kyazdani42/nvim-web-devicons'}
-    }
-
     -- Comment
     use {
         'numToStr/Comment.nvim',
@@ -125,6 +117,7 @@ end)
 
 -- set nord colorscheme
 vim.cmd [[colorscheme nord]]
+-- set statusline
 require('lualine').setup {
     options = {
         theme = 'nord'

@@ -22,10 +22,10 @@ function main() {
     setup_starship
 
     # extra software
-    setup_java $JAVA_MAIN_VERSION $JAVA_SUB_VERSION
-    setup_python $PYTHON_MAIN_VERSION $PYTHON_SUB_VERSION
+    setup_java
+    setup_python
     setup_node
-    setup_golang $GOLANG_VERSION
+    setup_golang
     setup_rust
 
     setup_picgo

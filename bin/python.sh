@@ -28,14 +28,12 @@ EOF
 function install_py() {
     log_action "install and set python version"
     source $DOTFILES/software/python/pyenv.sh
-    main_version=${1:-3.10.1}
-    sub_verson=${2:-2.7.18}
-    log_running "install py $sub_verson"
-    pyenv_install $sub_verson
-    log_running "install py $main_version"
-    pyenv_install $main_version
-    log_running "set global default to py $main_version"
-    pyenv global $main_version
+    for v in ${PYTHON_VERSIONS[@]}; do
+        log_running "install py $v"
+        pyenv_install $v
+    done
+    log_running "set global default to py $PYTHON_DEFAULT_VERSION"
+    pyenv global $PYTHON_DEFAULT_VERSION
     log_ok
 }
 

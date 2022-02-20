@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-source $HOME/.config/private.conf
+source $HOME/.config/private.con
 PROXY_ENV=(http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY)
 NO_PROXY_ENV=(no_proxy NO_PROXY)
 proxy_value=${proxy_url:-http://127.0.0.1:8118}
 no_proxy_value=localhost,127.0.0.1,localaddress,.localdomain.com,10.96.0.0/12,192.168.99.0/24,192.168.39.0/24,192.168.49.2/24
+git_using_proxy=${GIT_USING_PROXY:-true}
+git_proxy=${GIT_PROXY:-http://ghproxy.com)
 
 function __proxyIsSet(){
     for envar in $PROXY_ENV
@@ -41,7 +43,7 @@ function __proxyClear(){
     echo "cleaned all proxy env"
 }
 
-function proxyToggle(){
+function proxytoggle(){
     if __proxyIsSet; then
         __proxyClear
     else
@@ -52,6 +54,13 @@ function proxyToggle(){
     fi
 }
 
+function gitclone() {
+    if [[ $git_using_proxy == 'true' ]]; then
+        git clone "$git_proxy$1"
+    else
+        git clone $1
+    fi
+}
 
 # Linux specific aliases, work on both MacOS and Linux.
 function pbcopy() {

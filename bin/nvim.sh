@@ -42,22 +42,24 @@ function setup_nvim_lsp() {
     # go get github.com/lighttiger2505/sqls
     pip install -U jedi-language-server
 
+    mkdir -p $HOME/.local/share/nvim/site/pack/packer/start/
+    git clone https://ghproxy.com/https://github.com/wbthomason/packer.nvim \
+        $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
     git clone https://ghproxy.com/https://github.com/williamboman/nvim-lsp-installer \
         $HOME/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer
     gsed -i "s/return (\"https:\/\/github.com/return (\"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         $HOME/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer/lua/nvim-lsp-installer/installers/context.lua
 
-    mkdir -p $HOME/.config/lsp/jdtls
-    mkdir -p $HOME/.config/lsp/jdtls/lombok
-    mkdir -p $HOME/.config/lsp/workspace
+    mkdir -p $HOME/.local/share/nvim/lsp_servers/jdtls/lombok
+    mkdir -p $HOME/.local/share/nvim/lsp_servers/jdtls/workspace
 
-    ls $HOME/.config/lsp/jdtls >/dev/null 2>&1
+    ls $HOME/.local/share/nvim/lsp_servers/jdtls/plugins >/dev/null 2>&1
     if [ $? -ne 0 ]; then
-      tar -xzf $DOTFILES/software/nvim/extra/jdt-language-server-1.8.0-202201261434.tar.gz \
-        -C $HOME/.config/lsp/jdtls
-      cp $DOTFILES/software/nvim/extra/lombok.jar $HOME/.config/lsp/jdtls/lombok/
+        tar -xzf $DOTFILES/software/nvim/extra/jdt-language-server-1.8.0-202201261434.tar.gz \
+            -C $HOME/.local/share/nvim/lsp_servers/jdtls
+        cp $DOTFILES/software/nvim/extra/lombok.jar $HOME/.local/share/nvim/lsp_servers/jdtls/lombok/
     else
-      log_running "jdtls existed, skip"
+        log_running "jdtls existed, skip"
     fi
     log_ok
-  }
+}

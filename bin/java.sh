@@ -5,11 +5,10 @@ function setup_java() {
     log_task "$task"
     tap_jdk
 
-    main_version=${1:-jdk8}
-    sub_version=${2:-jdk11}
-    install_jdk $main_version $sub_version
-    set_jenv $main_version $sub_version
+    install_jdk
+    set_jenv
     install_maven
+    install_gradle
     log_finish "$task"
 }
 
@@ -21,17 +20,15 @@ function tap_jdk() {
 }
 
 function install_jdk() {
-    log_action "install jdk"
-    main_version=$1
-    sub_version=$2
-    log_running "install $main_version"
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
-        /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk/Casks/adoptopen${main_version}.rb
-    brew_no_update_install_cask adoptopenjdk/openjdk/adoptopen${main_version}
-    log_running "install $sub_version"
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
-        /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk/Casks/adoptopen${sub_version}.rb
-    brew_no_update_install_cask adoptopenjdk/openjdk/adoptopen${sub_version}
+    log_action "install jdk ${JAVA_VERSIONS[*]}"
+    mkdir -p /usr/local/lib/java
+    for v in ${JAVA_VERSIONS[@]}; do
+        log_running "install $v"
+        gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
+            /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk/Casks/adoptopenjdk${v}.rb
+        brew_no_update_install_cask adoptopenjdk/openjdk/adoptopenjdk${v}
+        ln -s /Library/Java/JavaVirtualMachines/adoptopenjdk-${v}.jdk/Contents/Home /usr/local/lib/java/java-${v}-openjdk
+    done
     log_ok
 }
 
@@ -53,13 +50,15 @@ eval "$(jenv init -)"
 EOF
     fi
 
-    main_version=$1
-    log_running "jenv add jdk, set global to $main_version"
-    main_version=${main_version/jdk/}
-    sub_version=${2/jdk/}
-    jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-${sub_version}.jdk/Contents/Home
-    jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-${main_version}.jdk/Contents/Home
-    jenv global 1.${main_version}
+    log_running "jenv add jdk, set global to $JAVA_DEFAULT_VERSION"
+    for v in ${JAVA_VERSIONS[@]}; do
+        jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-${v}.jdk/Contents/Home
+    done
+    main_version=$JAVA_DEFAULT_VERSION
+    if [[ $JAVA_DEFAULT_VERSION == '8' ]]; then
+        main_version="1.$JAVA_DEFAULT_VERSION"
+    fi
+    jenv global $main_version 
     # enable export JAVA_HOME
     jenv enable-plugin export
     log_ok
@@ -69,5 +68,12 @@ function install_maven() {
     log_action "install maven"
     brew_no_update_install maven
     mvn --version
+    log_ok
+}
+
+function install_gradle() {
+    log_action "install gradle@6"
+    brew_no_update_install gradle@6
+    gradle -v
     log_ok
 }
