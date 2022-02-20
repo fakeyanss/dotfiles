@@ -6,11 +6,10 @@ NO_PROXY_ENV=(no_proxy NO_PROXY)
 proxy_value=${proxy_url:-http://127.0.0.1:8118}
 no_proxy_value=localhost,127.0.0.1,localaddress,.localdomain.com,10.96.0.0/12,192.168.99.0/24,192.168.39.0/24,192.168.49.2/24
 git_using_proxy=${GIT_USING_PROXY:-true}
-git_proxy=${GIT_PROXY:-http://ghproxy.com)
+git_proxy=${GIT_PROXY:-http://ghproxy.com}
 
-function __proxyIsSet(){
-    for envar in $PROXY_ENV
-    do
+function __proxyIsSet() {
+    for envar in $PROXY_ENV; do
         eval temp=$(echo \$$envar)
         if [ $temp ]; then
             return 0
@@ -19,13 +18,11 @@ function __proxyIsSet(){
     return 1
 }
 
-function __proxyAssign(){
-    for envar in $PROXY_ENV
-    do
+function __proxyAssign() {
+    for envar in $PROXY_ENV; do
         export $envar=$1
     done
-    for envar in $NO_PROXY_ENV
-    do
+    for envar in $NO_PROXY_ENV; do
         export $envar=$2
     done
     echo "set all proxy env successfull"
@@ -35,15 +32,14 @@ function __proxyAssign(){
     echo ${no_proxy_value}
 }
 
-function __proxyClear(){
-    for envar in $PROXY_ENV
-    do
+function __proxyClear() {
+    for envar in $PROXY_ENV; do
         unset $envar
     done
     echo "cleaned all proxy env"
 }
 
-function proxytoggle(){
+function proxytoggle() {
     if __proxyIsSet; then
         __proxyClear
     else
@@ -64,31 +60,31 @@ function gitclone() {
 
 # Linux specific aliases, work on both MacOS and Linux.
 function pbcopy() {
-	stdin=$(</dev/stdin)
-	pbcopy="$(which pbcopy)"
-	if [[ -n "$pbcopy" ]]; then
-		echo "$stdin" | "$pbcopy"
-	else
-		echo "$stdin" | xclip -selection clipboard
-	fi
+    stdin=$(</dev/stdin)
+    pbcopy="$(which pbcopy)"
+    if [[ -n "$pbcopy" ]]; then
+        echo "$stdin" | "$pbcopy"
+    else
+        echo "$stdin" | xclip -selection clipboard
+    fi
 }
 
 function pbpaste() {
-	pbpaste="$(which pbpaste)"
-	if [[ -n "$pbpaste" ]]; then
-		"$pbpaste"
-	else
-		xclip -selection clipboard
-	fi
+    pbpaste="$(which pbpaste)"
+    if [[ -n "$pbpaste" ]]; then
+        "$pbpaste"
+    else
+        xclip -selection clipboard
+    fi
 }
 
 function mci() {
-	mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
+    mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
 }
 
 function darklight() {
-	# MacOS dark mode and light mode switcher
-	osascript -e "\
+    # MacOS dark mode and light mode switcher
+    osascript -e "\
 tell application \"System Events\"
 tell appearance preferences
 set dark mode to not dark mode
@@ -97,7 +93,7 @@ end tell"
 }
 
 function del() {
-	mv $1 /tmp
+    mv $1 /tmp
 }
 
 source $DOTFILES/software/python/pyenv.sh

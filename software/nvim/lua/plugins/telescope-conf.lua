@@ -1,4 +1,4 @@
-return function()
+local M = function()
     require('telescope').setup {
         defaults = {
             -- Default configuration for telescope goes here:
@@ -30,3 +30,14 @@ return function()
         }
     }
 end
+
+vim.api.nvim_set_keymap("n", "<C-p>", ":Telescope find_files<CR>", {
+    noremap = true,
+    silent = true
+})
+vim.api.nvim_set_keymap("n", "<leader>g", ":Telescope live_grep<CR>", {
+    noremap = true,
+    silent = true
+})
+
+return M

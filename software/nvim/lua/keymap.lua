@@ -71,31 +71,4 @@ map("n", "<C-w>", ":BufferLinePickClose<CR>", opt)
 -- visia
 map("n", "<A-,>", ":Vista!!<CR>", opt)
 
--- nvim-treesitter 代码格式化
-map("n", "<leader>i", "gg=G", opt)
-
--- Telescope
-map("n", "<C-p>", ":Telescope find_files<CR>", opt)
--- map("n", "<leader>f", ":Telescope find_files<CR>", opt)
-map("n", "<leader>g", ":Telescope live_grep<CR>", opt)
-
-local pluginKeys = {}
-
--- 代码注释插件
--- see ./lua/plugin-config/comment.lua
-pluginKeys.comment = {
-    toggler = {
-        line = 'gcc',
-        block = 'gbc'
-    },
-    opleader = {
-        line = 'gc',
-        bock = 'gb'
-    }
-}
--- ctrl + /
-map("n", "<C-_>", "gcc", {noremap = false})
-map("v", "<C-_>", "gcc", {noremap = false})
-
-
-return pluginKeys
+return {}
