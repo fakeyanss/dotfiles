@@ -20,6 +20,12 @@ local packer = require('packer').startup(function(use)
         config = require('plugins/virtual-column-conf')
     }
 
+    -- bufferline
+    use {
+        'akinsho/bufferline.nvim',
+        requires = 'kyazdani42/nvim-web-devicons'
+    }
+
     -- statusline
     use {
         'nvim-lualine/lualine.nvim',
@@ -52,8 +58,7 @@ local packer = require('packer').startup(function(use)
     -- treesitter
     use {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-        config = require('plugins/treesitter-conf')
+        run = ':TSUpdate'
     }
 
     -- telescope
@@ -88,29 +93,18 @@ local packer = require('packer').startup(function(use)
         'simrat39/rust-tools.nvim',
         requires = {'nvim-lua/plenary.nvim'}
     }
+    -- lspkind
+    use 'onsails/lspkind-nvim'
     -- nvim-cmp
     use {
         'hrsh7th/nvim-cmp',
         requires = {'rafamadriz/friendly-snippets', 'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ', 'hrsh7th/cmp-vsnip',
                     'hrsh7th/cmp-buffer', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline',
-                    'octaltree/cmp-look'},
-        config = require('plugins.cmp')
+                    'octaltree/cmp-look'}
     }
-
-    -- lspkind
-    use 'onsails/lspkind-nvim'
-
-    -- bufferline
-    use {
-        'akinsho/bufferline.nvim',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = require('plugins/bufferline-conf')
-    }
-
     -- Comment
     use {
-        'numToStr/Comment.nvim',
-        config = require('plugins.Commet')
+        'numToStr/Comment.nvim'
     }
 
 end)
@@ -123,5 +117,9 @@ require('lualine').setup {
         theme = 'nord'
     }
 }
+require('plugins.bufferline-conf')
+require('plugins.treesitter-conf')
+require('plugins.Commet')
+require('plugins.cmp')
 
 return packer
