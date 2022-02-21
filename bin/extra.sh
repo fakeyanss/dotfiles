@@ -7,6 +7,11 @@ function setup_extra() {
     brew_no_update_install redis
     brew_no_update_install pandoc
 
+    # nerd fonts
+    install_nerd_font
+    # gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
+    #     /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-fonts/Casks/font-hack-nerd-font.rb
+    # brew_no_update_install_cask font-hack-nerd-font
     # quick look plugin
     gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/qlcolorcode.rb
@@ -54,4 +59,9 @@ function setup_extra() {
     brew_no_update_install_cask wechat
     brew_no_update_install_cask wireshark
     brew_no_update_install_cask neteasemusic
+}
+
+function install_nerd_font() {
+    git clone --depth=1 'https://ghproxy.com/https://github.com/ryanoasis/nerd-fonts.git' $HOME/.config/nerd-fonts
+    bash $HOME/.config/nerd-fonts/install.sh
 }

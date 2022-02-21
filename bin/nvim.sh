@@ -5,7 +5,7 @@ function setup_nvim() {
     log_task "$task"
     install_nvim
     symbol_link_nvim
-    setup_nvim_lsp
+    setup_nvim_plugins
     log "please run this command postinstall:\nnvim +PackerSync"
     log_finish "$task"
 }
@@ -23,7 +23,7 @@ function symbol_link_nvim() {
     log_ok
 }
 
-function setup_nvim_lsp() {
+function setup_nvim_plugins() {
     log_action "set nvim language server protocol"
     pip install -U neovim
     npm install -g neovim
@@ -41,6 +41,7 @@ function setup_nvim_lsp() {
     # go install golang.org/x/tools/gopls@latest
     # go get github.com/lighttiger2505/sqls
     pip install -U jedi-language-server
+    brew_no_update_install fd
 
     mkdir -p $HOME/.local/share/nvim/site/pack/packer/start/
     git clone https://ghproxy.com/https://github.com/wbthomason/packer.nvim \
