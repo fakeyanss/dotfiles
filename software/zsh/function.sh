@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $HOME/.config/private.con
+source $HOME/.config/private.conf
 PROXY_ENV=(http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY)
 NO_PROXY_ENV=(no_proxy NO_PROXY)
 proxy_value=${proxy_url:-http://127.0.0.1:8118}
