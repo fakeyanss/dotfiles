@@ -50,23 +50,15 @@ map("n", "sj", ":resize +10<CR>", opt)
 map("n", "sk", ":resize -10<CR>", opt)
 
 -- alt + hjkl  窗口之间跳转
-map("n", "<A-h>", "<C-w>h", opt)
-map("n", "<A-j>", "<C-w>j", opt)
-map("n", "<A-k>", "<C-w>k", opt)
-map("n", "<A-l>", "<C-w>l", opt)
+map("n", "<leader>h", "<C-w>h", opt)
+map("n", "<leader>j", "<C-w>j", opt)
+map("n", "<leader>k", "<C-w>k", opt)
+map("n", "<leader>l", "<C-w>l", opt)
 
 ------------------------------------------------------------------
 -- 插件快捷键
 -- oscyank
 map('v', '<leader>y', ":OSCYank<CR>", opt)
-
--- nvimTree
-map('n', '<A-m>', ':NvimTreeToggle<CR>', opt)
-
--- bufferline 左右Tab切换
-map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
-map("n", "<C-w>", ":BufferLinePickClose<CR>", opt)
 
 -- visia
 map("n", "<A-,>", ":Vista!!<CR>", opt)

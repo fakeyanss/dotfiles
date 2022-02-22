@@ -117,6 +117,7 @@ require('lualine').setup {
         theme = 'nord'
     }
 }
+-- vim.cmd [[hi VirtualColumn guifg=#3B4251]]
 require('plugins.bufferline-conf')
 require('plugins.treesitter-conf')
 require('plugins.Commet')
