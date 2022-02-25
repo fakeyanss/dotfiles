@@ -104,3 +104,25 @@ function fileserv() {
     port=${1:-8000}
     python -m http.server $port
 }
+
+function countdown() { 
+    local now=$(date +%s)
+    local end=$((now + $1))
+    while (( now < end )); do 
+        printf '%s\r' "$(date -u -j -f %s $((end - now)) +%T)"
+        sleep 0.25 
+        now=$(date +%s) 
+    done 
+    echo -en '\a' 
+} 
+
+function showtime() {
+    while [ : ]; do
+        clear
+        tput cup 5 5
+        date
+        tput cup 6 5
+        echo "Hostname : $(hostname)"
+        sleep 1
+    done
+}

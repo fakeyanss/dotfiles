@@ -12,7 +12,7 @@ format = '\[[$symbol($version)]($style)\]'
 symbol = "cmake "
 
 [cmd_duration]
-format = '\[[⏱ $duration ]($style)\]'
+format = '\[[cost $duration ]($style)\]'
 
 #[cobol]
 #format = '\[[$symbol($version)]($style)\]'

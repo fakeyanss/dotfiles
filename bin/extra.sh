@@ -8,7 +8,10 @@ function setup_extra() {
     brew_no_update_install pandoc
 
     # nerd fonts
-    install_nerd_font
+    # install_nerd_font
+    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
+        /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-fonts/Casks/font-fira-code-nerd-font.rb
+    brew_no_update_install_cask font-fira-code-nerd-font
     # gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
     #     /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask-fonts/Casks/font-hack-nerd-font.rb
     # brew_no_update_install_cask font-hack-nerd-font
