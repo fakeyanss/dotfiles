@@ -1,4 +1,5 @@
 local lsp_installer = require("nvim-lsp-installer")
+-- vim.lsp.set_log_level 'trace'
 
 -- 安装列表
 -- https://github.com/williamboman/nvim-lsp-installer#available-lsps

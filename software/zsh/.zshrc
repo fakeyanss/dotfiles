@@ -59,7 +59,7 @@ export GOPROXY=https://goproxy.cn
 
 # editor
 alias purevim=/usr/bin/vim
-alias vim=/usr/local/bin/nvim
+alias vim=$HOME/.config/nvim/bin/nvim-osx64/bin/nvim
 
 # statship
 # eval "$(starship init zsh)"

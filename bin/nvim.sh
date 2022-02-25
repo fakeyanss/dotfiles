@@ -11,8 +11,10 @@ function setup_nvim() {
 }
 
 function install_nvim() {
-    log_action "install nvim using brew"
-    brew_no_update_install nvim
+    # log_action "install nvim using brew"
+    # brew_no_update_install nvim
+    log_action "install neovim nightly"
+    tar -xzvf $DOTFILES/software/nvim/extra/nvim-macos.tar.gz -C $DOTFILES/software/nvim/bin
     log_ok
 }
 
@@ -38,11 +40,13 @@ function setup_nvim_plugins() {
     # typescript typescript-language-server \
     # @ansible/ansible-language-server \
     # vls \
-    # go install golang.org/x/tools/gopls@latest
-    # go get github.com/lighttiger2505/sqls
-    pip install -U jedi-language-server
-    brew_no_update_install fd
 
+    # python lsp
+    pip install -U jedi-language-server 
+    # telescope dependency
+    brew_no_update_install fd ripgrep
+
+    # install packer and nvim-lsp-installer
     mkdir -p $HOME/.local/share/nvim/site/pack/packer/start/
     git clone https://ghproxy.com/https://github.com/wbthomason/packer.nvim \
         $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -51,9 +55,9 @@ function setup_nvim_plugins() {
     gsed -i "s/return (\"https:\/\/github.com/return (\"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         $HOME/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer/lua/nvim-lsp-installer/installers/context.lua
 
+    # install jdtls
     mkdir -p $HOME/.local/share/nvim/lsp_servers/jdtls/lombok
     mkdir -p $HOME/.local/share/nvim/lsp_servers/jdtls/workspace
-
     ls $HOME/.local/share/nvim/lsp_servers/jdtls/plugins >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         tar -xzf $DOTFILES/software/nvim/extra/jdt-language-server-1.8.0-202201261434.tar.gz \

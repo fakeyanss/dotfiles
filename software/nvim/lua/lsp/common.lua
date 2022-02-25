@@ -8,7 +8,7 @@ function M.set_option(bufnr, ...)
     vim.api.nvim_buf_set_option(bufnr, ...)
 end
 
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 M.opts = opts
 
 function M.setup(client, bufnr)
@@ -37,10 +37,10 @@ function M.setup(client, bufnr)
     -- Set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
         M.set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>",
-        opts)
+            opts)
     elseif client.resolved_capabilities.document_range_formatting then
         M.set_keymap(bufnr, "n", "<leader>f",
-        "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+            "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
 
     -- Set autocommands conditional on server_capabilities

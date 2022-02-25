@@ -1,3 +1,4 @@
 .DS_Store
 private.conf
 software/nvim/plugin/*
+software/nvim/bin/* 
