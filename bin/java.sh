@@ -27,6 +27,7 @@ function install_jdk() {
         gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
             /usr/local/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk/Casks/adoptopenjdk${v}.rb
         brew_no_update_install_cask adoptopenjdk/openjdk/adoptopenjdk${v}
+        mkdir -p /usr/local/lib/java
         ln -s /Library/Java/JavaVirtualMachines/adoptopenjdk-${v}.jdk/Contents/Home /usr/local/lib/java/java-${v}-openjdk
     done
     log_ok

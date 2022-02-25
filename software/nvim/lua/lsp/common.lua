@@ -1,11 +1,11 @@
 local M = {}
 
 function M.set_keymap(bufnr, ...)
-  vim.api.nvim_buf_set_keymap(bufnr, ...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
 end
 
 function M.set_option(bufnr, ...)
-  vim.api.nvim_buf_set_option(bufnr, ...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
 end
 
 local opts = {noremap = true, silent = true}
@@ -21,7 +21,7 @@ function M.setup(client, bufnr)
     M.set_keymap(bufnr, 'n', '<leader><leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     M.set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     M.set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    M.set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    -- M.set_keymap(bufnr, 'n', '<leader>wp', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
     M.set_keymap(bufnr, 'n', '<leader>D', '<cmd>Telescope lsp_type_definitions<CR>', opts)
     M.set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     M.set_keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
@@ -36,22 +36,22 @@ function M.setup(client, bufnr)
     M.set_keymap(bufnr, 'n', '<leader>cr', "<Cmd>lua require('jdtls').code_action(false, 'refactor')<CR>", opts)
     -- Set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
-      M.set_keymap(bufnr, "n", "<leader>mm", "<cmd>lua vim.lsp.buf.formatting()<CR>",
-                     opts)
+        M.set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>",
+        opts)
     elseif client.resolved_capabilities.document_range_formatting then
-      M.set_keymap(bufnr, "n", "<leader>mm",
-                     "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+        M.set_keymap(bufnr, "n", "<leader>f",
+        "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
 
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
-      vim.api.nvim_exec([[
-    augroup lsp_document_highlight
-    autocmd! * <buffer>
-    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-    ]], false)
+        vim.api.nvim_exec([[
+        augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+        ]], false)
     end
 end
 
