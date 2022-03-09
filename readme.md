@@ -103,9 +103,43 @@ HOMEBREW_NO_AUTO_UPDATE=1 brew install $1 # install without brew update
 
 ### neovim
 
+Use alias vim as nvim.
 
+Use <Space> as <Leader>
 
-#### Venn
+#### Packer
+
+available commands as follow:
+
+```
+vim +PackerSync
+PackerStatus
+```
+
+#### window
+
+```
+<Leader>m # toggle nvim-tree
+<Leader>, # toggle symbols outline
+<ALT>H # bufferline cycle next
+<ALT>L # bufferline cycle pre
+<Leader>w\ # split window vertical
+<Leader>w- # split window horizontal
+<Leader>wc # close current window
+<Leader>wo # close other window
+<Leader>h # focus on left window 
+<Leader>j # focus on below window 
+<Leader>k # focus on upper window 
+<Leader>l # focus on right window 
+```
+
+#### find
+
+#### lsp
+
+#### markdown
+
+#### venn
 
 Draw ASCII diagrams 
 
