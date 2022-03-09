@@ -74,6 +74,7 @@ local packer = require('packer').startup(function(use)
         'iamcco/markdown-preview.nvim',
         run = 'cd app && yarn install'
     }
+    use 'rpzeng/markdown-title-number' 
     use 'hotoo/pangu.vim'
 
     -------------- Neovim Lua Development ----------------
