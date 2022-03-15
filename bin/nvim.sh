@@ -31,7 +31,7 @@ function setup_nvim_plugins() {
     npm install -g neovim
     npm install -g yarn
     # using nvim-lsp-installer
-    # nvim install -g \
+    # npm install -g \
     # bash-language-server \
     # vscode-langservers-extracted \
     # cssmodules-language-server \
@@ -40,6 +40,8 @@ function setup_nvim_plugins() {
     # typescript typescript-language-server \
     # @ansible/ansible-language-server \
     # vls \
+
+    yarn global add yaml-language-server
 
     # python lsp
     pip install -U jedi-language-server 
