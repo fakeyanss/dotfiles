@@ -11,3 +11,8 @@ lua require('lsp')
 "   :echo a:url
 " endfunction
 " let g:mkdp_browserfunc = 'g:EchoUrl'
+
+
+" Open file in Obsidian vault
+command IO execute "silent !open 'obsidian://open?vault=vault&file=" . expand('%:r') . "'"
+nnoremap <leader>io :IO<CR>
