@@ -75,6 +75,7 @@ local packer = require('packer').startup(function(use)
         run = 'cd app && yarn install'
     }
     use 'rpzeng/markdown-title-number' 
+    use 'ekickx/clipboard-image.nvim'
     use 'hotoo/pangu.vim'
 
     -------------- Neovim Lua Development ----------------
@@ -160,5 +161,6 @@ require('plugins.telescope-conf')
 require('plugins.tree-conf')
 require('plugins.treesitter-conf')
 require('plugins.venn-conf')
+require('plugins.clipboard-image-conf')
 
 return packer
