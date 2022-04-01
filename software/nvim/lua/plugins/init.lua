@@ -64,7 +64,7 @@ local packer = require('packer').startup(function(use)
     use 'f-person/git-blame.nvim'
 
     --------------------- Note Taking --------------------
-    -- Draw ASCII diagrams 
+    -- Draw ASCII diagrams
     use 'jbyuki/venn.nvim'
 
     ---------------------- Markdown ----------------------
@@ -74,9 +74,13 @@ local packer = require('packer').startup(function(use)
         'iamcco/markdown-preview.nvim',
         run = 'cd app && yarn install'
     }
-    use 'rpzeng/markdown-title-number' 
+    use 'rpzeng/markdown-title-number'
     use 'ekickx/clipboard-image.nvim'
+    use 'rpzeng/markdown-title-number'
     use 'hotoo/pangu.vim'
+
+    ---------------------- Orgmode -----------------------
+    use 'nvim-orgmode/orgmode'
 
     -------------- Neovim Lua Development ----------------
     -- An implementation of the Popup API
@@ -93,7 +97,7 @@ local packer = require('packer').startup(function(use)
     use 'simrat39/symbols-outline.nvim'
 
     -- lsp
-    use 'neovim/nvim-lspconfig' 
+    use 'neovim/nvim-lspconfig'
     -- lsp Installer
     use 'williamboman/nvim-lsp-installer'
     -- Standalone UI for nvim-lsp progress
@@ -162,5 +166,6 @@ require('plugins.tree-conf')
 require('plugins.treesitter-conf')
 require('plugins.venn-conf')
 require('plugins.clipboard-image-conf')
+require('plugins.orgmode-conf')
 
 return packer
