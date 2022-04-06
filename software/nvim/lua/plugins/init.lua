@@ -76,7 +76,6 @@ local packer = require('packer').startup(function(use)
     }
     use 'rpzeng/markdown-title-number'
     use 'ekickx/clipboard-image.nvim'
-    use 'rpzeng/markdown-title-number'
     use 'hotoo/pangu.vim'
 
     ---------------------- Orgmode -----------------------
