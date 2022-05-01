@@ -41,8 +41,9 @@ _evalcache jenv init -
 PATH="/usr/local/opt/gradle@6/bin:$PATH"
 
 # python
-_evalcache pyenv init -
-_evalcache pyenv virtualenv-init -
+# _evalcache pyenv init -
+# _evalcache pyenv virtualenv-init -
+eval "$(pyenv init --path)"
 
 # node, npm
 export NODE_MIRROR=https://npm.taobao.org/dist/

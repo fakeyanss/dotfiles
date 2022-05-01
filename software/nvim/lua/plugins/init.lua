@@ -78,9 +78,6 @@ local packer = require('packer').startup(function(use)
     use 'ekickx/clipboard-image.nvim'
     use 'hotoo/pangu.vim'
 
-    ---------------------- Orgmode -----------------------
-    use 'nvim-orgmode/orgmode'
-
     -------------- Neovim Lua Development ----------------
     -- An implementation of the Popup API
     use 'nvim-lua/popup.nvim'
@@ -165,6 +162,5 @@ require('plugins.tree-conf')
 require('plugins.treesitter-conf')
 require('plugins.venn-conf')
 require('plugins.clipboard-image-conf')
-require('plugins.orgmode-conf')
 
 return packer
