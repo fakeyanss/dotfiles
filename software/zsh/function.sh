@@ -52,31 +52,31 @@ function proxytoggle() {
 
 function gitclone() {
     if [[ $git_using_proxy == 'true' ]]; then
-        git clone "$git_proxy$1"
+        git clone "$git_proxy/$1"
     else
         git clone $1
     fi
 }
 
 # Linux specific aliases, work on both MacOS and Linux.
-function pbcopy() {
-    stdin=$(</dev/stdin)
-    pbcopy="$(which pbcopy)"
-    if [[ -n "$pbcopy" ]]; then
-        echo "$stdin" | "$pbcopy"
-    else
-        echo "$stdin" | xclip -selection clipboard
-    fi
-}
-
-function pbpaste() {
-    pbpaste="$(which pbpaste)"
-    if [[ -n "$pbpaste" ]]; then
-        "$pbpaste"
-    else
-        xclip -selection clipboard
-    fi
-}
+# function pbcopy() {
+#     stdin=$(</dev/stdin)
+#     pbcopy="$(which pbcopy)"
+#     if [[ -n "$pbcopy" ]]; then
+#         echo "$stdin" | "$pbcopy"
+#     else
+#         echo "$stdin" | xclip -selection clipboard
+#     fi
+# }
+#
+# function pbpaste() {
+#     pbpaste="$(which pbpaste)"
+#     if [[ -n "$pbpaste" ]]; then
+#         "$pbpaste"
+#     else
+#         xclip -selection clipboard
+#     fi
+# }
 
 function mci() {
     mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
@@ -125,4 +125,12 @@ function showtime() {
         echo "Hostname : $(hostname)"
         sleep 1
     done
+}
+
+function zen() {
+    launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+}
+
+function zenquit() {
+    launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
 }
