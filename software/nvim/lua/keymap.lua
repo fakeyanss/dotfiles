@@ -9,6 +9,8 @@ local opt = {
     silent = true
 }
 
+-- local cmd = vim.api.nvim_create_user_command
+
 map("n", "<C-j>", "4j", opt)
 map("n", "<C-k>", "4k", opt)
 map("i", "<C-h>", "<ESC>I", opt)
@@ -31,6 +33,8 @@ map("v", "/", "/\\v", {
     noremap = true,
     silent = false
 })
+
+-- vim.api.nvim_create_user_command('SayHello', 'echo "Hello world!"', {})
 
 ------------------------------------------------------------------
 -- windows 分屏快捷键

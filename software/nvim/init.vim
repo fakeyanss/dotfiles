@@ -16,3 +16,8 @@ lua require('lsp')
 " Open file in Obsidian vault
 command IO execute "silent !open 'obsidian://open?vault=vault&file=" . expand('%:r') . "'"
 nnoremap <leader>io :IO<CR>
+
+" force save file when open without sudo
+command Sudow w !sudo tee % >/dev/null
+" match words selected
+vnoremap // y/<c-r>"<cr>
