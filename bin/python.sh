@@ -41,6 +41,6 @@ function symbol_link_py() {
     log_action "symbol link .pip"
     backup $HOME/.pip/pip.conf
     mkdir -p $HOME/.pip
-    ln -sv $DOTFILES/software/python/.pip.conf $HOME/.pip/pip.conf
+    ln -sv $DOTFILES/software/python/pip.conf $HOME/.pip/pip.conf
     log_ok
 }

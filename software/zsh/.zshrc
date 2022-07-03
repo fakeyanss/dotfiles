@@ -55,7 +55,7 @@ export NVM_DIR="$HOME/.nvm"
 # eval "$(goenv init -)"
 _evalcache goenv init -
 export GO111MODULE=auto
-export GOENV_GOPATH_PREFIX=$HOME/.config/golang
+export GOENV_GOPATH_PREFIX=$HOME/code/golang
 export GOPROXY=https://goproxy.cn
 
 # editor

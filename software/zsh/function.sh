@@ -134,3 +134,11 @@ function zen() {
 function zenquit() {
     launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
 }
+
+function brew_no_update_install() {
+        HOMEBREW_NO_AUTO_UPDATE=1 brew install $1
+}
+
+function brew_no_update_install_cask() {
+        HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask $1
+}
