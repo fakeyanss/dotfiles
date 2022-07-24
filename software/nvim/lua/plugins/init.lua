@@ -17,7 +17,8 @@ local packer = require('packer').startup(function(use)
     ----------------------- Tabline ----------------------
     -- bufferline
     use {
-        'akinsho/bufferline.nvim',
+        'akinsho/bufferline.nvim', 
+        tag = "v2.*", 
         requires = 'kyazdani42/nvim-web-devicons'
     }
 
@@ -66,6 +67,23 @@ local packer = require('packer').startup(function(use)
     --------------------- Note Taking --------------------
     -- Draw ASCII diagrams
     use 'jbyuki/venn.nvim'
+    use 'vimwiki/vimwiki'
+
+    ---------------------- Todo --------------------------
+    -- use {'nvim-orgmode/orgmode', config = function()
+    --     require('orgmode').setup{}
+    -- end
+    -- }
+    -- use {'akinsho/org-bullets.nvim', config = function()
+    --     require('org-bullets').setup()
+    -- end
+    -- }
+    -- use {
+    --     'lukas-reineke/headlines.nvim',
+    --     config = function()
+    --         require('headlines').setup()
+    --     end,
+    -- }
 
     ---------------------- Markdown ----------------------
     use 'dhruvasagar/vim-table-mode'
@@ -109,39 +127,36 @@ local packer = require('packer').startup(function(use)
     }
 
     --------------------- Completion ---------------------
-    -- A completion plugin for Neovim
-    use 'hrsh7th/nvim-cmp'
-    -- A nvim-cmp source for Neovim builtin LSP client
-    use 'hrsh7th/cmp-nvim-lsp'
-    -- A nvim-cmp source for luasnip
-    use 'saadparwaiz1/cmp_luasnip'
-    use 'L3MON4D3/LuaSnip'
-    -- A nvim-cmp source for UltiSnips
-    use 'quangnguyen30192/cmp-nvim-ultisnips'
-    use 'rafamadriz/friendly-snippets'
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
-    use 'hrsh7th/cmp-vsnip'
-    -- A nvim-cmp source for filesystem paths
-    use 'hrsh7th/cmp-path'
-    -- A nvim-cmp source for Git
-    use 'petertriho/cmp-git'
-    -- A nvim-cmp source for buffer words
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-cmdline'
-    use 'octaltree/cmp-look'
-    -- A nvim-cmp source for TabNine
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-nvim-lsp", -- neovim 内置 LSP 客户端的 nvim-cmp 源
+            --以下插件可选，可以根据个人喜好删减
+            "onsails/lspkind-nvim", -- 美化自动完成提示信息
+            "hrsh7th/cmp-buffer", -- 从buffer中智能提示
+            "hrsh7th/cmp-nvim-lua", -- nvim-cmp source for neovim Lua API.
+            "octaltree/cmp-look", -- 用于完成英语单词
+            "hrsh7th/cmp-path", -- 自动提示硬盘上的文件
+            "hrsh7th/cmp-calc", -- 输入数学算式（如1+1=）自动计算
+            "f3fora/cmp-spell", -- nvim-cmp 的拼写源基于 vim 的拼写建议
+            "hrsh7th/cmp-emoji", -- 输入: 可以显示表情
+            'petertriho/cmp-git',
+            'hrsh7th/cmp-cmdline',
+            'lukas-reineke/cmp-rg',
+            'David-Kunz/cmp-npm',
+            'lukas-reineke/cmp-under-comparator'
+        }
+    }
+
+    -- 代码段提示
+    use {
+        "L3MON4D3/LuaSnip",
+        requires = {
+            "saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
+            "rafamadriz/friendly-snippets" --代码段合集
+        }
+    }
     -- use 'tzachar/cmp-tabnine'
-    -- A nvim-cmp source for the Neovim Lua API
-    use 'hrsh7th/cmp-nvim-lua'
-    -- A nvim-cmp source for Ripgrep
-    use 'lukas-reineke/cmp-rg'
-    -- A nvim-cmp source for vim's spellsuggest
-    use 'f3fora/cmp-spell'
-    -- A nvim-cmp source for NPM
-    use 'David-Kunz/cmp-npm'
-    -- A nvim-cmp function for better sorting
-    use 'lukas-reineke/cmp-under-comparator'
 
     --------------------- Debugging ----------------------
     -- Debug Adapter Protocol client
@@ -162,5 +177,6 @@ require('plugins.tree-conf')
 require('plugins.treesitter-conf')
 require('plugins.venn-conf')
 require('plugins.clipboard-image-conf')
+-- require('plugins.orgmode-conf')
 
 return packer

@@ -5,4 +5,5 @@ vim.g.nord_italic = true
 vim.g.nord_cursorline_transparent = true
 
 -- Load the colorscheme
-vim.cmd [[colorscheme nord]]
+-- vim.cmd [[colorscheme nord]]
+require('nord').set()

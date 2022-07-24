@@ -27,7 +27,7 @@ source $ZSH/oh-my-zsh.sh
 # export ALL_PROXY="socks5://127.0.0.1:10808"
 
 # brew
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 
 # ssh
 alias autossh=$HOME/.ssh/autossh/autossh
