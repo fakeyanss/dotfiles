@@ -142,3 +142,33 @@ function brew_no_update_install() {
 function brew_no_update_install_cask() {
         HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask $1
 }
+
+# generate .gitignore template
+function gi() {
+    curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;
+}
+
+# Provides gi completion for zsh
+_gitignoreio_get_command_list() {
+    # gi cmd cache file
+    cache=~/.config/.gi_cmd_list
+    ls cache >/dev/null 2>&1
+    if [[ $? == 0 ]]; then
+        modify=$(date -j -f %c $(stat -x $cache|grep 'Modify: '|awk -F 'Modify: ' '{print $2}') +%s)
+        expire=$(($(date +%s)-$modify))
+        # check update once half a month
+        if [[ expire > 1296000 ]]; then
+            cat $cache
+            exit 0
+        fi
+    fi
+    curl -sL https://www.toptal.com/developers/gitignore/api/list | tr "," "\n" > $cache
+    cat $cache
+}
+
+_gitignoreio () {
+    compset -P '*,'
+    compadd -S '' $(_gitignoreio_get_command_list)
+}
+
+compdef _gitignoreio gi
