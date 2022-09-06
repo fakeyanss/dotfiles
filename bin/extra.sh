@@ -50,6 +50,7 @@ function setup_extra() {
     gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \
         /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/logseq.rb
     brew_no_update_install_cask logseq
+    brew_no_update_install_cask obsidian
 
     # karabiner, 比 hammerspoon 的 keystroke 更好用
     brew_no_update_install_cask karabiner-elements
@@ -58,6 +59,7 @@ function setup_extra() {
     open -a karabiner
 
     brew_no_update_install_cask docker
+    brew_no_update_install_cask raycast
     brew_no_update_install_cask logitech-options
     brew_no_update_install_cask wechat
     brew_no_update_install_cask wireshark

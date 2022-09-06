@@ -3,7 +3,7 @@
 function setup_rust() {
 	task="setup rust"
 	log_task "$task"
-	install_rust
+	install_cargo
 	log_finish "$task"
 }
 

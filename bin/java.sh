@@ -21,7 +21,7 @@ function tap_jdk() {
 
 function install_jdk() {
     log_action "install jdk ${JAVA_VERSIONS[*]}"
-    mkdir -p /usr/local/lib/java
+    sudo mkdir -p /usr/local/lib/java
     for v in ${JAVA_VERSIONS[@]}; do
         log_running "install $v"
         gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghproxy.com\/https:\/\/github.com/g" \

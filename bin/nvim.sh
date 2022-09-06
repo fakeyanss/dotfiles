@@ -14,7 +14,8 @@ function install_nvim() {
     # log_action "install nvim using brew"
     # brew_no_update_install nvim
     log_action "install neovim nightly"
-    tar -xzvf $DOTFILES/software/nvim/extra/nvim-macos.tar.gz -C $DOTFILES/software/nvim/bin
+    mkdir -p $DOTFILES/software/nvim/bin
+    tar -xzvf $DOTFILES/software/nvim/extra/nvim-macos-0.7.0.tar.gz -C $DOTFILES/software/nvim/bin
     log_ok
 }
 
