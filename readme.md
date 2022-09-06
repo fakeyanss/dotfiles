@@ -55,7 +55,9 @@ Before you actually execute the script, please make sure what is dotfiles and wh
 ```bash
 git clone https://ghproxy.com/https://github.com/fakeYanss/dotfiles.git --depth=1 ~/.dotfiles
 cd ~/.dotfiles;
-# run this using terminal (not iTerm, lest iTerm settings get discarded on exit)
+bash os.sh # and choose you system os
+
+# and then, run this using terminal (not iTerm, let iTerm settings get discarded on exit)
 bash bootstrap.sh
 ```
 
