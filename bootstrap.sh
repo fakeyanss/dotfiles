@@ -5,8 +5,6 @@ function main() {
 
     setup_sudo
 
-    # git pull origin master
-
     # base, keep order
     if [[ $1 == '-no-brew' ]]; then
         log "skip homebrew"
