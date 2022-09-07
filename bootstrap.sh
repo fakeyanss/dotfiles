@@ -3,9 +3,7 @@
 function main() {
     log "Pipixia, Here we go..."
 
-    # setup_sudo
-
-    # git pull origin master
+    setup_sudo
 
     # base, keep order
     if [[ $1 == '-no-brew' ]]; then
@@ -21,7 +19,7 @@ function main() {
     setup_tmux
     setup_starship
 
-    extra software
+    # extra software
     setup_java
     setup_python
     setup_node
@@ -33,7 +31,7 @@ function main() {
     setup_iterm2
 
     setup_nvim
-    # setup_mac
+    setup_mac
     setup_extra
     log "Good job! All of dotfiles have been installed :)"
 }
