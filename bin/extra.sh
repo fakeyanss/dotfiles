@@ -64,6 +64,10 @@ function setup_extra() {
     brew_no_update_install_cask wechat
     brew_no_update_install_cask wireshark
     brew_no_update_install_cask neteasemusic
+
+    # ffmpeg with h265
+    brew tap homebrew-ffmpeg/ffmpeg
+    brew install homebrew-ffmpeg/ffmpeg/ffmpeg
 }
 
 function install_nerd_font() {
