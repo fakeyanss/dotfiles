@@ -22,4 +22,4 @@ command Sudow w !sudo tee % >/dev/null
 " match words selected
 vnoremap // y/<c-r>"<cr>
 
-let g:vimwiki_list = [{'path': '~/text/vault', 'syntax': 'markdown', 'ext': '.md'}]
+" Lit g:vimwiki_list = [{'path': '~/text/vault', 'syntax': 'markdown', 'ext': '.md'}]

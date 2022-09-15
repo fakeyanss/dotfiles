@@ -18,10 +18,9 @@ local opt = {
     noremap = true,
     silent = true
 }
+
 -- bufferline 左右Tab切换
-map("n", "<A-h>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<A-l>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
 -- map("n", "<A-w>", ":BufferLinePickClose<CR>", opt)
-map("n", "<A-w>", ":bp | bd #<CR>", opt)
-
-
+map("n", "<C-w>", ":bp | bd #<CR>", opt)
