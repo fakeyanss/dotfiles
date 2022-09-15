@@ -58,6 +58,7 @@ function setup_extra() {
     ln -s $DOTFILES/software/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json
     open -a karabiner
 
+    brew_no_update_install_cask mos
     brew_no_update_install_cask docker
     brew_no_update_install_cask raycast
     brew_no_update_install_cask logitech-options
