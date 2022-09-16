@@ -35,10 +35,10 @@ alias autossh=$HOME/.ssh/autossh/autossh
 # java env
 export PATH="$HOME/.jenv/bin:$PATH"
 _evalcache jenv init -
-# maven env
+# maven env # brew link mvn
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
-# using gradle@6
-PATH="/usr/local/opt/gradle@6/bin:$PATH"
+# using gradle@6 # brew link gradle
+# PATH="/usr/local/opt/gradle@6/bin:$PATH"
 
 # python
 # _evalcache pyenv init -
