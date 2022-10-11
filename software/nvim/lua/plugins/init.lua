@@ -78,7 +78,7 @@ local packer = require('packer').startup(function(use)
     --------------------- Note Taking --------------------
     -- Draw ASCII diagrams
     use 'jbyuki/venn.nvim'
-    use 'vimwiki/vimwiki'
+    -- use 'vimwiki/vimwiki'
 
     ---------------------- Todo --------------------------
     -- use {'nvim-orgmode/orgmode', config = function()
