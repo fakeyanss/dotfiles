@@ -23,5 +23,5 @@ ranks = "!git log --format='%aN' | sort -u | while read name; do echo \"\\033[32
 sslVerify = false
 ; [url "https://ghproxy.com/https://github.com"]
 ; insteadOf = https://github.com
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+; [url "git@github.com:"]
+	; insteadOf = https://github.com/

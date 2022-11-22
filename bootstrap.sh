@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 
-function main() {
+#fonts color
+Green="\033[32m"
+Red="\033[31m"
+Yellow="\033[33m"
+GreenBG="\033[42;37m"
+RedBG="\033[41;37m"
+Font="\033[0m"
+shell_version="1.0"
+
+DOTFILES=$(git rev-parse --show-toplevel)
+source $DOTFILES/conf/conf.sh
+source $DOTFILES/bin/include.sh
+
+function all() {
     log "Pipixia, Here we go..."
 
     setup_sudo
@@ -36,8 +49,52 @@ function main() {
     log "Good job! All of dotfiles have been installed :)"
 }
 
-DOTFILES=$(git rev-parse --show-toplevel)
-source $DOTFILES/conf/conf.sh
-source $DOTFILES/bin/include.sh
+function menu() {
+    echo ""
+    echo -e "   _   __  _   ___   ___   _____ _ __  _   _  __      ____ __ __   ___   ___"
+    echo -e "  / \,' /,' \ / o | / _/  /_  _//// /.' \ / |/ /     / __// // /  / _/ ,' _/"
+    echo -e " / \,' // o |/  ,' / _/    / / / \` // o // || /     / _/ / // /_ / _/ _\ \`. "
+    echo -e "/_/ /_/ |_,'/_/\`_\/___/   /_/ /_n_//_n_//_/|_/  () /_/  /_//___//___//___,' "
+    echo ""
+    echo -e "\t\tmore-than-dotfiles installer ${Red}[${shell_version}]${Font}"
+    echo -e "\t\t---authored by fakeyanss---"
+    echo ""
+    echo -e "———————————————————————————— ${Green}menu${Font} ————————————————————————————"
+    echo -e "${Green}0.${Font} sudo"
+    echo -e "${Green}1.${Font} homebrew"
+    echo -e "${Green}2.${Font} ssh"
+    echo ""
+    echo -e "———————————————————————————— ${Green}start${Font} ————————————————————————————"
+    read -rp "input number:" menu_num
+    case $menu_num in
+    0)
+        setup_sudo
+        ret=$?
+        ;;
+    1)
+        setup_brew
+        setup_sed # requirement gsed
+        ret=$?
+        ;;
+    2)
+        setup_ssh
+        ret=$?
+        ;;
+    *)
+        ret=1
+        ;;
+    esac
+    exit ${ret}
+}
 
-main "$@"
+case "$1" in
+all)
+    all
+    ;;
+*)
+    menu
+    ret=1
+    ;;
+esac
+
+exit ${ret}

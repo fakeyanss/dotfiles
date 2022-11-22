@@ -24,9 +24,11 @@ EOF
 }
 
 function install_golang() {
-    version=${1:-1.17.6}
-    log_action "install golang $GOLANG_VERSION"
-    goenv install -s $GOLANG_VERSION
-    goenv global $GOLANG_VERSION
+    for v in ${GOLANG_VERSIONS[@]}; do
+        log_action "install golang $v"
+        goenv install -s $v
+    done
+    log_running "set global default to py $GOLANG_DEFAULT_VERSION"
+    goenv global $GOLANG_DEFAULT_VERSION
     log_ok
 }
