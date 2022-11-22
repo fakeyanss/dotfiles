@@ -11,7 +11,7 @@
     "current": "githubPlus",
     "githubPlus": {
       "branch": "master",
-      "customUrl": "https://cdn.jsdelivr.net/gh/$PICGO_GITHUB_REPO@master",
+      "customUrl": "https://ghproxy.com/https://raw.githubusercontent.com/$PICGO_GITHUB_REPO/master/",
       "origin": "github",
       "repo": "$PICGO_GITHUB_REPO",
       "path": "$PICGO_GITHUB_PATH",
