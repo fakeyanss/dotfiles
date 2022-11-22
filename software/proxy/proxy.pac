@@ -1,3 +1,6 @@
+var server = "192.168.31.177"
+var port = "10808"
+
 var FindProxyForURL = function(init, profiles) {
     return function(url, host) {
         "use strict";
@@ -7278,6 +7281,6 @@ var FindProxyForURL = function(init, profiles) {
     "+v2ray": function(url, host, scheme) {
         "use strict";
         if (/^127\.0\.0\.1$/.test(host) || /^::1$/.test(host) || /^localhost$/.test(host)) return "DIRECT";
-        return "SOCKS5 localhost:10808; SOCKS localhost:10808";
+        return "SOCKS5 " + server +":" + port + "; SOCKS " + server + ":" + port;
     }
 });
