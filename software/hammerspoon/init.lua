@@ -11,7 +11,7 @@ local spoons = {
     -- UnsplashZ = {},
     WinWin = {},
     -- Clipboard = {}, -- raycast clipboard is better
-    EjectMenu = {},
+    -- EjectMenu = {},
     TimeFlow = {},
     -- Karabiner = {},
 }

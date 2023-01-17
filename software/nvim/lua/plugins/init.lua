@@ -187,6 +187,7 @@ require('plugins.telescope-conf')
 require('plugins.tree-conf')
 require('plugins.treesitter-conf')
 require('plugins.venn-conf')
+require('plugins.symbols-outline-conf')
 require('plugins.clipboard-image-conf')
 -- require('plugins.orgmode-conf')
 
