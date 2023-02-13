@@ -22,4 +22,3 @@ command Sudow w !sudo tee % >/dev/null
 " match words selected
 vnoremap // y/<c-r>"<cr>
 
-" Lit g:vimwiki_list = [{'path': '~/text/vault', 'syntax': 'markdown', 'ext': '.md'}]

@@ -56,9 +56,9 @@ function set_tap_mirror() {
             brew tap --force-auto-update $tap "$upstream"
         fi
     done
-    grep -q 'HOMEBREW_BOTTLE_DOMAIN' $HOME/.zprofile >/dev/null 2>&1
+    grep -q 'HOMEBREW_BOTTLE_DOMAIN' $HOME/.zshrc >/dev/null 2>&1
     if [ $? -ne 0 ]; then
-        cat >>$HOME/.zprofile <<EOF
+        cat >>$HOME/.zshrc <<EOF
 # homebrew
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
 

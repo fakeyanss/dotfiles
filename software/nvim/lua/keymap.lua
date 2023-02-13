@@ -11,11 +11,6 @@ local opt = {
 
 -- local cmd = vim.api.nvim_create_user_command
 
-map("n", "<C-j>", "4j", opt)
-map("n", "<C-k>", "4k", opt)
-map("i", "<C-h>", "<ESC>I", opt)
-map("i", "<C-l>", "<ESC>A", opt)
-
 -- ctrl u / ctrl + d  只移动9行，默认移动半屏
 map("n", "<C-u>", "9k", opt)
 map("n", "<C-d>", "9j", opt)
@@ -53,10 +48,10 @@ map("n", "<leader>wj", ":resize +10<CR>", opt)
 map("n", "<leader>wk", ":resize -10<CR>", opt)
 
 -- alt + hjkl  窗口之间跳转
-map("n", "<leader>h", "<C-w>h", opt)
-map("n", "<leader>j", "<C-w>j", opt)
-map("n", "<leader>k", "<C-w>k", opt)
-map("n", "<leader>l", "<C-w>l", opt)
+map("n", "<C-h>", "<C-w>h", opt)
+map("n", "<C-j>", "<C-w>j", opt)
+map("n", "<C-k>", "<C-w>k", opt)
+map("n", "<C-l>", "<C-w>l", opt)
 
 ------------------------------------------------------------------
 -- 插件快捷键

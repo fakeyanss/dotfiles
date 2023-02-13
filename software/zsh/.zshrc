@@ -24,11 +24,12 @@ source $ZSH/oh-my-zsh.sh
 
 ####################################
 
-# proxy
-# export ALL_PROXY="socks5://127.0.0.1:10808"
+# dotfiles
+export DOTFILES=/Users/guichen01/.dotfiles
 
 # brew
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # ssh
 alias autossh=$HOME/.ssh/autossh/autossh
@@ -58,15 +59,12 @@ export NVM_COMPLETION=true
 # eval "$(goenv init -)"
 _evalcache goenv init -
 export GOENV_GOPATH_PREFIX=$HOME/code/golang
-export GO111MODULE=on
-export CC="/usr/bin/gcc"
-export CXX="/usr/bin/g++"
 
 # editor
 alias purevim=/usr/bin/vim
 alias vim=$HOME/.config/nvim/bin/nvim-osx64/bin/nvim
 
-# statship
+# starship
 # eval "$(starship init zsh)"
 _evalcache starship init zsh
 
