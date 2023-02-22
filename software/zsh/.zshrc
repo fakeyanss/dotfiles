@@ -63,7 +63,8 @@ export GOENV_GOPATH_PREFIX=$HOME/code/golang
 
 # editor
 alias purevim=/usr/bin/vim
-alias vim=$HOME/.config/nvim/bin/nvim-macos/bin/nvim
+alias vimu=$DOTFILES/software/nvim/bin/nvim-macos/bin/nvim -u NONE
+alias vim=$DOTFILES/software/nvim/bin/nvim-macos/bin/nvim
 
 # starship
 # eval "$(starship init zsh)"

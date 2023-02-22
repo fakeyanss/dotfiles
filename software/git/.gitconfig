@@ -25,3 +25,8 @@ sslVerify = false
 ; insteadOf = https://github.com
 ; [url "git@github.com:"]
 	; insteadOf = https://github.com/
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

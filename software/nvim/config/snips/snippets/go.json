@@ -1,0 +1,10 @@
+{
+	"author comment": {
+		"prefix": "author",
+		"body": [
+			"$LINE_COMMENT Author:  fakeyanss",
+			"$LINE_COMMENT Created: $CURRENT_MONTH_NAME_SHORT $CURRENT_DATE, $CURRENT_HOUR:$CURRENT_MINUTE, $CURRENT_YEAR"
+		],
+		"description": "Creates author and since info"
+	}
+}
