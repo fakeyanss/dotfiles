@@ -189,7 +189,7 @@
                         ]
                     },
                     {
-                        "description": "Shift + Esc to ` Grave Accent",
+                        "description": "Esc to ` Grave Accent",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -205,12 +205,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "escape",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "shift"
-                                        ]
-                                    }
+                                    "key_code": "escape"
                                 },
                                 "to": [
                                     {
@@ -222,7 +217,7 @@
                         ]
                     },
                     {
-                        "description": "Control + Esc to Tilde",
+                        "description": "Control + Esc to ~ Tilde",
                         "manipulators": [
                             {
                                 "conditions": [

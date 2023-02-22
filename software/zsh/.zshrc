@@ -29,6 +29,7 @@ export DOTFILES=/Users/guichen01/.dotfiles
 
 # brew
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+export HOMEBREW_NO_INSTALL_FROM_API=1
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # ssh
@@ -62,7 +63,7 @@ export GOENV_GOPATH_PREFIX=$HOME/code/golang
 
 # editor
 alias purevim=/usr/bin/vim
-alias vim=$HOME/.config/nvim/bin/nvim-osx64/bin/nvim
+alias vim=$HOME/.config/nvim/bin/nvim-macos/bin/nvim
 
 # starship
 # eval "$(starship init zsh)"
