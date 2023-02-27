@@ -441,7 +441,13 @@ local plugins = {
                 config = require("modules.plugins.tool.dap.dapui"),
             },
         },
-    }
+    },
+    {
+        "wakatime/vim-wakatime",
+        event = { "VeryLazy" },
+        -- event = { "BufReadPost", "BufAdd", "BufNewFile" },
+        lazy = true,
+    },
 }
 
 lazy.setup(plugins, lazy_opt)

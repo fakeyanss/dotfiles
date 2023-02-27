@@ -70,6 +70,7 @@
   "vim-matchup": { "branch": "master", "commit": "3a48818a8113a502f245c29d894201421727577a" },
   "vim-oscyank": { "branch": "main", "commit": "e6298736a7835bcb365dd45a8e8bfe86d935c1f8" },
   "vim-sandwich": { "branch": "master", "commit": "c5a2cc438ce6ea2005c556dc833732aa53cae21a" },
+  "vim-wakatime": { "branch": "master", "commit": "62113bb063aa1923146e59270d71563441ceabe5" },
   "which-key.nvim": { "branch": "main", "commit": "5224c261825263f46f6771f1b644cae33cd06995" },
   "wilder.nvim": { "branch": "master", "commit": "679f348dc90d80ff9ba0e7c470c40a4d038dcecf" }
 }
