@@ -103,7 +103,7 @@
   "BM Growl" : true,
   "Command" : "\/opt\/homebrew\/bin\/zsh",
   "Description" : "Default",
-  "Smart Cursor Color" : true,
+  "Smart Cursor Color" : false,
   "Mouse Reporting" : true,
   "Screen" : -1,
   "Selection Color" : {
@@ -127,7 +127,7 @@
   "Non Ascii Font" : "Monaco 12",
   "Vertical Spacing" : 1,
   "Use Bold Font" : true,
-  "Option Key Sends" : 0,
+  "Option Key Sends" : 1,
   "Selected Text Color" : {
     "Red Component" : 0.29803922772407532,
     "Color Space" : "sRGB",
@@ -154,164 +154,164 @@
   "Unlimited Scrollback" : false,
   "Keyboard Map" : {
     "0xf700-0x260000" : {
-      "Action" : 10,
-      "Text" : "[1;6A"
+      "Text" : "[1;6A",
+      "Action" : 10
     },
     "0x37-0x40000" : {
-      "Action" : 11,
-      "Text" : "0x1f"
+      "Text" : "0x1f",
+      "Action" : 11
     },
     "0x32-0x40000" : {
-      "Action" : 11,
-      "Text" : "0x00"
+      "Text" : "0x00",
+      "Action" : 11
     },
     "0xf709-0x20000" : {
-      "Action" : 10,
-      "Text" : "[17;2~"
+      "Text" : "[17;2~",
+      "Action" : 10
     },
     "0xf70c-0x20000" : {
-      "Action" : 10,
-      "Text" : "[20;2~"
+      "Text" : "[20;2~",
+      "Action" : 10
     },
     "0xf729-0x20000" : {
-      "Action" : 10,
-      "Text" : "[1;2H"
+      "Text" : "[1;2H",
+      "Action" : 10
     },
     "0xf72b-0x40000" : {
-      "Action" : 10,
-      "Text" : "[1;5F"
+      "Text" : "[1;5F",
+      "Action" : 10
     },
     "0xf705-0x20000" : {
-      "Action" : 10,
-      "Text" : "[1;2Q"
+      "Text" : "[1;2Q",
+      "Action" : 10
     },
     "0xf703-0x260000" : {
-      "Action" : 10,
-      "Text" : "[1;6C"
+      "Text" : "[1;6C",
+      "Action" : 10
     },
     "0xf700-0x220000" : {
-      "Action" : 10,
-      "Text" : "[1;2A"
+      "Text" : "[1;2A",
+      "Action" : 10
     },
     "0xf701-0x280000" : {
-      "Action" : 11,
-      "Text" : "0x1b 0x1b 0x5b 0x42"
+      "Text" : "0x1b 0x1b 0x5b 0x42",
+      "Action" : 11
     },
     "0x38-0x40000" : {
-      "Action" : 11,
-      "Text" : "0x7f"
+      "Text" : "0x7f",
+      "Action" : 11
     },
     "0x33-0x40000" : {
-      "Action" : 11,
-      "Text" : "0x1b"
+      "Text" : "0x1b",
+      "Action" : 11
     },
     "0xf703-0x220000" : {
-      "Action" : 10,
-      "Text" : "[1;2C"
+      "Text" : "[1;2C",
+      "Action" : 10
     },
     "0xf701-0x240000" : {
-      "Action" : 10,
-      "Text" : "[1;5B"
+      "Text" : "[1;5B",
+      "Action" : 10
     },
     "0xf70d-0x20000" : {
-      "Action" : 10,
-      "Text" : "[21;2~"
+      "Text" : "[21;2~",
+      "Action" : 10
     },
     "0xf702-0x260000" : {
-      "Action" : 10,
-      "Text" : "[1;6D"
+      "Text" : "[1;6D",
+      "Action" : 10
     },
     "0xf729-0x40000" : {
-      "Action" : 10,
-      "Text" : "[1;5H"
+      "Text" : "[1;5H",
+      "Action" : 10
     },
     "0xf706-0x20000" : {
-      "Action" : 10,
-      "Text" : "[1;2R"
+      "Text" : "[1;2R",
+      "Action" : 10
     },
     "0x34-0x40000" : {
-      "Action" : 11,
-      "Text" : "0x1c"
+      "Text" : "0x1c",
+      "Action" : 11
     },
     "0xf700-0x280000" : {
-      "Action" : 11,
-      "Text" : "0x1b 0x1b 0x5b 0x41"
+      "Text" : "0x1b 0x1b 0x5b 0x41",
+      "Action" : 11
     },
     "0x2d-0x40000" : {
-      "Action" : 11,
-      "Text" : "0x1f"
+      "Text" : "0x1f",
+      "Action" : 11
     },
     "0xf70e-0x20000" : {
-      "Action" : 10,
-      "Text" : "[23;2~"
+      "Text" : "[23;2~",
+      "Action" : 10
     },
     "0xf702-0x220000" : {
-      "Action" : 10,
-      "Text" : "[1;2D"
+      "Text" : "[1;2D",
+      "Action" : 10
     },
     "0xf703-0x280000" : {
-      "Action" : 11,
-      "Text" : "0x1b 0x1b 0x5b 0x43"
+      "Text" : "0x1b 0x1b 0x5b 0x43",
+      "Action" : 11
     },
     "0xf700-0x240000" : {
-      "Action" : 10,
-      "Text" : "[1;5A"
+      "Text" : "[1;5A",
+      "Action" : 10
     },
     "0xf707-0x20000" : {
-      "Action" : 10,
-      "Text" : "[1;2S"
+      "Text" : "[1;2S",
+      "Action" : 10
     },
     "0xf70a-0x20000" : {
-      "Action" : 10,
-      "Text" : "[18;2~"
+      "Text" : "[18;2~",
+      "Action" : 10
     },
     "0x35-0x40000" : {
-      "Action" : 11,
-      "Text" : "0x1d"
+      "Text" : "0x1d",
+      "Action" : 11
     },
     "0xf70f-0x20000" : {
-      "Action" : 10,
-      "Text" : "[24;2~"
+      "Text" : "[24;2~",
+      "Action" : 10
     },
     "0xf703-0x240000" : {
-      "Action" : 10,
-      "Text" : "[1;5C"
+      "Text" : "[1;5C",
+      "Action" : 10
     },
     "0xf701-0x260000" : {
-      "Action" : 10,
-      "Text" : "[1;6B"
+      "Text" : "[1;6B",
+      "Action" : 10
     },
     "0xf702-0x280000" : {
-      "Action" : 11,
-      "Text" : "0x1b 0x1b 0x5b 0x44"
+      "Text" : "0x1b 0x1b 0x5b 0x44",
+      "Action" : 11
     },
     "0xf72b-0x20000" : {
-      "Action" : 10,
-      "Text" : "[1;2F"
+      "Text" : "[1;2F",
+      "Action" : 10
     },
     "0x36-0x40000" : {
-      "Action" : 11,
-      "Text" : "0x1e"
+      "Text" : "0x1e",
+      "Action" : 11
     },
     "0xf708-0x20000" : {
-      "Action" : 10,
-      "Text" : "[15;2~"
+      "Text" : "[15;2~",
+      "Action" : 10
     },
     "0xf701-0x220000" : {
-      "Action" : 10,
-      "Text" : "[1;2B"
+      "Text" : "[1;2B",
+      "Action" : 10
     },
     "0xf70b-0x20000" : {
-      "Action" : 10,
-      "Text" : "[19;2~"
+      "Text" : "[19;2~",
+      "Action" : 10
     },
     "0xf702-0x240000" : {
-      "Action" : 10,
-      "Text" : "[1;5D"
+      "Text" : "[1;5D",
+      "Action" : 10
     },
     "0xf704-0x20000" : {
-      "Action" : 10,
-      "Text" : "[1;2P"
+      "Text" : "[1;2P",
+      "Action" : 10
     }
   },
   "Window Type" : 0,
@@ -357,55 +357,6 @@
     "Alpha Component" : 1,
     "Green Component" : 0.93725490570068359
   },
-  "Triggers" : [
-    {
-      "action" : "MuteCoprocessTrigger",
-      "parameter" : "\/Users\/guichen01\/.dotfiles\/software\/iterm2\/iterm2-send-zmodem.sh",
-      "regex" : "rz waiting to receive.\\*\\*B0100",
-      "partial" : false
-    },
-    {
-      "action" : "MuteCoprocessTrigger",
-      "parameter" : "\/Users\/guichen01\/.dotfiles\/software\/iterm2\/iterm2-recv-zmodem.sh",
-      "regex" : "\\*\\*B00000000000000",
-      "partial" : false
-    },
-    {
-      "action" : "MuteCoprocessTrigger",
-      "parameter" : "\/opt\/homebrew\/bin\/trzsz-iterm2 \\1",
-      "regex" : ":(:TRZSZ:TRANSFER:[SRD]:\\d+\\.\\d+\\.\\d+:\\d+)",
-      "partial" : false
-    }
-  ],
-  "Guid" : "66126B33-7588-4FF4-A7DB-F9F0AE7FBE31",
-  "Ansi 2 Color" : {
-    "Red Component" : 0.63921570777893066,
-    "Color Space" : "sRGB",
-    "Blue Component" : 0.54901963472366333,
-    "Alpha Component" : 1,
-    "Green Component" : 0.7450980544090271
-  },
-  "Ansi 3 Color" : {
-    "Red Component" : 0.92156863212585449,
-    "Color Space" : "sRGB",
-    "Blue Component" : 0.54509806632995605,
-    "Alpha Component" : 1,
-    "Green Component" : 0.79607844352722168
-  },
-  "Ansi 4 Color" : {
-    "Red Component" : 0.5058823823928833,
-    "Color Space" : "sRGB",
-    "Blue Component" : 0.75686275959014893,
-    "Alpha Component" : 1,
-    "Green Component" : 0.63137257099151611
-  },
-  "Ansi 0 Color" : {
-    "Red Component" : 0.23137255012989044,
-    "Color Space" : "sRGB",
-    "Blue Component" : 0.32156863808631897,
-    "Alpha Component" : 1,
-    "Green Component" : 0.25882354378700256
-  },
   "Transparency" : 0,
   "Ansi 1 Color" : {
     "Red Component" : 0.74901962280273438,
@@ -414,14 +365,63 @@
     "Alpha Component" : 1,
     "Green Component" : 0.3803921639919281
   },
-  "Normal Font" : "FiraCodeNerdFontCompleteM-Regular 14",
-  "Custom Directory" : "No",
   "Horizontal Spacing" : 1,
+  "Ansi 2 Color" : {
+    "Red Component" : 0.63921570777893066,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.54901963472366333,
+    "Alpha Component" : 1,
+    "Green Component" : 0.7450980544090271
+  },
+  "Ansi 4 Color" : {
+    "Red Component" : 0.5058823823928833,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.75686275959014893,
+    "Alpha Component" : 1,
+    "Green Component" : 0.63137257099151611
+  },
+  "Custom Directory" : "No",
+  "Ansi 0 Color" : {
+    "Red Component" : 0.23137255012989044,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.32156863808631897,
+    "Alpha Component" : 1,
+    "Green Component" : 0.25882354378700256
+  },
+  "Guid" : "66126B33-7588-4FF4-A7DB-F9F0AE7FBE31",
+  "Normal Font" : "FiraCodeNerdFontCompleteM-Regular 14",
+  "Triggers" : [
+    {
+      "partial" : false,
+      "parameter" : "\/Users\/guichen01\/.dotfiles\/software\/iterm2\/iterm2-send-zmodem.sh",
+      "regex" : "rz waiting to receive.\\*\\*B0100",
+      "action" : "MuteCoprocessTrigger"
+    },
+    {
+      "partial" : false,
+      "parameter" : "\/Users\/guichen01\/.dotfiles\/software\/iterm2\/iterm2-recv-zmodem.sh",
+      "regex" : "\\*\\*B00000000000000",
+      "action" : "MuteCoprocessTrigger"
+    },
+    {
+      "partial" : false,
+      "parameter" : "\/opt\/homebrew\/bin\/trzsz-iterm2 \\1",
+      "regex" : ":(:TRZSZ:TRANSFER:[SRD]:\\d+\\.\\d+\\.\\d+:\\d+)",
+      "action" : "MuteCoprocessTrigger"
+    }
+  ],
   "Link Color" : {
     "Red Component" : 0.99607843160629272,
     "Color Space" : "sRGB",
     "Blue Component" : 1,
     "Alpha Component" : 1,
     "Green Component" : 1
+  },
+  "Ansi 3 Color" : {
+    "Red Component" : 0.92156863212585449,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.54509806632995605,
+    "Alpha Component" : 1,
+    "Green Component" : 0.79607844352722168
   }
 }

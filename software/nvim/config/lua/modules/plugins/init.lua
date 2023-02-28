@@ -461,6 +461,7 @@ lazy.setup(plugins, lazy_opt)
 -- if you want some plugins be waked up by key press(send command), init them here
 require("modules.keymaps")["nvim_tree"]()
 require("modules.keymaps")["telescope"]()
+require("modules.keymaps")["toggleterm"]()
 require("modules.keymaps")["sniprun"]()
 require("modules.keymaps")["trouble"]()
 require("modules.keymaps")["dap"]()
