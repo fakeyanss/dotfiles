@@ -1,0 +1,48 @@
+{
+  "show_detail": true,
+  "options": {
+    "ServerAliveInterval": 30
+  },
+  "servers": [
+    {
+      "name": "example-password",
+      "ip": "example-password",
+      "port": 22,
+      "user": "example-password",
+      "password": "example-password",
+      "method": "example-password",
+      "key": "",
+      "options": {
+        "ServerAliveInterval": 20
+      },
+      "alias": "example"
+    },
+    {
+      "name": "example-key",
+      "ip": "example-key",
+      "user": "example-key",
+      "method": "key"
+    }
+  ],
+  "groups": [
+    {
+      "group_name": "your group name",
+      "prefix": "a",
+      "servers": [
+        {
+          "name": "example1",
+          "ip": "example1",
+          "user": "example1",
+          "password": "example1"
+        },
+        {
+          "name": "example2",
+          "ip": "example2",
+          "user": "example2",
+          "password": "example2"
+        }
+      ],
+      "collapse": false
+    }
+  ]
+}

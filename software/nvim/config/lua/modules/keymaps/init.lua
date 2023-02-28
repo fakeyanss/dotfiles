@@ -21,6 +21,8 @@ local basic_map = {
     ["n|N"] = map_cmd("Nzzzv"):with_noremap():with_desc("editn: Prev search result"),
     ["n|<C-u>"] = map_cmd("10k"):with_noremap():with_desc("editn: Half page up"),
     ["n|<C-d>"] = map_cmd("10j"):with_noremap():with_desc("editn: Half page down"),
+    ["n|<S-h>"] = map_cmd("<ESC>^i"):with_noremap():with_desc("editi: Move cursor to line start"),
+    ["n|<S-l>"] = map_cmd("<ESC>$a"):with_noremap():with_desc("editi: Move cursor to line end"),
     ["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("editn: Toggle spell check"),
     ["n|/"] = map_cmd("/\\v"):with_silent():with_noremap():with_desc("search: Case insensitive"),
     ["n|<S-/>"] = map_cmd("/"):with_silent():with_noremap():with_desc("search: Case sensitive"),
@@ -32,8 +34,6 @@ local basic_map = {
     -- Insert mode
     ["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap():with_desc("editi: Delete previous block"),
     ["i|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("editi: Move cursor to left"),
-    ["i|<S-h>"] = map_cmd("<ESC>^i"):with_noremap():with_desc("editi: Move cursor to line start"),
-    ["i|<S-l>"] = map_cmd("<ESC>$a"):with_noremap():with_desc("editi: Move cursor to line end"),
     ["i|<C-s>"] = map_cmd("<Esc>:w<CR>"):with_desc("editi: Save file"),
     ["i|<C-q>"] = map_cmd("<Esc>:wq<CR>"):with_desc("editi: Save file and quit"),
     -- Command mode

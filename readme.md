@@ -10,7 +10,6 @@
 
 [English](readme.md) | [中文版](readme-zh.md)
 
-
 * [What does this repository do?](#what-does-this-repository-do?)
 * [Installation](#installation)
 * [Supported software](#supported-software)
@@ -143,7 +142,7 @@ PackerStatus
 
 #### venn
 
-Draw ASCII diagrams 
+Draw ASCII diagrams
 
 available commands as follow:
 
@@ -244,5 +243,10 @@ available commands as follow:
 ```
 gitclone # customized function, using ghproxy.com for proxy
 darklight # toggle darkmode lightmode on macOS
-``` 
+```
 
+## TODO
+
+Support more tools.
+
+* [ ] aws cli, multiple configurations manage
