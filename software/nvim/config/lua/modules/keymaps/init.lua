@@ -21,8 +21,8 @@ local basic_map = {
 	["n|N"] = map_cmd("Nzzzv"):with_noremap():with_desc("editn: Prev search result"),
 	["n|<C-u>"] = map_cmd("10k"):with_noremap():with_desc("editn: Half page up"),
 	["n|<C-d>"] = map_cmd("10j"):with_noremap():with_desc("editn: Half page down"),
-	["n|<S-h>"] = map_cmd("<ESC>^i"):with_noremap():with_desc("editi: Move cursor to line start"),
-	["n|<S-l>"] = map_cmd("<ESC>$a"):with_noremap():with_desc("editi: Move cursor to line end"),
+	["n|gh"] = map_cmd("<ESC>^"):with_noremap():with_desc("editn: Move cursor to line start"),
+	["n|gl"] = map_cmd("<ESC>$"):with_noremap():with_desc("editn: Move cursor to line end"),
 	["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("editn: Toggle spell check"),
 	["n|/"] = map_cmd("/\\v"):with_silent():with_noremap():with_desc("search: Case insensitive"),
 	["n|<S-/>"] = map_cmd("/"):with_silent():with_noremap():with_desc("search: Case sensitive"),
@@ -31,6 +31,7 @@ local basic_map = {
 	["v|>"] = map_cmd(">gv"):with_desc("editv: Increase indent"),
 	["v|/"] = map_cmd("/\\v"):with_silent():with_noremap():with_desc("search: Case insensitive"),
 	["v|<S-/>"] = map_cmd("/"):with_silent():with_noremap():with_desc("search: Case sensitive"),
+	["v|<C-f>"] = map_cmd('y/<C-r>"<CR>'):with_silent():with_noremap():with_desc("search: Selected words"),
 	-- Insert mode
 	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap():with_desc("editi: Delete previous block"),
 	["i|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("editi: Move cursor to left"),
@@ -83,8 +84,8 @@ plugin_key_mapping["oscyank"] = function()
 end
 plugin_key_mapping["bufferline"] = function()
 	bind.nvim_load_mapping({
-		["n|<M-h>"] = map_cr("BufferLineCyclePrev"):with_silent():with_noremap():with_desc("buffer: Switch to prev"),
-		["n|<M-l>"] = map_cr("BufferLineCycleNext"):with_silent():with_noremap():with_desc("buffer: Switch to next"),
+		["n|<S-h>"] = map_cr("BufferLineCyclePrev"):with_silent():with_noremap():with_desc("buffer: Switch to prev"),
+		["n|<S-l>"] = map_cr("BufferLineCycleNext"):with_silent():with_noremap():with_desc("buffer: Switch to next"),
 		["n|<C-w>"] = map_cr("bp | bd #"):with_silent():with_noremap():with_desc("buffer: Close current"),
 	})
 end
@@ -96,7 +97,7 @@ plugin_key_mapping["nvim_tree"] = function()
 end
 plugin_key_mapping["telescope"] = function()
 	bind.nvim_load_mapping({
-		["n|<leader>p"] = map_callback(function()
+		["n|<leader><leader>"] = map_callback(function()
 				command_panel()
 			end)
 			:with_noremap()
@@ -108,44 +109,44 @@ plugin_key_mapping["telescope"] = function()
 			:with_noremap()
 			:with_silent()
 			:with_desc("edit: Show undo history"),
-		["n|<leader>fp"] = map_callback(function()
-				require("telescope").extensions.projects.projects({})
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("find: Project"),
-		["n|<leader>fr"] = map_callback(function()
-				require("telescope").extensions.frecency.frecency()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("find: File by frecency"),
-		["n|<leader>fw"] = map_callback(function()
+		["n|<leader>s"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
+		["n|<leader>F"] = map_callback(function()
 				require("telescope").extensions.live_grep_args.live_grep_args()
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("find: Word in project"),
 		["n|<leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent():with_desc("find: File by history"),
+		["n|<leader>p"] = map_callback(function()
+				require("telescope").extensions.frecency.frecency()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("find: File by frecency"),
 		["n|<leader>ff"] = map_cu("Telescope find_files")
 			:with_noremap()
 			:with_silent()
 			:with_desc("find: File in project"),
+		["n|<leader>fg"] = map_cu("Telescope git_files")
+			:with_noremap()
+			:with_silent()
+			:with_desc("find: file in git project"),
+		["n|<leader>fp"] = map_callback(function()
+				require("telescope").extensions.projects.projects({})
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("find: Project"),
 		["n|<leader>fc"] = map_cu("Telescope colorscheme")
 			:with_noremap()
 			:with_silent()
 			:with_desc("ui: Change colorscheme for current session"),
 		["n|<leader>fn"] = map_cu(":enew"):with_noremap():with_silent():with_desc("buffer: New"),
-		["n|<leader>fg"] = map_cu("Telescope git_files")
-			:with_noremap()
-			:with_silent()
-			:with_desc("find: file in git project"),
 		["n|<leader>fz"] = map_cu("Telescope zoxide list")
 			:with_noremap()
 			:with_silent()
 			:with_desc("edit: Change current direrctory by zoxide"),
 		["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
-		["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
 	})
 end
 plugin_key_mapping["gitsigns"] = function(bufnr)
@@ -315,10 +316,10 @@ plugin_key_mapping["toggleterm"] = function()
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle horizontal"),
-		["i|<leader>t-"] = map_cmd("<Esc><Cmd>ToggleTerm direction=horizontal<CR>")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle horizontal"),
+		-- ["i|<leader>t-"] = map_cmd("<Esc><Cmd>ToggleTerm direction=horizontal<CR>")
+		-- 	:with_noremap()
+		-- 	:with_silent()
+		-- 	:with_desc("terminal: Toggle horizontal"),
 		["t|<leader>t-"] = map_cmd("<Esc><Cmd>ToggleTerm<CR>")
 			:with_noremap()
 			:with_silent()
@@ -327,10 +328,10 @@ plugin_key_mapping["toggleterm"] = function()
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["i|<leader>t\\"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle vertical"),
+		-- ["i|<leader>t\\"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
+		-- 	:with_noremap()
+		-- 	:with_silent()
+		-- 	:with_desc("terminal: Toggle vertical"),
 		["t|<leader>t\\"] = map_cmd("<Esc><Cmd>ToggleTerm<CR>")
 			:with_noremap()
 			:with_silent()
@@ -351,10 +352,10 @@ plugin_key_mapping["toggleterm"] = function()
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle float"),
-		["i|<leader>tf"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>")
-			:with_noremap()
-			:with_silent()
-			:with_desc("terminal: Toggle float"),
+		-- ["i|<leader>tf"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>")
+		-- 	:with_noremap()
+		-- 	:with_silent()
+		-- 	:with_desc("terminal: Toggle float"),
 		["t|<leader>tf"] = map_cmd("<Esc><Cmd>ToggleTerm<CR>")
 			:with_noremap()
 			:with_silent()
@@ -375,30 +376,31 @@ plugin_key_mapping["toggleterm"] = function()
 end
 plugin_key_mapping["sniprun"] = function()
 	bind.nvim_load_mapping({
-		["v|<leader>rc"] = map_cr("SnipRun"):with_noremap():with_silent():with_desc("tool: Run code by range"),
-		["n|<leader>rc"] = map_cu([[%SnipRun]]):with_noremap():with_silent():with_desc("tool: Run code by file"),
+		["v|<leader>cr"] = map_cr("SnipRun"):with_noremap():with_silent():with_desc("tool: Run code by range"),
+		["n|<leader>cr"] = map_cu([[%SnipRun]]):with_noremap():with_silent():with_desc("tool: Run code by file"),
 	})
 end
 plugin_key_mapping["trouble"] = function()
 	bind.nvim_load_mapping({
-		["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent():with_desc("lsp: Toggle trouble list"),
-		["n|<leader>tr"] = map_cr("TroubleToggle lsp_references")
+		-- "t" is used by toggle_term, "e" meanings "error"
+		["n|<leader>eg"] = map_cr("TroubleToggle"):with_noremap():with_silent():with_desc("lsp: Toggle trouble list"),
+		["n|<leader>er"] = map_cr("TroubleToggle lsp_references")
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Show lsp references"),
-		["n|<leader>td"] = map_cr("TroubleToggle document_diagnostics")
+		["n|<leader>ed"] = map_cr("TroubleToggle document_diagnostics")
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Show document diagnostics"),
-		["n|<leader>tw"] = map_cr("TroubleToggle workspace_diagnostics")
+		["n|<leader>ew"] = map_cr("TroubleToggle workspace_diagnostics")
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Show workspace diagnostics"),
-		["n|<leader>tq"] = map_cr("TroubleToggle quickfix")
+		["n|<leader>eq"] = map_cr("TroubleToggle quickfix")
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Show quickfix list"),
-		["n|<leader>tl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent():with_desc("lsp: Show loclist"),
+		["n|<leader>el"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent():with_desc("lsp: Show loclist"),
 	})
 end
 plugin_key_mapping["dap"] = function()
@@ -469,9 +471,7 @@ end
 plugin_key_mapping["lsp"] = function()
 	bind.nvim_load_mapping({
 		-- LSP-related keymaps, work only when event = { "InsertEnter", "LspStart" }
-		["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent():with_nowait():with_desc("lsp: Info"),
-		["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent():with_nowait():with_desc("lsp: Restart"),
-		["n|go"] = map_cr("Lspsaga outline"):with_noremap():with_silent():with_desc("lsp: Toggle outline"),
+		["n|<leader>lo"] = map_cr("Lspsaga outline"):with_noremap():with_silent():with_desc("lsp: Toggle outline"),
 		["n|g["] = map_cr("Lspsaga diagnostic_jump_prev")
 			:with_noremap()
 			:with_silent()
@@ -480,36 +480,42 @@ plugin_key_mapping["lsp"] = function()
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Next diagnostic"),
-		["n|<leader>sl"] = map_cr("Lspsaga show_line_diagnostics")
+		["n|<leader>ldl"] = map_cr("Lspsaga show_line_diagnostics")
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Line diagnostic"),
-		["n|<leader>sc"] = map_cr("Lspsaga show_cursor_diagnostics")
+		["n|<leader>ldc"] = map_cr("Lspsaga show_cursor_diagnostics")
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Cursor diagnostic"),
-		["n|gs"] = map_callback(function()
+		["n|<leader>ls"] = map_callback(function()
 				vim.lsp.buf.signature_help()
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Signature help"),
-		["n|gr"] = map_cr("Lspsaga rename"):with_noremap():with_silent():with_desc("lsp: Rename in file range"),
-		["n|gR"] = map_cr("Lspsaga rename ++project")
+		["n|<leader>lr"] = map_cr("Lspsaga rename"):with_noremap():with_silent():with_desc("lsp: Rename in file range"),
+		["n|<leader>lR"] = map_cr("Lspsaga rename ++project")
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Rename in project range"),
 		["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent():with_desc("lsp: Show doc"),
-		["n|ga"] = map_cr("Lspsaga code_action"):with_noremap():with_silent():with_desc("lsp: Code action for cursor"),
-		["v|ga"] = map_cu("Lspsaga code_action"):with_noremap():with_silent():with_desc("lsp: Code action for range"),
+		["n|<leader>lc"] = map_cr("Lspsaga code_action")
+			:with_noremap()
+			:with_silent()
+			:with_desc("lsp: Code action for cursor"),
+		["v|<leader>lc"] = map_cu("Lspsaga code_action")
+			:with_noremap()
+			:with_silent()
+			:with_desc("lsp: Code action for range"),
 		["n|gd"] = map_cr("Lspsaga peek_definition"):with_noremap():with_silent():with_desc("lsp: Preview definition"),
 		["n|gD"] = map_cr("Lspsaga goto_definition"):with_noremap():with_silent():with_desc("lsp: Goto definition"),
-		["n|gh"] = map_cr("Lspsaga lsp_finder"):with_noremap():with_silent():with_desc("lsp: Show reference"),
-		["n|<leader>ci"] = map_cr("Lspsaga incoming_calls")
+		["n|gr"] = map_cr("Lspsaga lsp_finder"):with_noremap():with_silent():with_desc("lsp: Show reference"),
+		["n|<leader>lci"] = map_cr("Lspsaga incoming_calls")
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Show incoming calls"),
-		["n|<leader>co"] = map_cr("Lspsaga outgoing_calls")
+		["n|<leader>lco"] = map_cr("Lspsaga outgoing_calls")
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Show outgoing calls"),
