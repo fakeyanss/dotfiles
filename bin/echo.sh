@@ -16,33 +16,33 @@ COL_MAGENTA=$ESC_SEQ"35;01m"
 COL_CYAN=$ESC_SEQ"36;01m"
 
 function log() {
-    echo -e "$1\n"
+	echo -e "$1\n"
 }
 
 function log_task() {
-    echo -e "\n----------------------------------------\n$COL_GREEN[task]$COL_RESET $1\n"
+	echo -e "\n----------------------------------------\n$COL_GREEN[task]$COL_RESET $1\n"
 }
 
 function log_running() {
-    echo -e "$COL_CYAN ⇒ $COL_RESET"$1
+	echo -e "$COL_CYAN ⇒ $COL_RESET"$1
 }
 
 function log_action() {
-    echo -e "\n$COL_CYAN[action]$COL_RESET $1"
+	echo -e "\n$COL_CYAN[action]$COL_RESET $1"
 }
 
 function log_warn() {
-    echo -e "$COL_YELLOW[warning]$COL_RESET $1\n"
+	echo -e "$COL_YELLOW[warning]$COL_RESET $1\n"
 }
 
 function log_ok() {
-    echo -e "$COL_GREEN[ok]$COL_RESET $1\n"
+	echo -e "$COL_GREEN[ok]$COL_RESET $1\n"
 }
 
 function log_error() {
-    echo -e "$COL_RED[error]$COL_RESET $1\n"
+	echo -e "$COL_RED[error]$COL_RESET $1\n"
 }
 
 function log_finish() {
-    echo -e "$COL_GREEN[✔]$COL_RESET $1\n----------------------------------------\n"
+	echo -e "$COL_GREEN[✔]$COL_RESET $1\n----------------------------------------\n"
 }

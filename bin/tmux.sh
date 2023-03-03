@@ -10,7 +10,9 @@ function setup_tmux() {
 
 function install_tmux() {
     log_action "install tmux"
-    brew_no_update_install tmux
+    if [[ $IS_MAC == 1 ]]; then
+        brew_no_update_install tmux
+    fi
     tmux -V
     log_ok
 }

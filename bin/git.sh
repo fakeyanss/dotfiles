@@ -11,7 +11,12 @@ function setup_git() {
 
 function install_git() {
 	log_action "upgrade git using brew"
-	brew_no_update_install git
+	if [[ $IS_MAC == 1 ]]; then
+		brew_no_update_install git
+	fi
+	if [[ $IS_LINUX == 1 ]]; then
+		# todo
+	fi
 	log_ok
 }
 
@@ -25,13 +30,13 @@ function symbol_link_git() {
 
 	backup $HOME/.config/gitconfig
 	mkdir -p $HOME/.config
-    cp $DOTFILES/conf/gitconfig $HOME/.config/gitconfig
+	cp $DOTFILES/conf/gitconfig $HOME/.config/gitconfig
 	log_ok
 }
 
 function config_git() {
 	log_action "replace git config keywords"
-	sed -i "s/\\$\GITHUB_USER/${GITHUB_USER}/g" $HOME/.config/.gitconfig
-	sed -i "s/\\$\GITHUB_EMAIL/${GITHUB_EMAIL}/g" $HOME/.config/.gitconfig
+	SED -i "s/\\$\GITHUB_USER/${GITHUB_USER}/g" $HOME/.config/.gitconfig
+	SED -i "s/\\$\GITHUB_EMAIL/${GITHUB_EMAIL}/g" $HOME/.config/.gitconfig
 	log_ok
 }

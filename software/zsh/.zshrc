@@ -3,21 +3,21 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
 plugins=(
-    git
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    nvm
-    z
-    evalcache
-    # tmux
-    # redis-cli
-    # mvn
-    # node
-    # npm
-    # pyenv
-    # brew
-    # docker
-    # docker-compose
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  nvm
+  z
+  evalcache
+  # tmux
+  # redis-cli
+  # mvn
+  # node
+  # npm
+  # pyenv
+  # brew
+  # docker
+  # docker-compose
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -25,12 +25,16 @@ source $ZSH/oh-my-zsh.sh
 ####################################
 
 # dotfiles
-export DOTFILES=/Users/guichen01/.dotfiles
+export DOTFILES=$HOME/.config/.dotfiles
+source $DOTFILES/os.sh
 
 # brew
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
-export HOMEBREW_NO_INSTALL_FROM_API=1
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ $IS_MAC == 1 ]]; then
+  export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+  export HOMEBREW_NO_INSTALL_FROM_API=1
+  export HOMEBREW_NO_AUTO_UPDATE=1
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # ssh
 alias autossh=$HOME/.ssh/autossh/autossh
@@ -53,24 +57,24 @@ export NODE_MIRROR=https://npm.taobao.org/dist/
 export NVM_DIR="$HOME/.nvm"
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
+# no need to manual load, zsh plugin nvm do it
 # [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 # [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # go
 # eval "$(goenv init -)"
 _evalcache goenv init -
-export GOENV_GOPATH_PREFIX=$HOME/code/golang
+export GOENV_GOPATH_PREFIX=$GOLANG_INSTALL_PATH
 
 # editor
-alias purevim=/usr/bin/vim
-alias vimu=$DOTFILES/software/nvim/bin/nvim-macos/bin/nvim -u NONE
+alias purevim=$(which vim) # original vim
+alias vimu=$DOTFILES/software/nvim/bin/nvim-macos/bin/nvim -u NONE # nvim no plugin
 alias vim=$DOTFILES/software/nvim/bin/nvim-macos/bin/nvim
 
 # starship
 # eval "$(starship init zsh)"
 _evalcache starship init zsh
 
-# custom function
-source $HOME/.config/function.sh
-# private conf, like ssh, mysql connection, see $DOTFILES/conf/private.conf.sample
-source $HOME/.config/private.conf
+# custom useful function
+source $DOTFILES/software/zsh/function.sh
+# private conf, like ssh, mysql connection, see $DOTFILES/conf/private.conf.sample source $HOME/.config/private.conf

@@ -7,6 +7,13 @@ function setup_sudo() {
 	log_finish "$task"
 }
 
+function recover_sudo() {
+	task="recover sudo"
+	log_task "$task"
+	sudo_password
+	log_finish "$task"
+}
+
 function sudo_passwordless() {
 	grep -q 'NOPASSWD:     ALL' /etc/sudoers.d/$LOGNAME >/dev/null 2>&1
 	if [ $? -ne 0 ]; then
@@ -32,4 +39,10 @@ function sudo_passwordless() {
 			echo "You can now run sudo commands without password!"
 		fi
 	fi
+}
+
+# recover to password mode
+function sudo_password() {
+	SED -i "s/Defaults:$LOGNAME    !requiretty//g" | sudo tee /etc/sudoers.d/$LOGNAME 
+	SED -i "s/$LOGNAME ALL=(ALL) NOPASSWD:     ALL//g" | sudo tee /etc/sudoers.d/$LOGNAME 
 }

@@ -31,7 +31,7 @@ vim.api.nvim_create_user_command("FormatterToggle", function(opts)
     end
 end, {
     nargs = 1,
-    complete = function()
+    complete = function() -- FormatterToggle $1 (args completion will be as fellow)
         return {
             "markdown",
             "vim",
@@ -47,6 +47,7 @@ end, {
             "css",
             "scss",
             "sh",
+            "shfmt",
             "rust",
         }
     end,
