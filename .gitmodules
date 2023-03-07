@@ -1,0 +1,3 @@
+[submodule "software/nvim-conf"]
+	path = software/nvim
+	url = git@github.com:fakeyanss/nvim-conf.git
