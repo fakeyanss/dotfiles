@@ -22,3 +22,4 @@ source $DOTFILES/bin/starship.sh
 source $DOTFILES/bin/sudo.sh
 source $DOTFILES/bin/tmux.sh
 source $DOTFILES/bin/zsh.sh
+source $DOTFILES/bin/im.sh
