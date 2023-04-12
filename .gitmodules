@@ -1,3 +1,6 @@
 [submodule "software/nvim-conf"]
 	path = software/nvim
 	url = git@github.com:fakeyanss/nvim-conf.git
+[submodule "software/rime"]
+	path = software/rime
+	url = git@github.com:fakeyanss/rime-ice.git
