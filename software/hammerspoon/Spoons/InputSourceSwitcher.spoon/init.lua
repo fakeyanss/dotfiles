@@ -18,7 +18,7 @@ function obj:stop() end
 
 local function Chinese()
 	-- 简体拼音
-	hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Hans")
+	hs.keycodes.currentSourceID("com.apple.imputmethod.SCIM.ITABC")
 end
 
 local function English()
@@ -36,6 +36,7 @@ local app2Ime = {
 	{ "/System/Applications/System Settings.app", "English" },
 	{ "/Applications/如流.app", "Chinese" },
 	{ "/Applications/WeChat.app", "Chinese" },
+	{ "/Applications/Microsoft PowerPoint.app", "English" },
 }
 
 function updateFocusAppInputMethod()

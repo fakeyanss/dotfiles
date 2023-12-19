@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source $DOTFILES/bin/echo.sh
+
 source $HOME/.config/private.conf
 PROXY_ENV=(http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY)
 NO_PROXY_ENV=(no_proxy NO_PROXY)
@@ -9,53 +11,53 @@ git_using_proxy=${GIT_USING_PROXY:-true}
 git_proxy=${GIT_PROXY:-http://ghproxy.com}
 
 function __proxyIsSet() {
-    for envar in $PROXY_ENV; do
-        eval temp=$(echo \$$envar)
-        if [ $temp ]; then
-            return 0
-        fi
-    done
-    return 1
+	for envar in $PROXY_ENV; do
+		eval temp=$(echo \$$envar)
+		if [ $temp ]; then
+			return 0
+		fi
+	done
+	return 1
 }
 
 function __proxyAssign() {
-    for envar in $PROXY_ENV; do
-        export $envar=$1
-    done
-    for envar in $NO_PROXY_ENV; do
-        export $envar=$2
-    done
-    echo "set all proxy env successfull"
-    echo "proxy value is:"
-    echo ${proxy_value}
-    echo "no proxy value is:"
-    echo ${no_proxy_value}
+	for envar in $PROXY_ENV; do
+		export $envar=$1
+	done
+	for envar in $NO_PROXY_ENV; do
+		export $envar=$2
+	done
+	echo "set all proxy env successfull"
+	echo "proxy value is:"
+	echo ${proxy_value}
+	echo "no proxy value is:"
+	echo ${no_proxy_value}
 }
 
 function __proxyClear() {
-    for envar in $PROXY_ENV; do
-        unset $envar
-    done
-    echo "cleaned all proxy env"
+	for envar in $PROXY_ENV; do
+		unset $envar
+	done
+	echo "cleaned all proxy env"
 }
 
 function proxytoggle() {
-    if __proxyIsSet; then
-        __proxyClear
-    else
-        # user=YourUserName
-        # read -p "Password: " -s pass &&  echo -e " "
-        # proxy_value="http://$user:$pass@ProxyServerAddress:Port"
-        __proxyAssign $proxy_value $no_proxy_value
-    fi
+	if __proxyIsSet; then
+		__proxyClear
+	else
+		# user=YourUserName
+		# read -p "Password: " -s pass &&  echo -e " "
+		# proxy_value="http://$user:$pass@ProxyServerAddress:Port"
+		__proxyAssign $proxy_value $no_proxy_value
+	fi
 }
 
 function gitclone() {
-    if [[ $git_using_proxy == 'true' ]]; then
-        git clone "$git_proxy/$1"
-    else
-        git clone $1
-    fi
+	if [[ $git_using_proxy == 'true' ]]; then
+		git clone "$git_proxy/$1"
+	else
+		git clone $1
+	fi
 }
 
 # Linux specific aliases, work on both MacOS and Linux.
@@ -79,12 +81,12 @@ function gitclone() {
 # }
 
 function mci() {
-    mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
+	mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
 }
 
 function darklight() {
-    # MacOS dark mode and light mode switcher
-    osascript -e "\
+	# MacOS dark mode and light mode switcher
+	osascript -e "\
 tell application \"System Events\"
 tell appearance preferences
 set dark mode to not dark mode
@@ -93,7 +95,7 @@ end tell"
 }
 
 function del() {
-    mv $1 /tmp
+	mv $1 /tmp
 }
 
 source $DOTFILES/software/python/pyenv.sh
@@ -101,74 +103,110 @@ source $DOTFILES/software/python/pyenv.sh
 alias sed=gsed
 
 function fileserv() {
-    port=${1:-8000}
-    python -m http.server $port
+	port=${1:-8000}
+	python -m http.server $port
 }
 
-function countdown() { 
-    local now=$(date +%s)
-    local end=$((now + $1))
-    while (( now < end )); do 
-        printf '%s\r' "$(date -u -j -f %s $((end - now)) +%T)"
-        sleep 0.25 
-        now=$(date +%s) 
-    done 
-    echo -en '\a' 
-} 
+function countdown() {
+	local now=$(date +%s)
+	local end=$((now + $1))
+	while ((now < end)); do
+		printf '%s\r' "$(date -u -j -f %s $((end - now)) +%T)"
+		sleep 0.25
+		now=$(date +%s)
+	done
+	echo -en '\a'
+}
 
 function showtime() {
-    while [ : ]; do
-        clear
-        tput cup 5 5
-        date
-        tput cup 6 5
-        echo "Hostname : $(hostname)"
-        sleep 1
-    done
+	while [ : ]; do
+		clear
+		tput cup 5 5
+		date
+		tput cup 6 5
+		echo "Hostname : $(hostname)"
+		sleep 1
+	done
 }
 
 function zen() {
-    launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+	launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
 }
 
 function zenquit() {
-    launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+	launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
 }
 
 function brew_no_update_install() {
-        HOMEBREW_NO_AUTO_UPDATE=1 brew install $1
+	HOMEBREW_NO_AUTO_UPDATE=1 brew install $1
 }
 
 function brew_no_update_install_cask() {
-        HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask $1
+	HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask $1
 }
 
 # generate .gitignore template
 function gi() {
-    curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;
+	curl -sL https://www.toptal.com/developers/gitignore/api/$@
 }
 
 # Provides gi completion for zsh
 _gitignoreio_get_command_list() {
-    # gi cmd cache file
-    cache=~/.config/.gi_cmd_list
-    ls cache >/dev/null 2>&1
-    if [[ $? == 0 ]]; then
-        modify=$(date -j -f %c $(stat -x $cache|grep 'Modify: '|awk -F 'Modify: ' '{print $2}') +%s)
-        expire=$(($(date +%s)-$modify))
-        # check update once half a month
-        if [[ expire > 1296000 ]]; then
-            cat $cache
-            exit 0
-        fi
-    fi
-    curl -sL https://www.toptal.com/developers/gitignore/api/list | tr "," "\n" > $cache
-    cat $cache
+	# gi cmd cache file
+	cache=~/.config/.gi_cmd_list
+	ls cache >/dev/null 2>&1
+	if [[ $? == 0 ]]; then
+		modify=$(date -j -f %c $(stat -x $cache | grep 'Modify: ' | awk -F 'Modify: ' '{print $2}') +%s)
+		expire=$(($(date +%s) - $modify))
+		# check update once half a month
+		if [[ expire > 1296000 ]]; then
+			cat $cache
+			exit 0
+		fi
+	fi
+	curl -sL https://www.toptal.com/developers/gitignore/api/list | tr "," "\n" >$cache
+	cat $cache
 }
 
-_gitignoreio () {
-    compset -P '*,'
-    compadd -S '' $(_gitignoreio_get_command_list)
+_gitignoreio() {
+	compset -P '*,'
+	compadd -S '' $(_gitignoreio_get_command_list)
 }
 
 compdef _gitignoreio gi
+
+function gitp() {
+	git gpush
+}
+
+function compress_pdf() {
+	command -V gs >/dev/null || brew install ghostscript
+	if [ $# -eq 1 ]; then
+		input=$1
+		output="${input}_opt"
+	elif [ $# -eq 2 ]; then
+		input=$1
+		output=$2
+	fi
+
+	log_action "compress pdf file from $input to $output"
+	gs -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -q -o $output $input
+
+	origin_size=$(du -sh $input | cut -f1)
+	opt_size=$(du -sh $output | cut -f1)
+	diff_size=$(echo "$origin_size - $opt_size" | bc)
+	percentage=$(echo "scale=2; $diff_size / $origin_size * 100" | bc)
+
+	if [ $# -eq 1 ]; then
+		log_action "overwrite $output to $input"
+		mv $output $input
+	fi
+
+	log_ok "compress $origin_size => $opt_size, saved $percentage%"
+}
+
+function compress_img() {
+	command -V optimizt >/dev/null || npm i -g @funboxteam/optimizt
+	log_action "compress image file using input=$*"
+	optimizt $@
+}

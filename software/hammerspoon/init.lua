@@ -14,7 +14,7 @@ local spoons = {
 	-- EjectMenu = {},
 	TimeFlow = {},
 	-- Karabiner = {},
-	InputSourceSwitcher = {},
+	-- InputSourceSwitcher = {},
 }
 
 -- load spoons

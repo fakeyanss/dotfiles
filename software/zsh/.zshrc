@@ -43,6 +43,10 @@ _evalcache jenv init -
 # using gradle@6 # brew link gradle
 # PATH="/usr/local/opt/gradle@6/bin:$PATH"
 
+# scala env
+# eval "$(scalaenv init -)"
+_evalcache scalaenv init -
+
 # python
 # eval "$(pyenv init --path)"
 _evalcache pyenv init -
@@ -53,8 +57,9 @@ export NODE_MIRROR=https://npm.taobao.org/dist/
 export NVM_DIR="$HOME/.nvm"
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
-# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+export PUPPETEER_SKIP_DOWNLOAD='true'
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # go
 # eval "$(goenv init -)"
@@ -66,6 +71,9 @@ alias purevim=/usr/bin/vim
 alias vimu=$DOTFILES/software/nvim/bin/nvim/bin/nvim -u NONE
 alias vim=$DOTFILES/software/nvim/bin/nvim/bin/nvim
 
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # starship
 # eval "$(starship init zsh)"
 _evalcache starship init zsh
@@ -74,3 +82,4 @@ _evalcache starship init zsh
 source $HOME/.config/function.sh
 # private conf, like ssh, mysql connection, see $DOTFILES/conf/private.conf.sample
 source $HOME/.config/private.conf
+
