@@ -4,8 +4,8 @@ local spoons = {
 	-- ModalMgr Spoon must be loaded explicitly, because HSaria2 relies upon it.
 	ModalMgr = {},
 	HoldToQuit = {},
-	SpeedMenu = {},
-	HSaria2 = {},
+	-- SpeedMenu = {},
+	-- HSaria2 = {},
 	Caffeine = {},
 	ReloadConfiguration = {},
 	-- UnsplashZ = {},
@@ -15,6 +15,7 @@ local spoons = {
 	TimeFlow = {},
 	-- Karabiner = {},
 	-- InputSourceSwitcher = {},
+	Cherry = {},
 }
 
 -- load spoons

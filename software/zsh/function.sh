@@ -1,8 +1,24 @@
 #!/usr/bin/env bash
 
 source $DOTFILES/bin/echo.sh
-
 source $HOME/.config/private.conf
+source $DOTFILES/software/python/pyenv.sh
+
+alias mci="mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
+alias del="mv -f $1 /tmp"
+alias sed=gsed
+alias zen="launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist"
+alias zenquit="launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist"
+alias brew_no_update_install="HOMEBREW_NO_AUTO_UPDATE=1 brew install"
+alias gitp="git gpush"
+alias ..="cd .."         # 返回上一级
+alias 。。="cd .."         # 返回上一级
+alias ...="cd ../.."     # 返回上上级
+alias 。。。="cd ../.."     # 返回上上级
+alias ....="cd ../../.." # 返回上上上级
+alias 。。。。="cd ../../.." # 返回上上上级
+
+# terminal proxy
 PROXY_ENV=(http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY)
 NO_PROXY_ENV=(no_proxy NO_PROXY)
 proxy_value=${proxy_url:-http://127.0.0.1:8118}
@@ -80,10 +96,7 @@ function gitclone() {
 #     fi
 # }
 
-function mci() {
-	mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
-}
-
+# switch system theme to light/dark
 function darklight() {
 	# MacOS dark mode and light mode switcher
 	osascript -e "\
@@ -94,19 +107,13 @@ end tell
 end tell"
 }
 
-function del() {
-	mv $1 /tmp
-}
-
-source $DOTFILES/software/python/pyenv.sh
-
-alias sed=gsed
-
+# run a http file server
 function fileserv() {
 	port=${1:-8000}
 	python -m http.server $port
 }
 
+# run a countdown timer in terminal
 function countdown() {
 	local now=$(date +%s)
 	local end=$((now + $1))
@@ -118,6 +125,7 @@ function countdown() {
 	echo -en '\a'
 }
 
+# run a clock in terminal
 function showtime() {
 	while [ : ]; do
 		clear
@@ -129,56 +137,7 @@ function showtime() {
 	done
 }
 
-function zen() {
-	launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
-}
-
-function zenquit() {
-	launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
-}
-
-function brew_no_update_install() {
-	HOMEBREW_NO_AUTO_UPDATE=1 brew install $1
-}
-
-function brew_no_update_install_cask() {
-	HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask $1
-}
-
-# generate .gitignore template
-function gi() {
-	curl -sL https://www.toptal.com/developers/gitignore/api/$@
-}
-
-# Provides gi completion for zsh
-_gitignoreio_get_command_list() {
-	# gi cmd cache file
-	cache=~/.config/.gi_cmd_list
-	ls cache >/dev/null 2>&1
-	if [[ $? == 0 ]]; then
-		modify=$(date -j -f %c $(stat -x $cache | grep 'Modify: ' | awk -F 'Modify: ' '{print $2}') +%s)
-		expire=$(($(date +%s) - $modify))
-		# check update once half a month
-		if [[ expire > 1296000 ]]; then
-			cat $cache
-			exit 0
-		fi
-	fi
-	curl -sL https://www.toptal.com/developers/gitignore/api/list | tr "," "\n" >$cache
-	cat $cache
-}
-
-_gitignoreio() {
-	compset -P '*,'
-	compadd -S '' $(_gitignoreio_get_command_list)
-}
-
-compdef _gitignoreio gi
-
-function gitp() {
-	git gpush
-}
-
+# compress pdf using Ghostscript
 function compress_pdf() {
 	command -V gs >/dev/null || brew install ghostscript
 	if [ $# -eq 1 ]; then
@@ -205,6 +164,7 @@ function compress_pdf() {
 	log_ok "compress $origin_size => $opt_size, saved $percentage%"
 }
 
+# compress image using https://github.com/funbox/optimizt
 function compress_img() {
 	command -V optimizt >/dev/null || npm i -g @funboxteam/optimizt
 	log_action "compress image file using input=$*"

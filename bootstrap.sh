@@ -45,7 +45,7 @@ function all() {
 
 	setup_nvim
 	setup_mac
-	setup_im
+	# setup_im
 	setup_extra
 	log "Good job! All of dotfiles have been installed :)"
 }
