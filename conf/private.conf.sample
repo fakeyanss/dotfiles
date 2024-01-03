@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-picgo_github_token=xxxx
-picgo_github_repo=fakeyanss/imgplace
-picgo_github_path=2022/
+PICGO_GITHUB_TOKEN=xxxx
+PICGO_GITHUB_REPO=fakeyanss/imgplace
+PICGO_GITHUB_PATH=2023/
 
-function autossh() {
-    ~/.ssh/autossh/autossh
-}
-
+alias autossh="~/.ssh/autossh/autossh"

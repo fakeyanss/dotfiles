@@ -44,7 +44,10 @@ function all() {
 	setup_iterm2
 
 	setup_nvim
-	setup_mac
+
+	# mac system configuration
+	# setup_mac
+
 	# setup_im
 	setup_extra
 	log "Good job! All of dotfiles have been installed :)"

@@ -1,0 +1,15 @@
+name: macOS
+
+on:
+  push:
+    branches:
+      - macos-arm
+
+jobs:
+  ci:
+    runs-on: macos-latest
+    steps:
+      - run: |
+          git clone https://github.com/fakeYanss/dotfiles.git --branch macos-arm --depth=1 ~/.dotfiles
+          cd ~/.dotfiles
+          BREW_USING_MIRROR=false; bash bootstrap.sh all
