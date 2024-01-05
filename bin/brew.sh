@@ -69,7 +69,7 @@ export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bott
 
 EOF
 	fi
-	log_running "update brew upstream, this my be slow..."
+	log_running "update brew upstream, this maybe slow..."
 	brew update-reset
 	log_ok
 }
