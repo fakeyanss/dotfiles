@@ -80,11 +80,12 @@ if (( $+commands[pyenv] )) &>/dev/null; then
 fi
 
 # node, npm
-export NODE_MIRROR=https://npm.taobao.org/dist/
-export PUPPETEER_SKIP_DOWNLOAD='true'
 export N_PREFIX="$HOME/.n"
 export N_PRESERVE_NPM=1
 export PATH="$N_PREFIX/bin:$PATH"
+export NPM_CONFIG_LOGLEVEL="error"
+export NPM_CONFIG_STRICT_SSL="false"
+export PUPPETEER_SKIP_DOWNLOAD="true"
 
 # go
 # lazyload goenv and go, export GOPATH and GOROOT 

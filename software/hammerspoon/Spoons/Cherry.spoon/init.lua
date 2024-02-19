@@ -16,12 +16,13 @@ obj.license = "MIT"
 obj.homepage = "https://github.com/Hammerspoon/Spoons"
 
 -- Settings
+obj.title = "🍒"
 
 -- timer duration in minutes
 obj.duration = 15
 
 -- set this to true to always show the menubar item
-obj.alwaysShow = true
+obj.alwaysShow = false
 
 -- duration in seconds for alert to stay on screen
 -- set to 0 to turn off alert completely
@@ -38,33 +39,6 @@ obj.notification = nil
 obj.sound = nil
 -- obj.sound = hs.sound.getByFile("System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Resources/Sounds")
 
-obj.defaultMapping = {
-	start = { { "cmd", "ctrl", "alt" }, "C" },
-}
-
---- Cherry:bindHotkeys(mapping)
---- Method
---- Binds hotkeys for Cherry
----
---- Parameters:
----  * mapping - A table containing hotkey details for the following items:
----   * start - start the pomodoro timer (Default: cmd-ctrl-alt-C)
-function obj:bindHotkeys(mapping)
-	if self.hotkey then
-		self.hotkey.delete()
-	end
-
-	if mapping and mapping["start"] then
-		hs.hotkey.bind(mapping["start"][1], mapping["start"][2], function()
-			self:start()
-		end)
-	else
-		hs.hotkey.bind(self.defaultMapping["start"][1], self.defaultMapping["start"][2], function()
-			self:start()
-		end)
-	end
-end
-
 function obj:init()
 	self.menu = hs.menubar.new(self.alwaysShow)
 	self:reset()
@@ -75,12 +49,13 @@ function obj:reset()
 		{
 			title = "Start",
 			fn = function()
-				self:start()
+				self:run()
 			end,
 		},
 	}
+	self.timeLeft = nil
 	self.menu:setMenu(items)
-	self.menu:setTitle("🍒")
+	self.menu:setTitle(obj.title)
 	self.timerRunning = false
 	if not self.alwaysShow then
 		self.menu:removeFromMenuBar()
@@ -90,7 +65,7 @@ end
 function obj:updateTimerString()
 	local minutes = math.floor(self.timeLeft / 60)
 	local seconds = self.timeLeft - (minutes * 60)
-	local timerString = string.format("%02d:%02d 🍒", minutes, seconds)
+	local timerString = string.format("%02d:%02d %s", minutes, seconds, obj.title)
 	self.menu:setTitle(timerString)
 end
 
@@ -105,7 +80,7 @@ end
 ---  * None
 function obj:popup()
 	if 0 < self.alertDuration then
-		hs.alert.show("Done! 🍒", { textSize = self.alertTextSize }, self.alertDuration)
+		hs.alert.show("Done! " .. obj.title, { textSize = self.alertTextSize }, self.alertDuration)
 	end
 	if self.notification then
 		self.notification:send()
@@ -133,11 +108,11 @@ end
 ---
 --- Returns:
 ---  * None
-function obj:start(resume)
+function obj:run(resume)
 	if not self.menu:isInMenuBar() then
 		self.menu:returnToMenuBar()
 	end
-	if not resume then
+	if (not resume) or (resume and self.timeLeft == nil) then
 		self.timeLeft = self.duration * 60
 		self:updateTimerString()
 	end
@@ -176,11 +151,13 @@ function obj:pause()
 		{
 			title = "Resume",
 			fn = function()
-				self:start(true)
+				self:run(true)
 			end,
 		},
 	}
 	self.menu:setMenu(items)
 end
+
+function obj:start() end
 
 return obj

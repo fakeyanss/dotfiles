@@ -12,7 +12,7 @@ local spoons = {
 	WinWin = {},
 	-- Clipboard = {}, -- raycast clipboard is better
 	-- EjectMenu = {},
-	TimeFlow = {},
+	-- TimeFlow = {},
 	-- Karabiner = {},
 	-- InputSourceSwitcher = {},
 	Cherry = {},
@@ -258,6 +258,41 @@ if spoon.HSaria2 then
 	if string.len(hsaria2_keys[2]) > 0 then
 		spoon.ModalMgr.supervisor:bind(hsaria2_keys[1], hsaria2_keys[2], "Toggle aria2 Panel", function()
 			spoon.HSaria2:togglePanel()
+		end)
+	end
+end
+
+-- Register Cherry
+if spoon.Cherry then
+	spoon.ModalMgr:new("Cherry")
+	local cmodal = spoon.ModalMgr.modal_list["Cherry"]
+	-- using escape will make esc not working in Mac OS Monterey, and reboot can fix it
+	-- cmodal:bind('', 'escape', 'Deactivate resizeM', function() spoon.ModalMgr:deactivate({"resizeM"}) end)
+	cmodal:bind("", "Q", "Deactivate Cherry Clock", function()
+		spoon.ModalMgr:deactivate({ "Cherry" })
+	end)
+	cmodal:bind("", "tab", "Toggle Cheatsheet", function()
+		spoon.ModalMgr:toggleCheatsheet()
+	end)
+	cmodal:bind("", "S", "Start", function()
+		spoon.Cherry:run(true)
+		spoon.ModalMgr:deactivate({ "Cherry" })
+	end)
+	cmodal:bind("", "P", "Pause", function()
+		spoon.Cherry:pause()
+		spoon.ModalMgr:deactivate({ "Cherry" })
+	end)
+	cmodal:bind(" ", "space", "Stop", function()
+		spoon.Cherry:reset()
+		spoon.ModalMgr:deactivate({ "Cherry" })
+	end)
+	hscherry_keys = hscherry_keys or { "alt", "C" }
+	if string.len(hscherry_keys[2]) > 0 then
+		spoon.ModalMgr.supervisor:bind(hscherry_keys[1], hscherry_keys[2], "Cherry Clock", function()
+			-- Deactivate some modal environments or not before activating a new one
+			spoon.ModalMgr:deactivateAll()
+			-- Show an status indicator so we know we're in some modal environment now
+			spoon.ModalMgr:activate({ "Cherry" }, "#B22222")
 		end)
 	end
 end

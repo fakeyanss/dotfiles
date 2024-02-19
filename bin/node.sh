@@ -7,6 +7,7 @@ function setup_node() {
 	symbol_link_npm
 	set_n
 	install_node
+	install_tool
 	log_finish "$task"
 }
 
@@ -32,11 +33,12 @@ function set_n() {
 	if [ $? -ne 0 ]; then
 		cat >>~/.zshrc <<EOF
 # node, npm
-export NODE_MIRROR=https://npm.taobao.org/dist/
-export PUPPETEER_SKIP_DOWNLOAD='true'
 export N_PREFIX="$HOME/.n"
 export N_PRESERVE_NPM=1
 export PATH="$N_PREFIX/bin:$PATH"
+export NPM_CONFIG_LOGLEVEL="error"
+export NPM_CONFIG_STRICT_SSL="false"
+export PUPPETEER_SKIP_DOWNLOAD="true"
 
 EOF
 	fi
@@ -46,5 +48,11 @@ EOF
 function install_node() {
 	log_action "install node lts version"
 	n lts
+	log_ok
+}
+
+function install_tool() {
+	log_action "install npm packages"
+	npm install -g nrm
 	log_ok
 }
