@@ -14,8 +14,10 @@ local spoons = {
 	-- EjectMenu = {},
 	-- TimeFlow = {},
 	-- Karabiner = {},
-	-- InputSourceSwitcher = {},
+	InputSourceSwitcher = {},
 	Cherry = {},
+	-- PopupTranslateSelection = {},
+	-- Seal = {},
 }
 
 -- load spoons

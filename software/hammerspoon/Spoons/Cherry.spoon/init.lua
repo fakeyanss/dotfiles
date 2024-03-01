@@ -39,6 +39,12 @@ obj.notification = nil
 obj.sound = nil
 -- obj.sound = hs.sound.getByFile("System/Library/PrivateFrameworks/ScreenReader.framework/Versions/A/Resources/Sounds")
 
+-- 切换专注模式，需要设置捷径
+-- https://www.icloud.com/shortcuts/933adeb9deb14ff482920fbf06b30b24
+-- https://www.icloud.com/shortcuts/c620b553840048298ff69c01e9e09f69
+obj.focusStart = "ToggleFocusStart"
+obj.focusStop = "ToggleFocusStop"
+
 function obj:init()
 	self.menu = hs.menubar.new(self.alwaysShow)
 	self:reset()
@@ -60,6 +66,7 @@ function obj:reset()
 	if not self.alwaysShow then
 		self.menu:removeFromMenuBar()
 	end
+	hs.shortcuts.run(self.focusStop)
 end
 
 function obj:updateTimerString()
@@ -137,6 +144,7 @@ function obj:run(resume)
 		},
 	}
 	self.menu:setMenu(items)
+	hs.shortcuts.run(self.focusStart)
 end
 
 function obj:pause()
@@ -156,6 +164,7 @@ function obj:pause()
 		},
 	}
 	self.menu:setMenu(items)
+	hs.shortcuts.run(self.focusStop)
 end
 
 function obj:start() end

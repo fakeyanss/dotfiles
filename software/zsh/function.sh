@@ -18,6 +18,16 @@ alias 。。。="cd ../.."     # 返回上上级
 alias ....="cd ../../.." # 返回上上上级
 alias 。。。。="cd ../../.." # 返回上上上级
 
+# use Tmux only if current term program is iTerm2
+if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
+	tmux has -t hack &>/dev/null
+	if [[ $? != 0 ]]; then
+		tmux new -s hack -n default
+	elif [ -z $MUX ]; then
+		tmux attach -t hack
+	fi
+fi
+
 # terminal proxy
 PROXY_ENV=(http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY)
 NO_PROXY_ENV=(no_proxy NO_PROXY)
@@ -141,24 +151,24 @@ function showtime() {
 function compress_pdf() {
 	command -V gs >/dev/null || brew install ghostscript
 	if [ $# -eq 1 ]; then
-		input=$1
+		input="$1"
 		output="${input}_opt"
 	elif [ $# -eq 2 ]; then
-		input=$1
-		output=$2
+		input="$1"
+		output="$2"
 	fi
 
 	log_action "compress pdf file from $input to $output"
-	gs -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -q -o $output $input
+	gs -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -q -o "$output" "$input"
 
-	origin_size=$(du -sh $input | cut -f1)
-	opt_size=$(du -sh $output | cut -f1)
+	origin_size=$(du -sh "$input" | cut -f1)
+	opt_size=$(du -sh "$output" | cut -f1)
 	diff_size=$(echo "$origin_size - $opt_size" | bc)
 	percentage=$(echo "scale=2; $diff_size / $origin_size * 100" | bc)
 
 	if [ $# -eq 1 ]; then
 		log_action "overwrite $output to $input"
-		mv $output $input
+		mv "$output" "$input"
 	fi
 
 	log_ok "compress $origin_size => $opt_size, saved $percentage%"
@@ -168,5 +178,22 @@ function compress_pdf() {
 function compress_img() {
 	command -V optimizt >/dev/null || npm i -g @funboxteam/optimizt
 	log_action "compress image file using input=$*"
-	optimizt $@
+	optimizt "$@"
+}
+
+function compress_logseq_asset() {
+	img_exts=(jpg jpeg png)
+	for graph in "${LOGSEQ_GRAPH_DIR[@]}"; do
+		for ext in "${img_exts[@]}"; do
+			while IFS= read -r -d '' img; do
+				echo "$img"
+				compress_img "$img"
+			done < <(find "$graph"/assets -type f -name "*.$ext" -print0)
+		done
+
+		while IFS= read -r -d '' pdf; do
+			echo "$pdf"
+			compress_pdf "$pdf"
+		done < <(find "$graph"/assets -type f -name "*.pdf" -print0)
+	done
 }

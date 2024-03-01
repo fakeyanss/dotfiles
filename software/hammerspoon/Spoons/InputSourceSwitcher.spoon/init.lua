@@ -37,6 +37,7 @@ local app2Ime = {
 	{ "/Applications/如流.app", "Chinese" },
 	{ "/Applications/WeChat.app", "Chinese" },
 	{ "/Applications/Microsoft PowerPoint.app", "English" },
+	-- { "/Applications/IntelliJ IDEA CE.app", "English" },
 }
 
 function updateFocusAppInputMethod()
