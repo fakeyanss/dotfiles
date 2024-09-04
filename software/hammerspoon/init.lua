@@ -8,16 +8,18 @@ local spoons = {
 	-- HSaria2 = {},
 	Caffeine = {},
 	ReloadConfiguration = {},
-	-- UnsplashZ = {},
+	-- UnsplashZ = {}, -- macos sonoma wallpapers is cool
 	WinWin = {},
 	-- Clipboard = {}, -- raycast clipboard is better
 	-- EjectMenu = {},
-	-- TimeFlow = {},
+	-- TimeFlow = {}, -- macos sonoma support desktop component
 	-- Karabiner = {},
 	InputSourceSwitcher = {},
+	-- AllBrightness = {},
 	Cherry = {},
 	-- PopupTranslateSelection = {},
 	-- Seal = {},
+	-- KeepOneDisplay = { externalDisplayName = "U2790B", },
 }
 
 -- load spoons

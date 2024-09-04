@@ -10,7 +10,7 @@ obj.homepage = "https://github.com/Hammerspoon/Spoons"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
 
 function obj:start()
-	appWatcher = hs.application.watcher.new(applicationWatcher)
+	local appWatcher = hs.application.watcher.new(applicationWatcher)
 	appWatcher:start()
 end
 

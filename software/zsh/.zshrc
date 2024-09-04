@@ -113,13 +113,13 @@ fi
 
 # editor
 alias purevim=/usr/bin/vim
-alias vimu=$DOTFILES/software/nvim/bin/nvim/bin/nvim -u NONE
-alias vim=$DOTFILES/software/nvim/bin/nvim/bin/nvim
+#alias vim=$DOTFILES/software/nvim/bin/nvim/bin/nvim
+#alias vim=nvim
+alias nvimu=nvim -u NONE
 
 # fzf
 if (( $+commands[fzf] )) &>/dev/null; then
     _lazyload_completion_fzf() {
-        [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     }
     lazyload_add_completion fzf
 fi
@@ -170,3 +170,8 @@ source $HOME/.config/function.sh
 # private conf, like ssh, mysql connection, see $DOTFILES/conf/private.conf.sample
 source $HOME/.config/private.conf
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# icafe cli
+export PATH="$HOME/.icafe/bin:$PATH"

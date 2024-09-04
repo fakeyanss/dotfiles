@@ -1,7 +1,26 @@
 [include]
 path= ~/.config/gitconfig
+
 [core]
 editor = vim
+#pager = delta
+
+#[interactive]
+#    diffFilter = delta --color-only
+
+#[delta]
+#    navigate = true    # use n and N to move between diff sections
+#
+#    # delta detects terminal colors automatically; set one of these to disable auto-detection
+#    # dark = true
+#    # light = true
+
+#[merge]
+#    conflictstyle = diff3
+
+#[diff]
+#    colorMoved = default
+
 [alias]
 # Shortening aliases
 co = checkout
@@ -12,7 +31,7 @@ dc = diff --cached
 st = status -sb
 a = add -p
 
-gpush="!f() { : push ; r=$1; [[ -z $r ]] && r=origin; b=$2; t=$(git rev-parse --abbrev-ref HEAD); t=${t#refs/heads/}; [[ -z $b ]] && b=$t; cmd=\"git push $r HEAD:refs/for/$b\"; echo $cmd; echo; $cmd; }; f"
+gpush = "!f() { : push ; r=$1; [[ -z $r ]] && r=origin; b=$2; t=$(git rev-parse --abbrev-ref HEAD); t=${t#refs/heads/}; [[ -z $b ]] && b=$t; cmd=\"git push $r HEAD:refs/for/$b\"; echo $cmd; echo; $cmd; }; f"
 
 # Complex aliases
 plog = log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'
@@ -28,10 +47,12 @@ sslVerify = false
 ; insteadOf = https://github.com
 ; [url "git@github.com:"]
 	; insteadOf = https://github.com/
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
 [init]
 	defaultBranch = main

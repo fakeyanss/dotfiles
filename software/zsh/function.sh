@@ -18,6 +18,10 @@ alias 。。。="cd ../.."     # 返回上上级
 alias ....="cd ../../.." # 返回上上上级
 alias 。。。。="cd ../../.." # 返回上上上级
 
+alias pinentry='pinentry-mac'
+
+alias obsidian-backup='git --git-dir /Users/guichen01/text/obsidian_backup --work-tree '\''/Users/guichen01/Library/Mobile Documents/iCloud~md~obsidian/Documents/'\'
+
 # use Tmux only if current term program is iTerm2
 if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
 	tmux has -t hack &>/dev/null
@@ -195,5 +199,22 @@ function compress_logseq_asset() {
 			echo "$pdf"
 			compress_pdf "$pdf"
 		done < <(find "$graph"/assets -type f -name "*.pdf" -print0)
+	done
+}
+
+function compress_obsidian_asset() {
+img_exts=(jpg jpeg png)
+	for graph in "${OBSIDIAN_VAULT_DIR[@]}"; do
+		for ext in "${img_exts[@]}"; do
+			while IFS= read -r -d '' img; do
+				echo "$img"
+				compress_img "$img"
+			done < <(find "$graph" -type f -name "*.$ext" -print0)
+		done
+
+		while IFS= read -r -d '' pdf; do
+			echo "$pdf"
+			compress_pdf "$pdf"
+		done < <(find "$graph" -type f -name "*.pdf" -print0)
 	done
 }

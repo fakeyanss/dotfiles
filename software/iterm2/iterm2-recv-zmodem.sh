@@ -19,11 +19,10 @@ if [[ $FILE = "" ]]; then
     echo
     echo \# Cancelled transfer
 else
-    cd "$FILE"
-    # /usr/local/bin/rz -E -e -b
-    /opt/homebrew/bin/rz -E -e -b
-    sleep 1
-    echo
-    echo
-    echo \# Sent \-\> $FILE
+	cd "$FILE"
+	/usr/local/bin/rz --rename --escape --binary --bufsize 4096 
+	sleep 1
+	echo
+	echo
+	echo \# Sent \-\> $FILE
 fi
