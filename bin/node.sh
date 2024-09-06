@@ -4,6 +4,7 @@ function setup_node() {
 	task="setup node"
 	log_task "$task"
 	install_n
+    install_npm
 	symbol_link_npm
 	set_n
 	install_node
@@ -14,6 +15,12 @@ function setup_node() {
 function install_n() {
 	log_action "install n using brew"
 	brew_no_update_install n
+	log_ok
+}
+
+function install_n() {
+	log_action "install npm using brew"
+	brew_no_update_install npm
 	log_ok
 }
 

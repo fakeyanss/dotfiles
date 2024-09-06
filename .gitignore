@@ -2,5 +2,4 @@
 private.conf
 # node registry auth, authtoken will be saved in .npmrc
 .npmrc
-software/nvim/bin/* 
 lazy-lock.json

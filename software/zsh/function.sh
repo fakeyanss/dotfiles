@@ -32,6 +32,14 @@ if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
 	fi
 fi
 
+# IDEA load environment
+if [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then
+	export ZSH_TMUX_AUTOSTART=true
+fi
+
+# fzf, Open in tmux popup if on tmux, otherwise use --height mode
+export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
+
 # terminal proxy
 PROXY_ENV=(http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY)
 NO_PROXY_ENV=(no_proxy NO_PROXY)

@@ -43,7 +43,7 @@ function all() {
 	setup_hammerspoon
 	setup_iterm2
 
-	setup_nvim
+	setup_vim
 
 	# mac system configuration
 	setup_mac
@@ -80,8 +80,9 @@ function menu() {
 	echo -e "${Green}13.${Font} picgo"
 	echo -e "${Green}14.${Font} harmmerspoon"
 	echo -e "${Green}15.${Font} iterm2"
-	echo -e "${Green}16.${Font} nvim"
+	echo -e "${Green}16.${Font} vim"
 	echo -e "${Green}17.${Font} mac"
+	echo -e "${Green}18.${Font} extra"
 	echo ""
 	echo -e "———————————————————————————— ${Green}start${Font} ————————————————————————————"
 	read -rp "input number:" menu_num
@@ -135,10 +136,13 @@ function menu() {
 		setup_iterm2
 		;;
 	16)
-		setup_nvim
+		setup_vim
 		;;
 	17)
 		setup_mac
+		;;
+	18)
+		setup_extra
 		;;
 	*)
 		exit 1
