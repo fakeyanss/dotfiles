@@ -52,7 +52,7 @@ Before you actually execute the script, please make sure what is dotfiles and wh
 ## Installation
 
 ```bash
-git clone https://ghproxy.com/https://github.com/fakeYanss/dotfiles.git --depth=1 ~/.dotfiles
+git clone https://ghp.ci//https://github.com/fakeYanss/dotfiles.git --depth=1 ~/.dotfiles
 cd ~/.dotfiles
 bash os.sh # and choose you system os
 
@@ -241,7 +241,7 @@ available commands as follow:
 ### useful function
 
 ```
-gitclone # customized function, using ghproxy.com for proxy
+gitclone # customized function, using ghp.ci for proxy
 darklight # toggle darkmode lightmode on macOS
 ```
 

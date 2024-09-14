@@ -12,7 +12,7 @@ function setup_python() {
 function install_pyenv() {
 	log_action "install pyenv"
 	brew_no_update_install pyenv
-	git clone https://ghproxy.com/https://github.com/pyenv/pyenv-virtualenv.git \
+	git clone https://ghp.ci//https://github.com/pyenv/pyenv-virtualenv.git \
 		$(pyenv root)/plugins/pyenv-virtualenv
 	grep -q "pyenv" $HOME/.zprofile >/dev/null 2>&1
 	if [ $? -ne 0 ]; then

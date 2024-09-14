@@ -14,8 +14,8 @@ function install_brew() {
 	if [ $? -ne 0 ]; then
 		log_running "go..."
 		if [[ $BREW_USING_MIRROR == 'true' ]]; then
-			export HOMEBREW_BREW_GIT_REMOTE="https://ghproxy.com/https://github.com/Homebrew/brew.git"
-			export HOMEBREW_CORE_GIT_REMOTE="https://ghproxy.com/https://github.com/Homebrew/homebrew-core.git"
+			export HOMEBREW_BREW_GIT_REMOTE="https://ghp.ci//https://github.com/Homebrew/brew.git"
+			export HOMEBREW_CORE_GIT_REMOTE="https://ghp.ci//https://github.com/Homebrew/homebrew-core.git"
 		fi
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	else
@@ -28,13 +28,15 @@ function set_tap_mirror() {
 	if [[ $BREW_USING_MIRROR != 'true' ]]; then
 		return
 	fi
+    export HOMEBREW_CORE_GIT_REMOTE="https://ghp.ci//https://github.com/Homebrew/homebrew-core.git"
+
 	log_action "set brew tap upstream"
-	BREW_TAPS="$(brew tap)"
+    BREW_TAPS=($(brew tap))
 	for tap in ${BREW_TAPS[@]}; do
 		upstream=$(git -C "$(brew --repo $tap)" remote -v | grep -e 'origin.*fetch' | awk '{print $2}')
-		echo $upstream | grep -q 'ghproxy.com' >/dev/null 2>&1
+		echo $upstream | grep -q 'ghp.ci' >/dev/null 2>&1
 		if [[ $? != 0 ]]; then
-			upstream=${upstream/https:\/\/github.com/https:\/\/ghproxy.com\/https:\/\/github.com}
+			upstream=${upstream/https:\/\/github.com/https:\/\/ghp.ci\/https:\/\/github.com}
 		fi
 		log_running "replace brew upstream, $tap to $upstream"
 		git -C "$(brew --repo $tap)" remote set-url origin "$upstream"
@@ -43,16 +45,13 @@ function set_tap_mirror() {
 	taps=(
 		homebrew/core
 		homebrew/cask
-		homebrew/cask-fonts
-		homebrew/cask-drivers
-		homebrew/cask-versions
 		homebrew/services
 		homebrew/command-not-found
 	)
 	for tap in ${taps[@]}; do
-		# set remote upstream proxy to https://ghproxy.com, and autoupdate
+		# set remote upstream proxy to https://ghp.ci/, and autoupdate
 		tap_name=${tap/homebrew\//}
-		upstream=https://ghproxy.com/https://github.com/Homebrew/homebrew-${tap_name}.git
+		upstream=https://ghp.ci//https://github.com/Homebrew/homebrew-${tap_name}.git
 		log_running "replace brew upstream, $tap to $upstream"
 		if echo "$BREW_TAPS" | grep -qE "^$tap\$"; then
 			git -C "$(brew --repo $tap)" remote set-url origin "$upstream"
