@@ -19,7 +19,7 @@ function install_vim() {
 
 function symbol_link_vim() {
 	log_action "symbol link vim"
-	ln -s $DOTFILES/software/vim/.vimrc $HOME/.vimrc
+	ln -s $DOTFILES/software/vim/vimrc $HOME/.vimrc
 	log_ok
 }
 
