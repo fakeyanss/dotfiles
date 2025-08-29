@@ -128,49 +128,10 @@ fi
 # starship
 eval "$(starship init zsh)"
 
-# .gitignore, provides gi completion for zsh
-# generate .gitignore template, using like: gi --proxy somewhere:8080 -- linux python
-gi() {
-    gi_args=()
-    for arg; do
-        if [[ $arg = -- ]]; then
-            curl_args=("${gi_args[@]}")
-            gi_args=()
-        else
-            gi_args+=("$arg")
-        fi
-    done
-    IFS=,
-    curl "${curl_args[@]}" -sL  https://www.toptal.com/developers/gitignore/api/"${gi_args[*]}"
-}
-_cache_gi_commands() {
-	# tpl_gi cmd cache file
-	cache=~/.config/.gi_cmd_list
-	ls cache >/dev/null 2>&1
-	if [[ $? == 0 ]]; then
-		modify=$(date -j -f %c $(stat -x $cache | grep 'Modify: ' | awk -F 'Modify: ' '{print $2}') +%s)
-		expire=$(($(date +%s) - $modify))
-		# check update once half a month
-		if [[ expire > 1296000 ]]; then
-			cat $cache
-			exit 0
-		fi
-	fi
-	curl -sL https://www.toptal.com/developers/gitignore/api/list | tr "," "\n" >$cache
-	cat $cache
-}
-_lazyload_completion_gi() {
-    compset -P '*,'
-	compadd -S '' $(_cache_gi_commands)
-}
-compdef _lazyload_completion_gi gi
-# lazyload_add_completion gi
-
 # custom function
 source $HOME/.config/function.sh
 # private conf, like ssh, mysql connection, see $DOTFILES/conf/private.conf.sample
 source $HOME/.config/private.conf
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

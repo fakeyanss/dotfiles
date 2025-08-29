@@ -4,7 +4,7 @@ source $DOTFILES/bin/echo.sh
 source $HOME/.config/private.conf
 source $DOTFILES/software/python/pyenv.sh
 
-alias mci="mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
+alias mci="mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -T4"
 alias del="mv -f $1 /tmp"
 alias sed=gsed
 alias zen="launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist"
@@ -22,6 +22,8 @@ alias pinentry='pinentry-mac'
 
 alias obsidian-backup='git --git-dir /Users/guichen01/text/obsidian_backup --work-tree '\''/Users/guichen01/Library/Mobile Documents/iCloud~md~obsidian/Documents/'\'
 
+alias mat='/Applications/MemoryAnalyzer.app/Contents/MacOS/MemoryAnalyzer -vm  /opt/homebrew/Cellar/openjdk@17/17.0.13/libexec/openjdk.jdk/Contents/Home/bin/java'
+
 # use Tmux only if current term program is iTerm2
 if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
 	tmux has -t hack &>/dev/null
@@ -31,6 +33,44 @@ if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
 		tmux attach -t hack
 	fi
 fi
+
+# .gitignore, provides gi completion for zsh
+# generate .gitignore template, using like: gi --proxy somewhere:8080 -- linux python
+gi() {
+    gi_args=()
+    for arg; do
+        if [[ $arg = -- ]]; then
+            curl_args=("${gi_args[@]}")
+            gi_args=()
+        else
+            gi_args+=("$arg")
+        fi
+    done
+    IFS=,
+    curl "${curl_args[@]}" -sL  https://www.toptal.com/developers/gitignore/api/"${gi_args[*]}"
+}
+_cache_gi_commands() {
+	# tpl_gi cmd cache file
+	cache=~/.config/.gi_cmd_list
+	ls cache >/dev/null 2>&1
+	if [[ $? == 0 ]]; then
+		modify=$(date -j -f %c $(stat -x $cache | grep 'Modify: ' | awk -F 'Modify: ' '{print $2}') +%s)
+		expire=$(($(date +%s) - $modify))
+		# check update once half a month
+		if [[ expire > 1296000 ]]; then
+			cat $cache
+			exit 0
+		fi
+	fi
+	curl -sL https://www.toptal.com/developers/gitignore/api/list | tr "," "\n" >$cache
+	cat $cache
+}
+_lazyload_completion_gi() {
+    compset -P '*,'
+	compadd -S '' $(_cache_gi_commands)
+}
+compdef _lazyload_completion_gi gi
+# lazyload_add_completion gi
 
 # IDEA load environment
 if [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then
