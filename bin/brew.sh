@@ -14,10 +14,15 @@ function install_brew() {
 	if [ $? -ne 0 ]; then
 		log_running "go..."
 		if [[ $BREW_USING_MIRROR == 'true' ]]; then
-			export HOMEBREW_BREW_GIT_REMOTE="https://ghp.ci//https://github.com/Homebrew/brew.git"
-			export HOMEBREW_CORE_GIT_REMOTE="https://ghp.ci//https://github.com/Homebrew/homebrew-core.git"
+            export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
+            export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+            export HOMEBREW_INSTALL_FROM_API=1
 		fi
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        git clone --depth=1 https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.git brew-install
+        /bin/bash brew-install/install.sh
+        rm -rf brew-install
+        test -r ~/.bash_profile && echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
+        test -r ~/.zprofile && echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 	else
 		log_running "brew existed, skip"
 	fi
@@ -28,48 +33,22 @@ function set_tap_mirror() {
 	if [[ $BREW_USING_MIRROR != 'true' ]]; then
 		return
 	fi
-    export HOMEBREW_CORE_GIT_REMOTE="https://ghp.ci//https://github.com/Homebrew/homebrew-core.git"
-
 	log_action "set brew tap upstream"
-    BREW_TAPS=($(brew tap))
-	for tap in ${BREW_TAPS[@]}; do
-		upstream=$(git -C "$(brew --repo $tap)" remote -v | grep -e 'origin.*fetch' | awk '{print $2}')
-		echo $upstream | grep -q 'ghp.ci' >/dev/null 2>&1
-		if [[ $? != 0 ]]; then
-			upstream=${upstream/https:\/\/github.com/https:\/\/ghp.ci\/https:\/\/github.com}
-		fi
-		log_running "replace brew upstream, $tap to $upstream"
-		git -C "$(brew --repo $tap)" remote set-url origin "$upstream"
-		git -C "$(brew --repo $tap)" config homebrew.forceautoupdate true
-	done
-	taps=(
-		homebrew/core
-		homebrew/cask
-		homebrew/services
-		homebrew/command-not-found
-	)
-	for tap in ${taps[@]}; do
-		# set remote upstream proxy to https://ghp.ci/, and autoupdate
-		tap_name=${tap/homebrew\//}
-		upstream=https://ghp.ci//https://github.com/Homebrew/homebrew-${tap_name}.git
-		log_running "replace brew upstream, $tap to $upstream"
-		if echo "$BREW_TAPS" | grep -qE "^$tap\$"; then
-			git -C "$(brew --repo $tap)" remote set-url origin "$upstream"
-			git -C "$(brew --repo $tap)" config homebrew.forceautoupdate true
-		else
-			brew tap --force-auto-update $tap "$upstream"
-		fi
-	done
-	grep -q 'HOMEBREW_BOTTLE_DOMAIN' $HOME/.zshrc >/dev/null 2>&1
-	if [ $? -ne 0 ]; then
-		cat >>$HOME/.zshrc <<EOF
+    
+    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
+    for tap in core cask command-not-found; do
+        brew tap --custom-remote "homebrew/${tap}" "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-${tap}.git"
+    done
+    brew update
+    
+	! grep -q 'HOMEBREW_BOTTLE_DOMAIN' $HOME/.zprofile && cat >>$HOME/.zprofile <<EOF
 # homebrew
+export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
+export HOMEBREW_PIP_INDEX_URL="https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
 
 EOF
-	fi
 	log_running "update brew upstream, this maybe slow..."
-	brew update-reset
 	log_ok
 }
 

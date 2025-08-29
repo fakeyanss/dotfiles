@@ -44,7 +44,7 @@ function install_omz() {
     log_action "install oh-my-zsh"
     ZSH=${ZSH:-~/.oh-my-zsh}
     REPO=${REPO:-ohmyzsh/ohmyzsh}
-    REMOTE=${REMOTE:-https://ghp.ci//https://github.com/${REPO}.git}
+    REMOTE=${REMOTE:-https://github.com/${REPO}.git}
     BRANCH=${BRANCH:-master}
     git clone -c core.eol=lf -c core.autocrlf=false \
         -c fsck.zeroPaddedFilemode=ignore \
@@ -53,12 +53,11 @@ function install_omz() {
         -c oh-my-zsh.remote=origin \
         -c oh-my-zsh.branch="$BRANCH" \
         --depth=1 --branch "$BRANCH" "$REMOTE" "$ZSH"
-    #sh -c "$(curl -fsSL https://ghp.ci//https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://ghp.ci//https://github.com/zsh-users/zsh-autosuggestions \
+    git clone https://github.com/zsh-users/zsh-autosuggestions \
         ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://ghp.ci//https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
         ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone https://ghp.ci//https://github.com/mroth/evalcache \
+    git clone https://github.com/mroth/evalcache \
         ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache
     log_ok
 }

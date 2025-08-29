@@ -86,7 +86,7 @@ NO_PROXY_ENV=(no_proxy NO_PROXY)
 proxy_value=${PROXY_URL:-http://127.0.0.1:8118}
 no_proxy_value=localhost,127.0.0.1,localaddress,.localdomain.com,10.96.0.0/12,192.168.99.0/24,192.168.39.0/24,192.168.49.2/24
 git_using_proxy=${GIT_USING_PROXY:-true}
-git_proxy=${GIT_PROXY:-http://ghp.ci}
+git_proxy=${GIT_PROXY:-https://ghfast.top}
 
 function __proxyIsSet() {
 	for envar in $PROXY_ENV; do

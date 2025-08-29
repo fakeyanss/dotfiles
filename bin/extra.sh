@@ -11,44 +11,20 @@ function setup_extra() {
 
     # nerd fonts
     # install_nerd_font
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask-fonts/Casks/font-fira-code-nerd-font.rb
     brew_no_update_install_cask font-fira-code-nerd-font
-    # gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-    #     /opt/Homebrew/Library/Taps/homebrew/homebrew-cask-fonts/Casks/font-hack-nerd-font.rb
-    # brew_no_update_install_cask font-hack-nerd-font
     # quick look plugin
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/qlcolorcode.rb
     brew_no_update_install_cask qlcolorcode
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/qlimagesize.rb
     brew_no_update_install_cask qlimagesize
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/qlmarkdown.rb
     brew_no_update_install_cask qlmarkdown
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/qlstephen.rb
     brew_no_update_install_cask qlstephen
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/qlvideo.rb
     brew_no_update_install_cask qlvideo
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/quicklook-json.rb
     brew_no_update_install_cask quicklook-json
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/quicklookase.rb
     brew_no_update_install_cask quicklookase
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/qlmobi.rb
     brew_no_update_install_cask qlmobi
 
     # menubar items hider
-    gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/dozer.rb
     brew_no_update_install_cask dozer
     # outliner notebook
-        /opt/Homebrew/Library/Taps/homebrew/homebrew-cask/Casks/logseq.rb
     brew_no_update_install_cask obsidian
 
     # karabiner, 比 hammerspoon 的 keystroke 更好用
@@ -75,6 +51,6 @@ function setup_extra() {
 }
 
 function install_nerd_font() {
-    git clone --depth=1 'https://ghp.ci//https://github.com/ryanoasis/nerd-fonts.git' $HOME/.config/nerd-fonts
+    git clone --depth=1 'https://github.com/ryanoasis/nerd-fonts.git' $HOME/.config/nerd-fonts
     bash $HOME/.config/nerd-fonts/install.sh
 }

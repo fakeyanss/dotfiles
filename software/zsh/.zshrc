@@ -23,12 +23,6 @@ lazyload_add_completion() {
     compdef $comp_name $1
 }
 
-# homebrew
-export HOMEBREW_CORE_GIT_REMOTE=${HOMEBREW_CORE_GIT_REMOTE:=https://ghp.ci//https://github.com/Homebrew/homebrew-core.git}
-export HOMEBREW_BOTTLE_DOMAIN=${HOMEBREW_BOTTLE_DOMAIN:=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles}
-export HOMEBREW_NO_INSTALL_FROM_API=1
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"

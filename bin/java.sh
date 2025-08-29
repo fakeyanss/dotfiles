@@ -12,13 +12,6 @@ function setup_java() {
 	log_finish "$task"
 }
 
-# function tap_jdk() {
-#     log_action "brew tap AdoptOpenJDK"
-#     brew tap --force-auto-update AdoptOpenJDK/openjdk \
-#         "https://ghp.ci//https://github.com/AdoptOpenJDK/homebrew-openjdk.git"
-#     log_ok
-# }
-
 function install_jdk() {
 	log_action "install jdk ${JAVA_VERSIONS[*]}"
 	sudo mkdir -p /usr/local/lib/java
@@ -31,11 +24,6 @@ function install_jdk() {
 			brew_no_update_install openjdk@$v
 			sudo ln -s /opt/homebrew/opt/openjdk@$v /usr/local/lib/java/java-$v-openjdk
 		fi
-		# gsed -i "s/url \"https:\/\/github.com/url \"https:\/\/ghp.ci\/https:\/\/github.com/g" \
-		# /opt/Homebrew/Library/Taps/adoptopenjdk/homebrew-openjdk/Casks/adoptopenjdk${v}.rb
-		# brew_no_update_install_cask adoptopenjdk/openjdk/adoptopenjdk${v}
-		# mkdir -p /usr/local/lib/java
-		# sudo ln -s /Library/Java/JavaVirtualMachines/adoptopenjdk-${v}.jdk/Contents/Home /usr/local/lib/java/java-${v}-openjdk
 	done
 	log_ok
 }

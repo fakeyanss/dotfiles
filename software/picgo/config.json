@@ -11,7 +11,7 @@
     "current": "githubPlus",
     "githubPlus": {
       "branch": "master",
-      "customUrl": "https://ghp.ci//https://raw.githubusercontent.com/fakeYanss/imgplace/master/",
+      "customUrl": "https://raw.githubusercontent.com/fakeYanss/imgplace/master/",
       "origin": "github",
       "repo": "$PICGO_GITHUB_REPO",
       "path": "$PICGO_GITHUB_PATH",
