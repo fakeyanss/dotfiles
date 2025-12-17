@@ -10,19 +10,12 @@ alias sed=gsed
 alias zen="launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist"
 alias zenquit="launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist"
 alias brew_no_update_install="HOMEBREW_NO_AUTO_UPDATE=1 brew install"
-alias gitp="git gpush"
 alias ..="cd .."         # 返回上一级
 alias 。。="cd .."         # 返回上一级
 alias ...="cd ../.."     # 返回上上级
 alias 。。。="cd ../.."     # 返回上上级
 alias ....="cd ../../.." # 返回上上上级
 alias 。。。。="cd ../../.." # 返回上上上级
-
-alias pinentry='pinentry-mac'
-
-alias obsidian-backup='git --git-dir /Users/guichen01/text/obsidian_backup --work-tree '\''/Users/guichen01/Library/Mobile Documents/iCloud~md~obsidian/Documents/'\'
-
-alias mat='/Applications/MemoryAnalyzer.app/Contents/MacOS/MemoryAnalyzer -vm  /opt/homebrew/Cellar/openjdk@17/17.0.13/libexec/openjdk.jdk/Contents/Home/bin/java'
 
 # use Tmux only if current term program is iTerm2
 if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
@@ -80,55 +73,118 @@ fi
 # fzf, Open in tmux popup if on tmux, otherwise use --height mode
 export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border top'
 
-# terminal proxy
+# proxy
+# 1. Local PAC file hosting address (match your Python HTTP server)
+pac_url=${PAC_URL:-}
+# 2. Your network service name (check via: networksetup -listallnetworkservices)
+NETWORK_SERVICE="Wi-Fi"  # Use "Ethernet" for wired connections
+# 3. Terminal proxy address (match Xray's HTTP proxy port)
+proxy_value=${PROXY_URL:-}
+# 4. No-proxy list for terminal
+no_proxy_value=localhost,127.0.0.1,localaddress,.localdomain.com,10.96.0.0/12,192.168.99.0/24,192.168.39.0/24,192.168.49.2/24
+
 PROXY_ENV=(http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY)
 NO_PROXY_ENV=(no_proxy NO_PROXY)
-proxy_value=${PROXY_URL:-http://127.0.0.1:8118}
-no_proxy_value=localhost,127.0.0.1,localaddress,.localdomain.com,10.96.0.0/12,192.168.99.0/24,192.168.39.0/24,192.168.49.2/24
-git_using_proxy=${GIT_USING_PROXY:-true}
-git_proxy=${GIT_PROXY:-https://ghfast.top}
 
+# Check if system PAC proxy is enabled
+function __pacProxyIsSet() {
+    local pac_enabled=$(networksetup -getautoproxyurl "$NETWORK_SERVICE" | grep "Enabled:" | awk '{print $2}')
+    [[ "$pac_enabled" == "Yes" ]] && return 0 || return 1
+}
+# Enable system PAC proxy (only for GUI apps)
+function pacon() {
+    if __pacProxyIsSet; then
+        echo "⚠️ System PAC proxy is already enabled, no need to re-run"
+        return
+    fi
+    networksetup -setautoproxyurl "$NETWORK_SERVICE" "$PAC_URL"
+    networksetup -setautoproxystate "$NETWORK_SERVICE" on
+    echo "✅ System PAC proxy enabled: $PAC_URL"
+}
+# Disable system PAC proxy
+function pacoff() {
+    if ! __pacProxyIsSet; then
+        echo "⚠️ System PAC proxy is already disabled, no need to re-run"
+        return
+    fi
+    networksetup -setautoproxystate "$NETWORK_SERVICE" off
+    echo "❌ System PAC proxy disabled"
+}
+# Check if terminal proxy is enabled
 function __proxyIsSet() {
-	for envar in $PROXY_ENV; do
-		eval temp=$(echo \$$envar)
-		if [ $temp ]; then
-			return 0
-		fi
-	done
-	return 1
+    for envar in "${PROXY_ENV[@]}"; do
+        eval temp=\${$envar}
+        [[ -n "$temp" ]] && return 0
+    done
+    return 1
 }
-
-function __proxyAssign() {
-	for envar in $PROXY_ENV; do
-		export $envar=$1
-	done
-	for envar in $NO_PROXY_ENV; do
-		export $envar=$2
-	done
-	echo "set all proxy env successfull"
-	echo "proxy value is:"
-	echo ${proxy_value}
-	echo "no proxy value is:"
-	echo ${no_proxy_value}
+# Enable terminal proxy (only for command-line tools)
+function proxyon() {
+    if __proxyIsSet; then
+        echo "⚠️ Terminal proxy is already enabled, no need to re-run"
+        return
+    fi
+    # Set terminal proxy environment variables
+    for envar in "${PROXY_ENV[@]}"; do
+        export $envar="$proxy_value"
+    done
+    for envar in "${NO_PROXY_ENV[@]}"; do
+        export $envar="$no_proxy_value"
+    done
+    echo "✅ Terminal proxy enabled:"
+    echo "   Proxy address: $proxy_value"
+    echo "   No-proxy list: $no_proxy_value"
 }
-
-function __proxyClear() {
-	for envar in $PROXY_ENV; do
-		unset $envar
-	done
-	echo "cleaned all proxy env"
+# Disable terminal proxy
+function proxyoff() {
+    if ! __proxyIsSet; then
+        echo "⚠️ Terminal proxy is already disabled, no need to re-run"
+        return
+    fi
+    # Clear terminal proxy environment variables
+    for envar in "${PROXY_ENV[@]}"; do
+        unset $envar
+    done
+    echo "❌ Terminal proxy cleared"
 }
-
+# Toggle both PAC and terminal proxy on/off (delete if not needed)
 function proxytoggle() {
-	if __proxyIsSet; then
-		__proxyClear
-	else
-		# user=YourUserName
-		# read -p "Password: " -s pass &&  echo -e " "
-		# proxy_value="http://$user:$pass@ProxyServerAddress:Port"
-		__proxyAssign $proxy_value $no_proxy_value
-	fi
+    if __pacProxyIsSet || __proxyIsSet; then
+        pacoff
+        proxyoff
+    else
+        pacon
+        proxyon
+    fi
 }
+function proxystatus() {
+    echo "========== System PAC Proxy Status =========="
+    networksetup -getautoproxyurl "$NETWORK_SERVICE"
+    echo "========== Terminal Proxy Env Vars =========="
+    local has_proxy=0
+    for envar in "${PROXY_ENV[@]}"; do
+        # 提取变量值（避免转义问题）
+        eval value=\${$envar}
+        if [[ -n "$value" ]]; then
+            echo "$envar=$value"
+            has_proxy=1
+        fi
+    done
+    for envar in "${NO_PROXY_ENV[@]}"; do
+        eval value=\${$envar}
+        if [[ -n "$value" ]]; then
+            echo "$envar=$value"
+            has_proxy=1
+        fi
+    done
+    if [[ $has_proxy -eq 0 ]]; then
+        echo "No terminal proxy environment variables"
+    fi
+}
+
+# git
+git_using_proxy=${GIT_USING_PROXY:-}
+git_proxy=${GIT_PROXY:-}
 
 function gitclone() {
 	if [[ $git_using_proxy == 'true' ]]; then

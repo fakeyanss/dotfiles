@@ -19,11 +19,11 @@ function all() {
 	setup_sudo
 
 	# base, keep order
-	if [[ $SKIP_BREW == 'true' ]]; then
+	#if [[ $SKIP_BREW == 'true' ]]; then
 		log "skip homebrew"
-	else
-		setup_brew
-	fi
+	#else
+		#setup_brew
+	#fi
 	setup_sed # using gnu sed
 	setup_ssh
 	setup_git
@@ -45,10 +45,6 @@ function all() {
 
 	setup_vim
 
-	# mac system configuration
-	setup_mac
-
-	# setup_im
 	setup_extra
 	log "Good job! All of dotfiles have been installed :)"
 }
@@ -81,8 +77,7 @@ function menu() {
 	echo -e "${Green}14.${Font} harmmerspoon"
 	echo -e "${Green}15.${Font} iterm2"
 	echo -e "${Green}16.${Font} vim"
-	echo -e "${Green}17.${Font} mac"
-	echo -e "${Green}18.${Font} extra"
+	echo -e "${Green}17.${Font} extra"
 	echo ""
 	echo -e "———————————————————————————— ${Green}start${Font} ————————————————————————————"
 	read -rp "input number:" menu_num
@@ -139,9 +134,6 @@ function menu() {
 		setup_vim
 		;;
 	17)
-		setup_mac
-		;;
-	18)
 		setup_extra
 		;;
 	*)

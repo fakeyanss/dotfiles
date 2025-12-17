@@ -8,15 +8,12 @@ function setup_zsh() {
     install_omz
     log_action "symbol link .zshrc, function.sh"
     backup $HOME/.zshrc
-    ln -sv $DOTFILES/software/zsh/.zshrc $HOME/.zshrc
+    ln -sv $DOTFILES/software/zsh/zshrc $HOME/.zshrc
+    ln -sv $DOTFILES/software/zsh/zprofile $HOME/.zprofile
     mkdir -p $HOME/.config
     touch $HOME/.config/private.conf
     backup $HOME/.config/function.sh
     ln -sv $DOTFILES/software/zsh/function.sh $HOME/.config/function.sh
-    grep -q "DOTFILES" $HOME/.zprofile >/dev/null 2>&1
-    if [ $? -ne 0 ]; then
-        echo -e "# dotfiles\nexport DOTFILES=$DOTFILES\n" >>$HOME/.zprofile
-    fi
     log_ok
 
     log_finish "$task"
@@ -31,11 +28,10 @@ function install_zsh() {
 function ch_sh() {
     log_action "set zsh to user login shell"
     CURRENTSHELL=$(dscl . -read /Users/$USER UserShell | awk '{print $2}')
-    if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
-        log_running "setting newer homebrew zsh (/usr/local/bin/zsh) as your shell (password required)"
-        # sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
-        # chsh -s /usr/local/bin/zsh
-        sudo dscl . -change /Users/$USER UserShell $SHELL /usr/local/bin/zsh >/dev/null 2>&1
+    if [[ "$CURRENTSHELL" != "/bin/zsh" ]]; then
+        #log_running "setting newer homebrew zsh (/opt/homebrew/opt/zsh) as your shell (password required)"
+        log_running "setting zsh (/bin/zsh) as your shell (password required)"
+        sudo chsh -s /bin/zsh
     fi
     log_ok
 }

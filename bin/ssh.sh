@@ -13,8 +13,9 @@ function install_autossh() {
     ls ~/.ssh/autossh >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         mkdir -p $HOME/.ssh/autossh
-        unzip -d $HOME/.ssh/autossh $DOTFILES/software/ssh/autossh/autossh-macOS-arm_v1.1.0.zip
-        mv $HOME/.ssh/autossh/autossh-macOS-amd64_v1.1.0/* $HOME/.ssh/autossh/
+        unzip -d $HOME/.ssh/autossh $DOTFILES/software/ssh/autossh/autossh-macOS-arm64_v1.1.0.zip
+        mv $HOME/.ssh/autossh/autossh-macOS-arm64_v1.1.0/* $HOME/.ssh/autossh/
+        rm -rf $HOME/.ssh/autossh/autossh-macOS-arm64_v1.1.0/
     else
         log_running "autossh existed, skip"
     fi

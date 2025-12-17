@@ -11,19 +11,18 @@ function setup_golang() {
 
 function install_goenv() {
 	log_action "install goenv"
-	brew_no_update_install "--HEAD goenv"
+	brew_no_update_install "goenv"
 	grep -q 'goenv' $HOME/.zshrc >/dev/null 2>&1
 	if [ $? -ne 0 ]; then
 		cat >>$HOME/.zshrc <<EOF
 # go
 export GOENV_GOPATH_PREFIX=$HOME/code/golang
-_lazyload__command_goenv() {
-    eval "$(goenv init -)"
-}
-lazyload_add_command goenv
+eval "$(goenv init -)"
 
 EOF
 	fi
+    log_action "symbol link .goenvrc"
+    ln -s $DOTFILES/software/go/goenvrc $HOME/.goenvrc
 	log_ok
 }
 
@@ -32,7 +31,7 @@ function install_golang() {
 		log_action "install golang $v"
 		goenv install -s $v
 	done
-	log_running "set global default to py $GOLANG_DEFAULT_VERSION"
+	log_running "set global default to go $GOLANG_DEFAULT_VERSION"
 	goenv global $GOLANG_DEFAULT_VERSION
 	log_ok
 }

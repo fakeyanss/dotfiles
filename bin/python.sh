@@ -20,10 +20,7 @@ function install_pyenv() {
 # python
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
-_lazyload__command_pyenv() {
-  eval "$(pyenv init -)"
-}
-lazyload_add_command pyenv
+eval "$(pyenv init -)"
 
 EOF
 	fi
@@ -44,8 +41,7 @@ function install_py() {
 
 function symbol_link_py() {
 	log_action "symbol link .pip"
-	backup $HOME/.pip/pip.conf
-	mkdir -p $HOME/.pip
-	ln -sv $DOTFILES/software/python/pip.conf $HOME/.pip/pip.conf
+	mkdir -p $HOME/.config/.pip
+	ln -sv $DOTFILES/software/python/pip.conf $HOME/.config/.pip/pip.conf
 	log_ok
 }

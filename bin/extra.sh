@@ -2,12 +2,12 @@
 
 function setup_extra() {
     # install my software and cli
-
     brew_no_update_install aria2
     brew_no_update_install jq
     brew_no_update_install mycli
     brew_no_update_install redis
     brew_no_update_install pandoc
+    brew_no_update_install fzf
 
     # nerd fonts
     # install_nerd_font
@@ -33,16 +33,16 @@ function setup_extra() {
     ln -s $DOTFILES/software/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json
 
     brew_no_update_install_cask mos
-    brew_no_update_install_cask docker
+    #brew_no_update_install_cask docker
     brew_no_update_install_cask raycast
     brew_no_update_install_cask logitech-options
     brew_no_update_install_cask wechat
     brew_no_update_install_cask wireshark
-    brew_no_update_install_cask neteasemusic
+    #brew_no_update_install_cask neteasemusic
 
     # ffmpeg with h265
-    brew tap homebrew-ffmpeg/ffmpeg
-    brew install homebrew-ffmpeg/ffmpeg/ffmpeg
+    #brew tap homebrew-ffmpeg/ffmpeg
+    #brew install homebrew-ffmpeg/ffmpeg/ffmpeg
 
     # compress img
     npm install -g @funboxteam/optimizt --loglevel verbose

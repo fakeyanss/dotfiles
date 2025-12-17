@@ -41,9 +41,6 @@ source $ZSH/oh-my-zsh.sh
 
 ####################################
 
-# dotfiles
-export DOTFILES=/Users/guichen01/.dotfiles
-
 # java env
 export JENV_ROOT="${JENV_ROOT:=${HOME}/.jenv}"
 export PATH="$JENV_ROOT/shims:$PATH"
@@ -52,16 +49,6 @@ if (( $+commands[jenv] )) &>/dev/null; then
         eval "$(jenv init -)"
     }
     lazyload_add_command jenv
-fi
-
-# scala env
-export SCALAENV_ROOT="${SCALAENV_ROOT:=${HOME}/.scalaenv}"
-export PATH="$SCALAENV_ROOT/shims:$PATH"
-if (( $+commands[scalaenv] )) &>/dev/null; then
-    _lazyload_command_scalaenv() {
-        eval "$(scalaenv init -)"
-    }
-    lazyload_add_command scalaenv
 fi
 
 # python
@@ -75,9 +62,14 @@ if (( $+commands[pyenv] )) &>/dev/null; then
 fi
 
 # node, npm
-export N_PREFIX="$HOME/.n"
-export N_PRESERVE_NPM=1
-export PATH="$N_PREFIX/bin:$PATH"
+export NODENV_ROOT="$HOME/.nodenv"
+export PATH=$NODENV_ROOT/bin:$PATH
+if (( $+commands[nodenv] )) &>/dev/null; then
+    _lazyload_command_nodenv() {
+        eval "$(nodenv init -)"
+    }
+    lazyload_add_command nodenv 
+fi
 export NPM_CONFIG_LOGLEVEL="error"
 export NPM_CONFIG_STRICT_SSL="false"
 export PUPPETEER_SKIP_DOWNLOAD="true"
@@ -88,6 +80,8 @@ export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/shims:$PATH"
 export GOENV_GOMOD_VERSION_ENABLE=1
 export GOENV_GOPATH_PREFIX=$HOME/code/golang
+export GO111MODULE=on
+export GOPROXY="https://goproxy.cn,direct"
 if (( $+commands[goenv] )) &>/dev/null; then
     _lazyload_command_goenv() {
         eval "$(goenv init -)"
@@ -108,16 +102,9 @@ fi
 
 # editor
 alias purevim=/usr/bin/vim
-#alias vim=$DOTFILES/software/nvim/bin/nvim/bin/nvim
-#alias vim=nvim
-alias nvimu=nvim -u NONE
 
 # fzf
-if (( $+commands[fzf] )) &>/dev/null; then
-    _lazyload_completion_fzf() {
-    }
-    lazyload_add_completion fzf
-fi
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # starship
 eval "$(starship init zsh)"
@@ -127,7 +114,3 @@ source $HOME/.config/function.sh
 # private conf, like ssh, mysql connection, see $DOTFILES/conf/private.conf.sample
 source $HOME/.config/private.conf
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# icafe cli
-export PATH="$HOME/.icafe/bin:$PATH"

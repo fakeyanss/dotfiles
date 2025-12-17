@@ -9,7 +9,6 @@ source $DOTFILES/bin/hammerspoon.sh
 source $DOTFILES/bin/iterm2.sh
 source $DOTFILES/bin/java.sh
 source $DOTFILES/bin/lib.sh
-source $DOTFILES/bin/mac_system.sh
 source $DOTFILES/bin/vim.sh
 source $DOTFILES/bin/node.sh
 source $DOTFILES/bin/picgo.sh
@@ -22,4 +21,3 @@ source $DOTFILES/bin/starship.sh
 source $DOTFILES/bin/sudo.sh
 source $DOTFILES/bin/tmux.sh
 source $DOTFILES/bin/zsh.sh
-source $DOTFILES/bin/im.sh

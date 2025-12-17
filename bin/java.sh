@@ -8,7 +8,6 @@ function setup_java() {
 	install_jdk
 	set_jenv
 	install_maven
-	install_gradle
 	log_finish "$task"
 }
 
@@ -18,8 +17,10 @@ function install_jdk() {
 	for v in ${JAVA_VERSIONS[@]}; do
 		log_running "install $v"
 		if [[ $v == '8' ]]; then
-			brew_no_update_install_cask homebrew/cask-versions/adoptopenjdk8
-			sudo ln -s /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home /usr/local/lib/java/java-8-openjdk
+			# 安装Rosetta转义x86 openjdk8
+			softwareupdate --install-rosetta --agree-to-license
+			brew_no_update_install temurin@8
+			sudo ln -s /Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home /usr/local/lib/java/java-$v-openjdk
 		else
 			brew_no_update_install openjdk@$v
 			sudo ln -s /opt/homebrew/opt/openjdk@$v /usr/local/lib/java/java-$v-openjdk
@@ -36,15 +37,12 @@ function set_jenv() {
 	eval "$(jenv init -)"
 
 	log_running "set jenv path"
-	grep -q "jenv" ~/.zshrc >/dev/null 2>&1
+	grep -q "jenv" $HOME/.zshrc >/dev/null 2>&1
 	if [ $? -ne 0 ]; then
-		cat >>~/.zshrc <<EOF
+		cat >>$HOME/.zshrc <<EOF
 # java env
 export PATH="$HOME/.jenv/bin:$HOME/.jenv/shims:$PATH"
-_lazyload__command_jenv() {
-    eval "$(jenv init -)"
-}
-lazyload_add_command jenv
+eval "$(jenv init -)"
 
 EOF
 	fi
@@ -71,10 +69,3 @@ function install_maven() {
 	log_ok
 }
 
-function install_gradle() {
-	log_action "install gradle@6"
-	brew_no_update_install gradle@6
-	brew link gradle@6
-	gradle -v
-	log_ok
-}
